@@ -1,0 +1,7 @@
+Multiplier,LUT,FF,DSP,resultError (%)
+multExato,43,0,0,0.0000
+p_1bitTruncated,33,0,0,0.7828
+p_2bitTruncated,26,0,0,2.3391
+p_3bitTruncated,17,0,0,5.4148
+p_4bitTruncated,13,0,0,11.4187
+bitEspecifico,33,0,0,0.7828

@@ -1,0 +1,103 @@
+
+****** Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2022.2 (64-bit)
+  **** SW Build 3670227 on Oct 13 2022
+  **** IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+
+source /tools/Xilinx/Vitis_HLS/2022.2/scripts/vitis_hls/hls.tcl -notrace
+INFO: [HLS 200-10] Running '/tools/Xilinx/Vitis_HLS/2022.2/bin/unwrapped/lnx64.o/vitis_hls'
+INFO: [HLS 200-10] For user 'daniel.costa' on host 'sarue' (Linux_x86_64 version 5.4.0-216-generic) on Thu Aug 27 18:56:08 -03 2026
+INFO: [HLS 200-10] On os Ubuntu 20.04.6 LTS
+INFO: [HLS 200-10] In directory '/home/daniel.costa/hls_proj'
+Sourcing Tcl script 'run_hls.tcl'
+INFO: [HLS 200-1510] Running: open_project -reset hls_proj 
+INFO: [HLS 200-10] Opening and resetting project '/home/daniel.costa/hls_proj/build/hls_proj'.
+INFO: [HLS 200-1510] Running: set_top _2bitTruncated 
+INFO: [HLS 200-1510] Running: add_files ../src/2bitTruncated.cpp 
+INFO: [HLS 200-10] Adding design file '../src/2bitTruncated.cpp' to the project
+INFO: [HLS 200-1510] Running: add_files -tb ../tb/tb_2bitTruncated.cpp -cflags -I../src 
+INFO: [HLS 200-10] Adding test bench file '../tb/tb_2bitTruncated.cpp' to the project
+INFO: [HLS 200-1510] Running: open_solution solution 
+INFO: [HLS 200-10] Creating and opening solution '/home/daniel.costa/hls_proj/build/hls_proj/solution'.
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-1505.html
+INFO: [HLS 200-435] Setting 'open_solution -flow_target vivado' configuration: config_interface -m_axi_latency=0
+INFO: [HLS 200-1510] Running: set_part xc7s50csga324-1 
+INFO: [HLS 200-1611] Setting target device to 'xc7s50-csga324-1'
+INFO: [HLS 200-1510] Running: create_clock -period 10 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+INFO: [HLS 200-1510] Running: csim_design 
+Running Dispatch Server on port: 20579
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [SIM 211-4] CSIM will launch GCC as the compiler.
+   Compiling ../../../../../tb/tb_2bitTruncated.cpp in debug mode
+   Compiling ../../../../../src/2bitTruncated.cpp in debug mode
+   Generating csim.exe
+OK! Resultado = 63504
+INFO: [SIM 211-1] CSim done with 0 errors.
+INFO: [SIM 211-3] *************** CSIM finish ***************
+INFO: [HLS 200-111] Finished Command csim_design CPU user time: 4.26 seconds. CPU system time: 0.38 seconds. Elapsed time: 4.63 seconds; current allocated memory: 0.000 MB.
+INFO: [HLS 200-1510] Running: csynth_design 
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 0 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.01 seconds; current allocated memory: 211.805 MB.
+INFO: [HLS 200-10] Analyzing design file '../src/2bitTruncated.cpp' ... 
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 6.98 seconds. CPU system time: 0.72 seconds. Elapsed time: 7.69 seconds; current allocated memory: 213.863 MB.
+INFO: [HLS 200-777] Using interface defaults for 'Vivado' flow target.
+INFO: [HLS 200-111] Finished Compiling Optimization and Transform: CPU user time: 4.75 seconds. CPU system time: 0.35 seconds. Elapsed time: 5.11 seconds; current allocated memory: 214.176 MB.
+INFO: [HLS 200-111] Finished Checking Pragmas: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.01 seconds; current allocated memory: 214.176 MB.
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms: CPU user time: 0.04 seconds. CPU system time: 0.02 seconds. Elapsed time: 0.05 seconds; current allocated memory: 218.375 MB.
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [HLS 200-111] Finished Checking Synthesizability: CPU user time: 0.11 seconds. CPU system time: 0 seconds. Elapsed time: 0.11 seconds; current allocated memory: 224.957 MB.
+INFO: [HLS 200-111] Finished Loop, function and other optimizations: CPU user time: 0.08 seconds. CPU system time: 0.02 seconds. Elapsed time: 0.09 seconds; current allocated memory: 251.453 MB.
+INFO: [HLS 200-111] Finished Architecture Synthesis: CPU user time: 0.04 seconds. CPU system time: 0 seconds. Elapsed time: 0.05 seconds; current allocated memory: 252.031 MB.
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing '_2bitTruncated' ...
+WARNING: [SYN 201-103] Top function name '_2bitTruncated' is not a legal RTL name.
+WARNING: [SYN 201-103] Top function name '_2bitTruncated' is not a legal RTL name and is changed to 'p_2bitTruncated'; this may result in automatic C/RTL co-simulation failure.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'p_2bitTruncated' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.04 seconds. CPU system time: 0.02 seconds. Elapsed time: 0.05 seconds; current allocated memory: 252.031 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.01 seconds. CPU system time: 0 seconds. Elapsed time: 0.02 seconds; current allocated memory: 252.031 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'p_2bitTruncated' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-500] Setting interface mode on port 'p_2bitTruncated/a' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'p_2bitTruncated/b' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'p_2bitTruncated/c' to 'ap_none'.
+WARNING: [RTGEN 206-101] Port 'c' with mode 'ap_none' may require an associated data valid signal to correctly communicate with other blocks or a test bench; automatic C/RTL co-simulation may not be able to verify such a port.
+INFO: [RTGEN 206-500] Setting interface mode on function 'p_2bitTruncated' to 'ap_ctrl_none'.
+INFO: [RTGEN 206-100] Generating core module 'mul_6ns_6ns_12_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'p_2bitTruncated'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.02 seconds. CPU system time: 0 seconds. Elapsed time: 0.02 seconds; current allocated memory: 252.031 MB.
+INFO: [HLS 200-111] Finished Generating all RTL models: CPU user time: 0.19 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.2 seconds; current allocated memory: 252.031 MB.
+INFO: [HLS 200-111] Finished Updating report files: CPU user time: 0.2 seconds. CPU system time: 0.02 seconds. Elapsed time: 0.22 seconds; current allocated memory: 252.031 MB.
+INFO: [VHDL 208-304] Generating VHDL RTL for p_2bitTruncated.
+INFO: [VLOG 209-307] Generating Verilog RTL for p_2bitTruncated.
+INFO: [HLS 200-789] **** Estimated Fmax: 279.33 MHz
+INFO: [HLS 200-111] Finished Command csynth_design CPU user time: 12.46 seconds. CPU system time: 1.17 seconds. Elapsed time: 13.63 seconds; current allocated memory: 40.355 MB.
+INFO: [HLS 200-1510] Running: cosim_design 
+INFO: [COSIM 212-47] Using XSIM for RTL simulation.
+INFO: [COSIM 212-14] Instrumenting C test bench ...
+/home/daniel.costa/hls_proj/build/hls_proj/solution/.autopilot/db/p_2bitTruncated.rtl_wrap.cfg.tcl can't be opened.
+ERROR: [COSIM 212-378] Internal file format error, please contact www.xilinx.com for help.
+ERROR: [COSIM 212-100] C/RTL co-simulation internal error: Cannot find file '/home/daniel.costa/hls_proj/build/hls_proj/solution/.autopilot/db/p_2bitTruncated.rtl_wrap.cfg.tcl'.
+ERROR: [COSIM 212-5] *** C/RTL co-simulation file generation failed. ***
+ERROR: [COSIM 212-4] *** C/RTL co-simulation finished: FAIL ***
+INFO: [HLS 200-111] Finished Command cosim_design CPU user time: 1.88 seconds. CPU system time: 0.26 seconds. Elapsed time: 2.14 seconds; current allocated memory: 0.000 MB.
+command 'ap_source' returned error code
+    while executing
+"source run_hls.tcl"
+    ("uplevel" body line 1)
+    invoked from within
+"uplevel \#0 [list source $arg] "
+
+INFO: [HLS 200-112] Total CPU user time: 20.88 seconds. Total CPU system time: 2.1 seconds. Total elapsed time: 32.71 seconds; peak allocated memory: 252.031 MB.
+INFO: [Common 17-206] Exiting vitis_hls at Thu Aug 27 18:56:40 2026...
