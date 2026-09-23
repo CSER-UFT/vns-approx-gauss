@@ -73,12 +73,18 @@ def main():
         help="Disable generating visual comparison and Pareto plots"
     )
 
+    parser.add_argument(
+        "--exploit-symmetry", action="store_true",
+        help="Enable symmetry exploitation for all multipliers"
+    )
+
     args = parser.parse_args()
 
     print("=========================================================================")
     print(" Approximate Multipliers & Hardware Metrics Evaluator - Gaussian Filter ")
     print("=========================================================================")
     print(f"Kernel Size: {args.kernel_size}x{args.kernel_size} | Sigma: {args.sigma}")
+    print(f"Symmetry Exploitation: {'Enabled' if args.exploit_symmetry else 'Disabled'}")
     print(f"Hardware Metrics Source: {args.csv}")
     print(f"Output Directory: {args.output}/")
     print("-------------------------------------------------------------------------")
@@ -89,7 +95,8 @@ def main():
         output_dir=args.output,
         kernel_size=args.kernel_size,
         sigma=args.sigma,
-        save_plots=not args.no_plots
+        save_plots=not args.no_plots,
+        exploit_symmetry=args.exploit_symmetry
     )
 
     print_results_table(results)

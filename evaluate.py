@@ -92,7 +92,8 @@ def run_evaluation(
     output_dir: str = "output",
     kernel_size: int = 3,
     sigma: float = 1.0,
-    save_plots: bool = True
+    save_plots: bool = True,
+    exploit_symmetry: bool = False
 ) -> Tuple[List[Dict], np.ndarray, Dict[str, np.ndarray]]:
     """Runs complete Gaussian filter evaluation comparing all approximate multipliers
     against the exact multiplier baseline, linking hardware metrics with application errors.
@@ -128,9 +129,11 @@ def run_evaluation(
     kernel, norm_factor = get_gaussian_kernel(size=kernel_size, sigma=sigma)
     exact_multiplier_fn = get_multiplier("multExato")
     exact_filtered = apply_gaussian_filter(img, exact_multiplier_fn, kernel=kernel, norm_factor=norm_factor)
-    
-    # Save exact filtered image
     Image.fromarray(exact_filtered).save(os.path.join(output_dir, "filtered_exact.png"))
+    
+    if exploit_symmetry:
+        exact_filtered_sym = apply_gaussian_filter(img, exact_multiplier_fn, kernel=kernel, norm_factor=norm_factor, exploit_symmetry=True)
+        Image.fromarray(exact_filtered_sym).save(os.path.join(output_dir, "filtered_exact_sym.png"))
 
     filtered_images = {"Exact": exact_filtered}
     comparison_results = []
@@ -151,7 +154,6 @@ def run_evaluation(
         # Save filtered image
         safe_name = re.sub(r'[^\w\-]', '_', mult_name)
         Image.fromarray(filtered).save(os.path.join(output_dir, f"filtered_{safe_name}.png"))
-
         # Compute application error metrics vs exact
         app_metrics = evaluate_image_errors(exact_filtered, filtered)
 
@@ -159,6 +161,7 @@ def run_evaluation(
         lut = entry['LUT']
         lut_savings = ((baseline_lut - lut) / baseline_lut * 100.0) if baseline_lut > 0 else 0.0
 
+        # Record baseline (no symmetry) result
         merged = {
             'Multiplier': mult_name,
             'LUT': lut,
@@ -172,8 +175,34 @@ def run_evaluation(
             'MAE': app_metrics['MAE'],
             'Max Error': app_metrics['Max Error'],
             'Error Rate (%)': app_metrics['Error Rate (%)'],
+            'Symmetry': False,
         }
         comparison_results.append(merged)
+
+        # Symmetry-enabled version
+        if exploit_symmetry:
+            filtered_sym = apply_gaussian_filter(img, mult_fn, kernel=kernel, norm_factor=norm_factor, exploit_symmetry=True)
+            Image.fromarray(filtered_sym).save(os.path.join(output_dir, f"filtered_{safe_name}_sym.png"))
+            filtered_images[f"{mult_name}_sym"] = filtered_sym
+
+            # Compute symmetry metrics (should match baseline)
+            app_metrics_sym = evaluate_image_errors(exact_filtered, filtered_sym)
+            merged_sym = {
+                'Multiplier': f"{mult_name}_sym",
+                'LUT': lut,
+                'LUT Savings (%)': round(lut_savings, 2),
+                'FF': entry['FF'],
+                'DSP': entry['DSP'],
+                'PSNR (dB)': app_metrics_sym['PSNR (dB)'],
+                'SSIM': app_metrics_sym['SSIM'],
+                'MSE': app_metrics_sym['MSE'],
+                'RMSE': app_metrics_sym['RMSE'],
+                'MAE': app_metrics_sym['MAE'],
+                'Max Error': app_metrics_sym['Max Error'],
+                'Error Rate (%)': app_metrics_sym['Error Rate (%)'],
+                'Symmetry': True,
+            }
+            comparison_results.append(merged_sym)
 
     # 5. Export comprehensive results CSV
     results_csv_path = os.path.join(output_dir, "gaussian_multiplier_comparison.csv")
