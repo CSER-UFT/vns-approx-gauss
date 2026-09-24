@@ -219,3 +219,182 @@ def apply_gaussian_filter(
         filtered = np.round(acc / norm_factor)
 
     return np.clip(filtered, 0, 255).astype(np.uint8)
+
+
+# ===========================================================================
+# Modelo SEPARÁVEL: dois estágios de convolução 1D (horizontal + vertical)
+# ===========================================================================
+
+def get_gaussian_kernel_1d(
+    size: int = 3,
+    sigma: float = 1.0,
+    scale_to_sum: Optional[int] = None
+) -> Tuple[np.ndarray, int]:
+    """Gera o vetor Gaussiano 1D inteiro usado no modelo separável.
+
+    Como G2D(x, y) = G1D(x) * G1D(y), o kernel 2D é o produto externo
+    K2D = v^T x v. Aqui devolvemos apenas o vetor v.
+
+    Args:
+        size: Tamanho do vetor (ímpar).
+        sigma: Desvio padrão (usado apenas quando o vetor não é canônico).
+        scale_to_sum: Soma alvo dos pesos 1D. Se None, usa os vetores canônicos:
+                      size=3 -> [1, 2, 1] (soma 4, >> 2)
+                      size=5 -> [1, 4, 6, 4, 1] (soma 16, >> 4)
+                      e, para os demais tamanhos, discretiza a Gaussiana com soma 16.
+                      Se for múltiplo da soma canônica, escala o vetor canônico
+                      (ex.: size=5, 256 -> [16, 64, 96, 64, 16], >> 8). Útil com
+                      multiplicadores que truncam bits: pesos pequenos (<16)
+                      seriam zerados por um multiplicador que trunca 4 bits.
+
+    Returns:
+        kernel_1d (np.ndarray uint8): vetor 1D de pesos.
+        norm_factor (int): soma dos pesos (divisor de CADA estágio 1D).
+    """
+    canonical = {3: np.array([1, 2, 1], dtype=np.int32),
+                 5: np.array([1, 4, 6, 4, 1], dtype=np.int32)}
+    if size in canonical:
+        base = canonical[size]
+        base_sum = int(base.sum())
+        # Vetor canônico, opcionalmente escalado por um fator inteiro
+        # (ex.: size=5, scale_to_sum=256 -> [16, 64, 96, 64, 16], >> 8).
+        if scale_to_sum is None or (scale_to_sum >= base_sum and scale_to_sum % base_sum == 0):
+            factor = 1 if scale_to_sum is None else scale_to_sum // base_sum
+            scaled = base * factor
+            if scaled.max() <= 255:
+                return scaled.astype(np.uint8), int(scaled.sum())
+    if scale_to_sum is None:
+        scale_to_sum = 16
+
+    radius = size // 2
+    x = np.arange(-radius, radius + 1)
+    kernel_f = np.exp(-(x ** 2) / (2 * sigma ** 2))
+    kernel_f /= np.sum(kernel_f)
+
+    kernel = np.round(kernel_f * scale_to_sum).astype(np.int32)
+    # Ajusta o tap central para a soma ser exatamente scale_to_sum
+    kernel[radius] += scale_to_sum - int(np.sum(kernel))
+    kernel = np.clip(kernel, 0, 255).astype(np.uint8)
+    return kernel, int(np.sum(kernel))
+
+
+def summarize_separable_savings(kernel_1d: np.ndarray) -> Dict[str, Union[int, float]]:
+    """Compara o nº de multiplicadores do filtro 2D direto com o separável.
+
+    2D direto : (taps não nulos)^2 multiplicações por pixel (ex.: 5x5 -> 25)
+    Separável : 2 * (taps não nulos) multiplicações por pixel (ex.: 5 + 5 = 10)
+    """
+    taps = int(np.count_nonzero(kernel_1d))
+    naive = taps * taps
+    separable = 2 * taps
+    reduction_pct = (naive - separable) / naive * 100.0 if naive > 0 else 0.0
+    return {
+        "taps_1d": taps,
+        "naive_2d_multiplications_per_pixel": naive,
+        "separable_multiplications_per_pixel": separable,
+        "reduction_pct": round(reduction_pct, 2),
+    }
+
+
+def _apply_1d_pass(
+    image: np.ndarray,
+    multiplier_fn: Callable[[np.ndarray, np.ndarray], np.ndarray],
+    kernel_1d: np.ndarray,
+    norm_factor: int,
+    axis: int,
+    hardware_shift: bool = True
+) -> np.ndarray:
+    """Um estágio de convolução 1D (axis=1: horizontal / axis=0: vertical).
+
+    A saída é normalizada (>> log2(norm_factor)) e volta a ser uint8, como o
+    buffer intermediário de 8 bits de um pipeline em hardware. Como a soma dos
+    pesos é igual a norm_factor, o resultado sempre cabe em [0, 255], então o
+    multiplicador de 8 bits do segundo estágio recebe operandos válidos.
+    """
+    h, w = image.shape
+    radius = len(kernel_1d) // 2
+
+    # Replicação de borda (mesma política do filtro 2D)
+    if axis == 1:
+        padded = np.pad(image, ((0, 0), (radius, radius)), mode='edge')
+    else:
+        padded = np.pad(image, ((radius, radius), (0, 0)), mode='edge')
+
+    acc = np.zeros((h, w), dtype=np.uint32)
+    for i, weight in enumerate(kernel_1d):
+        if weight == 0:
+            continue
+        window = padded[:, i:i + w] if axis == 1 else padded[i:i + h, :]
+        prod = multiplier_fn(window, np.uint8(weight))
+        acc += prod.astype(np.uint32)
+
+    is_power_of_2 = (norm_factor > 0) and (norm_factor & (norm_factor - 1) == 0)
+    if hardware_shift and is_power_of_2:
+        shift = int(np.log2(norm_factor))
+        round_offset = 1 << (shift - 1) if shift > 0 else 0
+        out = (acc + round_offset) >> shift
+    else:
+        out = np.round(acc / norm_factor)
+
+    return np.clip(out, 0, 255).astype(np.uint8)
+
+
+def apply_gaussian_filter_separable(
+    image: np.ndarray,
+    multiplier_fn: Callable[[np.ndarray, np.ndarray], np.ndarray],
+    kernel_1d: Optional[np.ndarray] = None,
+    norm_factor: Optional[int] = None,
+    kernel_size: int = 3,
+    sigma: float = 1.0,
+    hardware_shift: bool = True
+) -> np.ndarray:
+    """Filtro Gaussiano separável: dois estágios sequenciais de convolução 1D.
+
+    Como K2D = v^T x v, em vez de uma janela k x k de uma só vez fazemos:
+        Passo 1 (horizontal): v = [1 4 6 4 1] ao longo de cada linha
+                              -> 5 multiplicadores, normalização >> 4
+        Passo 2 (vertical):   v^T ao longo das colunas da imagem intermediária
+                              -> mais 5 multiplicadores, normalização >> 4
+    Total: 10 multiplicações por pixel (5x5) em vez de 25 (ou 6 com simetria).
+
+    Diferença numérica para o filtro 2D: a imagem intermediária é quantizada
+    em 8 bits (arredondada após o Passo 1). Para o multiplicador exato o
+    resultado pode diferir do 2D em ±1 LSB; para multiplicadores aproximados,
+    o erro do multiplicador atua duas vezes (uma por estágio).
+
+    Args:
+        image: 2D (grayscale) ou 3D (H, W, C) uint8 em [0, 255].
+        multiplier_fn: Modelo do multiplicador (uint8 x uint8 -> uint16).
+        kernel_1d: Vetor 1D uint8 opcional. Se None, vem de get_gaussian_kernel_1d.
+        norm_factor: Divisor de cada estágio. Se None, soma de kernel_1d.
+        kernel_size: Tamanho do vetor (se kernel_1d é None).
+        sigma: Sigma (se kernel_1d é None e o tamanho não é canônico).
+        hardware_shift: Usa >> log2(norm_factor) quando norm_factor é potência de 2.
+
+    Returns:
+        Imagem filtrada uint8 com as mesmas dimensões da entrada.
+    """
+    if kernel_1d is None:
+        kernel_1d, norm_factor = get_gaussian_kernel_1d(size=kernel_size, sigma=sigma)
+    elif norm_factor is None:
+        norm_factor = int(np.sum(kernel_1d))
+
+    # Multi-canal (ex.: RGB)
+    if image.ndim == 3:
+        channels = [
+            apply_gaussian_filter_separable(
+                image[:, :, c], multiplier_fn, kernel_1d, norm_factor,
+                kernel_size, sigma, hardware_shift
+            )
+            for c in range(image.shape[2])
+        ]
+        return np.stack(channels, axis=2)
+
+    img_uint8 = np.clip(image, 0, 255).astype(np.uint8)
+
+    # Passo 1: horizontal (ao longo das linhas)
+    intermediate = _apply_1d_pass(img_uint8, multiplier_fn, kernel_1d, norm_factor,
+                                  axis=1, hardware_shift=hardware_shift)
+    # Passo 2: vertical (ao longo das colunas da imagem intermediária)
+    return _apply_1d_pass(intermediate, multiplier_fn, kernel_1d, norm_factor,
+                          axis=0, hardware_shift=hardware_shift)

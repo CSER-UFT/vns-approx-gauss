@@ -15,13 +15,13 @@ def print_results_table(results):
         "PSNR (dB)", "SSIM", "MSE", "MAE", "MaxErr", "ErrRate"
     ]
     
-    print("\n" + "=" * 105)
-    print(f"{'HARDWARE SYNTHESIS METRICS':<42} | {'APPLICATION QUALITY & ERROR METRICS':<55}")
-    print("=" * 105)
+    print("\n" + "=" * 110)
+    print(f"{'HARDWARE SYNTHESIS METRICS':<47} | {'APPLICATION QUALITY & ERROR METRICS':<55}")
+    print("=" * 110)
     
-    row_fmt = "{:<16} | {:>5} | {:>7} | {:>4} | {:>4} || {:>9} | {:>6} | {:>7} | {:>6} | {:>6} | {:>8}"
+    row_fmt = "{:<21} | {:>5} | {:>7} | {:>4} | {:>4} || {:>9} | {:>6} | {:>7} | {:>6} | {:>6} | {:>8}"
     print(row_fmt.format(*headers))
-    print("-" * 105)
+    print("-" * 110)
     
     for r in results:
         savings = f"{r['LUT Savings (%)']:.1f}%" if r['LUT Savings (%)'] > 0 else "-"
@@ -41,7 +41,7 @@ def print_results_table(results):
             r['Max Error'],
             err_rate
         ))
-    print("=" * 105 + "\n")
+    print("=" * 110 + "\n")
 
 
 def main():
@@ -78,6 +78,16 @@ def main():
         help="Enable symmetry exploitation for all multipliers"
     )
 
+    parser.add_argument(
+        "--separable", action="store_true",
+        help="Also evaluate the separable Gaussian (horizontal 1D pass + vertical 1D pass)"
+    )
+    parser.add_argument(
+        "--sep-scale", type=int, default=None, choices=[16, 64, 256],
+        help="Sum of the 1D separable weights (default: canonical, e.g. [1,4,6,4,1] with sum 16). "
+             "Use 256 for [16,64,96,64,16] (>> 8 per pass), which survives bit-truncating multipliers."
+    )
+
     args = parser.parse_args()
 
     print("=========================================================================")
@@ -85,6 +95,7 @@ def main():
     print("=========================================================================")
     print(f"Kernel Size: {args.kernel_size}x{args.kernel_size} | Sigma: {args.sigma}")
     print(f"Symmetry Exploitation: {'Enabled' if args.exploit_symmetry else 'Disabled'}")
+    print(f"Separable Model (2x 1D): {'Enabled' if args.separable else 'Disabled'}")
     print(f"Hardware Metrics Source: {args.csv}")
     print(f"Output Directory: {args.output}/")
     print("-------------------------------------------------------------------------")
@@ -96,7 +107,9 @@ def main():
         kernel_size=args.kernel_size,
         sigma=args.sigma,
         save_plots=not args.no_plots,
-        exploit_symmetry=args.exploit_symmetry
+        exploit_symmetry=args.exploit_symmetry,
+        separable=args.separable,
+        sep_scale=args.sep_scale
     )
 
     print_results_table(results)
