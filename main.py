@@ -73,29 +73,12 @@ def main():
         help="Disable generating visual comparison and Pareto plots"
     )
 
-    parser.add_argument(
-        "--exploit-symmetry", action="store_true",
-        help="Enable symmetry exploitation for all multipliers"
-    )
-
-    parser.add_argument(
-        "--separable", action="store_true",
-        help="Also evaluate the separable Gaussian (horizontal 1D pass + vertical 1D pass)"
-    )
-    parser.add_argument(
-        "--sep-scale", type=int, default=None, choices=[16, 64, 256],
-        help="Sum of the 1D separable weights (default: canonical, e.g. [1,4,6,4,1] with sum 16). "
-             "Use 256 for [16,64,96,64,16] (>> 8 per pass), which survives bit-truncating multipliers."
-    )
-
     args = parser.parse_args()
 
     print("=========================================================================")
     print(" Approximate Multipliers & Hardware Metrics Evaluator - Gaussian Filter ")
     print("=========================================================================")
     print(f"Kernel Size: {args.kernel_size}x{args.kernel_size} | Sigma: {args.sigma}")
-    print(f"Symmetry Exploitation: {'Enabled' if args.exploit_symmetry else 'Disabled'}")
-    print(f"Separable Model (2x 1D): {'Enabled' if args.separable else 'Disabled'}")
     print(f"Hardware Metrics Source: {args.csv}")
     print(f"Output Directory: {args.output}/")
     print("-------------------------------------------------------------------------")
@@ -106,10 +89,7 @@ def main():
         output_dir=args.output,
         kernel_size=args.kernel_size,
         sigma=args.sigma,
-        save_plots=not args.no_plots,
-        exploit_symmetry=args.exploit_symmetry,
-        separable=args.separable,
-        sep_scale=args.sep_scale
+        save_plots=not args.no_plots
     )
 
     print_results_table(results)

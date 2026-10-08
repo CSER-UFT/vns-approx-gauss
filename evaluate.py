@@ -14,12 +14,7 @@ from PIL import Image
 import matplotlib.pyplot as plt
 
 from multipliers import get_multiplier, MULTIPLIER_REGISTRY
-from gaussian_filter import (
-    apply_gaussian_filter,
-    apply_gaussian_filter_separable,
-    get_gaussian_kernel,
-    get_gaussian_kernel_1d,
-)
+from gaussian_filter import apply_gaussian_filter, get_gaussian_kernel
 from metrics import evaluate_image_errors
 
 
@@ -97,10 +92,7 @@ def run_evaluation(
     output_dir: str = "output",
     kernel_size: int = 3,
     sigma: float = 1.0,
-    save_plots: bool = True,
-    exploit_symmetry: bool = False,
-    separable: bool = False,
-    sep_scale: Optional[int] = None
+    save_plots: bool = True
 ) -> Tuple[List[Dict], np.ndarray, Dict[str, np.ndarray]]:
     """Runs complete Gaussian filter evaluation comparing all approximate multipliers
     against the exact multiplier baseline, linking hardware metrics with application errors.
@@ -137,18 +129,6 @@ def run_evaluation(
     exact_multiplier_fn = get_multiplier("multExato")
     exact_filtered = apply_gaussian_filter(img, exact_multiplier_fn, kernel=kernel, norm_factor=norm_factor)
     Image.fromarray(exact_filtered).save(os.path.join(output_dir, "filtered_exact.png"))
-    
-    if exploit_symmetry:
-        exact_filtered_sym = apply_gaussian_filter(img, exact_multiplier_fn, kernel=kernel, norm_factor=norm_factor, exploit_symmetry=True)
-        Image.fromarray(exact_filtered_sym).save(os.path.join(output_dir, "filtered_exact_sym.png"))
-
-    # Separable model: two 1D passes (horizontal + vertical), see gaussian_filter.py
-    kernel_1d, norm_1d = get_gaussian_kernel_1d(size=kernel_size, sigma=sigma, scale_to_sum=sep_scale)
-    if separable:
-        exact_filtered_sep = apply_gaussian_filter_separable(
-            img, exact_multiplier_fn, kernel_1d=kernel_1d, norm_factor=norm_1d
-        )
-        Image.fromarray(exact_filtered_sep).save(os.path.join(output_dir, "filtered_exact_sep.png"))
 
     filtered_images = {"Exact": exact_filtered}
     comparison_results = []
@@ -176,7 +156,6 @@ def run_evaluation(
         lut = entry['LUT']
         lut_savings = ((baseline_lut - lut) / baseline_lut * 100.0) if baseline_lut > 0 else 0.0
 
-        # Record baseline (no symmetry) result
         merged = {
             'Multiplier': mult_name,
             'LUT': lut,
@@ -190,64 +169,8 @@ def run_evaluation(
             'MAE': app_metrics['MAE'],
             'Max Error': app_metrics['Max Error'],
             'Error Rate (%)': app_metrics['Error Rate (%)'],
-            'Symmetry': False,
-            'Separable': False,
         }
         comparison_results.append(merged)
-
-        # Symmetry-enabled version
-        if exploit_symmetry:
-            filtered_sym = apply_gaussian_filter(img, mult_fn, kernel=kernel, norm_factor=norm_factor, exploit_symmetry=True)
-            Image.fromarray(filtered_sym).save(os.path.join(output_dir, f"filtered_{safe_name}_sym.png"))
-            filtered_images[f"{mult_name}_sym"] = filtered_sym
-
-            # Compute symmetry metrics (should match baseline)
-            app_metrics_sym = evaluate_image_errors(exact_filtered, filtered_sym)
-            merged_sym = {
-                'Multiplier': f"{mult_name}_sym",
-                'LUT': lut,
-                'LUT Savings (%)': round(lut_savings, 2),
-                'FF': entry['FF'],
-                'DSP': entry['DSP'],
-                'PSNR (dB)': app_metrics_sym['PSNR (dB)'],
-                'SSIM': app_metrics_sym['SSIM'],
-                'MSE': app_metrics_sym['MSE'],
-                'RMSE': app_metrics_sym['RMSE'],
-                'MAE': app_metrics_sym['MAE'],
-                'Max Error': app_metrics_sym['Max Error'],
-                'Error Rate (%)': app_metrics_sym['Error Rate (%)'],
-                'Symmetry': True,
-                'Separable': False,
-            }
-            comparison_results.append(merged_sym)
-
-        # Separable version (two 1D passes). Error is still measured against the
-        # exact 2D filter, so it captures multiplier error + intermediate 8-bit rounding.
-        if separable:
-            filtered_sep = apply_gaussian_filter_separable(
-                img, mult_fn, kernel_1d=kernel_1d, norm_factor=norm_1d
-            )
-            Image.fromarray(filtered_sep).save(os.path.join(output_dir, f"filtered_{safe_name}_sep.png"))
-            filtered_images[f"{mult_name}_sep"] = filtered_sep
-
-            app_metrics_sep = evaluate_image_errors(exact_filtered, filtered_sep)
-            merged_sep = {
-                'Multiplier': f"{mult_name}_sep",
-                'LUT': lut,
-                'LUT Savings (%)': round(lut_savings, 2),
-                'FF': entry['FF'],
-                'DSP': entry['DSP'],
-                'PSNR (dB)': app_metrics_sep['PSNR (dB)'],
-                'SSIM': app_metrics_sep['SSIM'],
-                'MSE': app_metrics_sep['MSE'],
-                'RMSE': app_metrics_sep['RMSE'],
-                'MAE': app_metrics_sep['MAE'],
-                'Max Error': app_metrics_sep['Max Error'],
-                'Error Rate (%)': app_metrics_sep['Error Rate (%)'],
-                'Symmetry': False,
-                'Separable': True,
-            }
-            comparison_results.append(merged_sep)
 
     # 5. Export comprehensive results CSV
     results_csv_path = os.path.join(output_dir, "gaussian_multiplier_comparison.csv")
