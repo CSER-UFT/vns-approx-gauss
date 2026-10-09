@@ -34,7 +34,10 @@ As imagens são ordenadas por nome em ordem NATURAL (img2 < img10), então
 
 Uso:
     python vns2.py --dataset imagens/ --train-count 70 --total 100 \
-                   --t-start 95 --t-end 70 --t-step 5 --time 30 --kmax 4 --seed 42
+                   --t-start 95 --t-end 70 --t-step 5 --max-evals 500 --kmax 4 --seed 42
+
+    # Orçamento: --max-evals N = nº máximo de avaliações REAIS (cache misses) POR limiar.
+    # --time S (opcional) é apenas um teto de segurança em CPU; vale o que ocorrer primeiro.
 
     # Só validar soluções já geradas (lê output/vns/vns_solution_Txx.csv):
     python vns2.py --dataset imagens/ --validate-only
@@ -46,6 +49,7 @@ import os
 import random
 import re
 import time
+from concurrent.futures import ProcessPoolExecutor
 from dataclasses import dataclass, field
 from typing import Callable, Dict, Iterator, List, Optional, Tuple
 
@@ -178,6 +182,23 @@ class _SlotDispatcher:
         return fn(a, b)
 
 
+
+
+# Função worker no nível de módulo: obrigatório para o multiprocessing conseguir
+# serializar (pickle) a referência por nome. Recebe os nomes dos multiplicadores
+# (strings) em vez dos callables para evitar problemas de pickling.
+def _eval_one_image(args: Tuple) -> float:
+    """Aplica o filtro e calcula a SSIM de UMA imagem — executado em processo filho."""
+    img, ref, mult_names, kernel, norm = args
+    from multipliers import get_multiplier  # importação local no worker
+    from gaussian_filter import apply_gaussian_filter
+    from metrics import calc_ssim as _calc_ssim
+    fns = [get_multiplier(name) for name in mult_names]
+    disp = _SlotDispatcher(fns)
+    out = apply_gaussian_filter(img, disp, kernel=kernel, norm_factor=norm)
+    return float(_calc_ssim(ref, out))
+
+
 class DSEProblem:
     """Problema de DSE sobre um CONJUNTO de imagens.
 
@@ -224,7 +245,9 @@ class DSEProblem:
         self.best_cost: Optional[int] = None
         self.t0: float = time.process_time()
         self.current_k: int = 0
-        self.deadline: Optional[float] = None  # limite de CPU (process_time) da execução atual
+        # Orçamento da execução atual (definido em vns()):
+        self.max_evals: Optional[int] = None   # máx. de avaliações reais (cache misses)
+        self.deadline: Optional[float] = None  # teto opcional de CPU (process_time)
 
     # -- parametrização ------------------------------------------------------
     def _build_slot_labels(self) -> List[str]:
@@ -255,8 +278,14 @@ class DSEProblem:
         return out
 
     def mean_ssim(self, x: Solution) -> float:
-        """SSIM média de x sobre todas as imagens do conjunto."""
-        vals = [calc_ssim(self.references[i], self.render(x, i)) for i in range(len(self.images))]
+        """SSIM média de x sobre todas as imagens do conjunto (avaliação paralela por imagem)."""
+        mult_names = tuple(self.library[i].name for i in x)
+        args = [
+            (self.images[i], self.references[i], mult_names, self.kernel, self.norm)
+            for i in range(len(self.images))
+        ]
+        with ProcessPoolExecutor() as ex:
+            vals = list(ex.map(_eval_one_image, args))
         return float(np.mean(vals))
 
     def per_image_metrics(self, x: Solution) -> List[Dict]:
@@ -292,6 +321,12 @@ class DSEProblem:
                     "k": self.current_k,
                 })
         return self._cache[x]
+
+    def budget_exhausted(self) -> bool:
+        """True quando o orçamento de avaliações (ou o teto opcional de CPU) acabou."""
+        if self.max_evals is not None and self.n_evals >= self.max_evals:
+            return True
+        return self.deadline is not None and time.process_time() >= self.deadline
 
     def is_feasible(self, ssim: float) -> bool:
         return ssim >= self.threshold
@@ -353,10 +388,9 @@ def local_search_dse(problem: DSEProblem, x: Solution, descent: bool = True) -> 
         center = x_best
         improved = False
         for y in neighbors_n1(problem, center):
-            # Com várias imagens cada avaliação é cara: respeita o orçamento de
-            # tempo também DENTRO da busca local, devolvendo o melhor até agora.
-
-            if problem.deadline is not None and time.process_time() >= problem.deadline:
+            # Respeita o orçamento também DENTRO da busca local (cada avaliação é
+            # cara com várias imagens), devolvendo o melhor encontrado até agora.
+            if problem.budget_exhausted():
                 return x_best
             R_y, s_y = problem.evaluate(y)
             if problem.is_better(R_y, s_y, R_best, s_best):
@@ -391,37 +425,50 @@ class VNSResult:
 
 def vns(
     problem: DSEProblem,
-    t_max: float = 30.0,
+    max_evals: Optional[int] = 500,
+    t_max: Optional[float] = None,
     k_max: int = 4,
     seed: Optional[int] = None,
     descent: bool = True,
     verbose: bool = True,
 ) -> VNSResult:
-    """Algoritmo principal (VNS para seleção de multiplicadores)."""
+    """Algoritmo principal (VNS para seleção de multiplicadores).
+
+    Critério de parada: `max_evals` avaliações reais (a avaliação da solução inicial
+    conta) e/ou `t_max` segundos de CPU (teto opcional); vale o que ocorrer primeiro.
+    """
+    if max_evals is None and t_max is None:
+        raise ValueError("Defina max_evals e/ou t_max.")
     rng = random.Random(seed)
     k_max = max(1, min(k_max, problem.n_slots))
 
     t0 = time.process_time()
     problem.t0 = t0
-    problem.deadline = t0 + t_max
+    problem.max_evals = max_evals
+    problem.deadline = None if t_max is None else t0 + t_max
     elapsed = lambda: time.process_time() - t0  # CpuTime()
 
     x = problem.initial_solution()
     R, s = problem.evaluate(x)
     if verbose:
         print(f"[VNS] inicial (todos exatos): R={R}  SSIM={s:.4f}  "
-              f"posições={problem.n_slots}  biblioteca={len(problem.library)}  T={problem.threshold}")
+              f"posições={problem.n_slots}  biblioteca={len(problem.library)}  T={problem.threshold}  "
+              f"max_evals={max_evals}  teto_cpu={t_max}")
 
     iterations = 0
+    idle = 0  # iterações seguidas sem nenhuma avaliação nova (espaço esgotado)
+    MAX_IDLE = 1000
 
-    while elapsed() < t_max:
+    while not problem.budget_exhausted() and idle < MAX_IDLE:
         k = 1
-        while k <= k_max and elapsed() < t_max:
+        while k <= k_max and not problem.budget_exhausted() and idle < MAX_IDLE:
             problem.current_k = k
+            evals_before = problem.n_evals
             x1 = perturbation_dse(problem, x, k, rng)
             x2 = local_search_dse(problem, x1, descent)
             x_new, k_new = change_neighborhood_dse(problem, x, x2, k)
             iterations += 1
+            idle = idle + 1 if problem.n_evals == evals_before else 0
 
             if x_new != x:
                 R, s = problem.evaluate(x_new)
@@ -646,8 +693,10 @@ def main():
     p.add_argument("--t-start", "-ts", type=int, default=95, help="Primeiro limiar de SSIM, em %% (default: 95)")
     p.add_argument("--t-end", "-te", type=int, default=70, help="Último limiar de SSIM, em %% (default: 70)")
     p.add_argument("--t-step", type=int, default=5, help="Decremento do limiar, em %% (default: 5)")
-    p.add_argument("--time", "-t", type=float, default=30.0,
-                   help="Tempo máximo de CPU POR limiar, em segundos (default: 30)")
+    p.add_argument("--max-evals", "-mev", type=int, default=500,
+                   help="Nº máximo de avaliações reais (cache misses) POR limiar (default: 500)")
+    p.add_argument("--time", "-t", type=float, default=None,
+                   help="Teto OPCIONAL de CPU POR limiar, em segundos (default: sem teto)")
     p.add_argument("--kmax", type=int, default=4, help="Número máximo de vizinhanças (default: 4)")
     p.add_argument("--seed", type=int, default=None, help="Semente aleatória (reprodutibilidade)")
     p.add_argument("--single-sweep", action="store_true",
@@ -655,6 +704,8 @@ def main():
     p.add_argument("--validate-only", action="store_true",
                    help="Pula o treino: lê vns_solution_Txx.csv do diretório de saída e só valida")
     args = p.parse_args()
+    if args.max_evals is not None and args.max_evals < 1:
+        p.error("--max-evals deve ser >= 1")
 
     # Dataset e divisão treino / validação
     if args.dataset:
@@ -685,7 +736,7 @@ def main():
 
     for T in thresholds:
         # Problema novo por limiar (cache próprio): cada execução parte do zero,
-        # para que o orçamento de tempo seja comparável entre limiares.
+        # para que o orçamento de avaliações seja idêntico entre limiares.
         problem = new_problem(train_imgs, train_names, T)
 
         if args.validate_only:
@@ -699,7 +750,8 @@ def main():
         print("\n" + "#" * 70)
         print(f"# FASE 1 - TREINO: VNS com T = {T:.2f}  ({len(train_imgs)} imagens)")
         print("#" * 70)
-        result = vns(problem, t_max=args.time, k_max=args.kmax, seed=args.seed,
+        result = vns(problem, max_evals=args.max_evals, t_max=args.time,
+                     k_max=args.kmax, seed=args.seed,
                      descent=not args.single_sweep)
 
         print(f"\n[VNS] fim (T={T:.2f}): {result.iterations} iterações, {result.evaluations} avaliações, "
