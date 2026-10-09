@@ -106,7 +106,8 @@ def create_synthetic_dataset(total: int, seed: int = 0, size: int = 128) -> List
         img += np.sin(np.hypot(x - cx, y - cy) / period) * 45.0 + 45.0
         img += (((x // cell) + (y // cell)) % 2) * rng.uniform(10, 60)
         img += rng.normal(0, noise, img.shape)
-        out.append((f"synthetic_{n:03d}.png", np.clip(img, 0, 255).astype(np.uint8)))
+        img = np.clip(img, 0, 255)
+        out.append((f"synthetic_{n:03d}.png", img.astype(np.uint8)))
     return out
 
 
@@ -165,11 +166,13 @@ def build_library(csv_path: str) -> List[Component]:
 
 class _SlotDispatcher:
     """Faz o filtro existente (gaussian_filter.py) usar um multiplicador
-    DIFERENTE por posição.
+    DIFERENTE por posição do kernel.
 
-    O filtro chama multiplier_fn uma vez por tap não nulo, sempre na mesma
-    ordem (varredura row-major). O dispatcher devolve a i-ésima função da
-    lista na i-ésima chamada.
+    CONTRATO / PREMISSA:
+    Assume que `apply_gaussian_filter` varre o kernel 2D em ordem row-major
+    (linha por linha, da esquerda para a direita) e invoca a função multiplicadora
+    exatamente uma vez por tap não nulo para a imagem completa.
+    O dispatcher devolve a i-ésima função da lista na i-ésima chamada.
     """
 
     def __init__(self, fns: List[Callable]):
@@ -182,20 +185,42 @@ class _SlotDispatcher:
         return fn(a, b)
 
 
+# Estado global nos processos workers do ProcessPoolExecutor.
+# Carregado apenas uma vez via _init_worker na inicialização de cada worker do pool,
+# eliminando a serialização e transmissão IPC de imagens a cada avaliação.
+_WORKER_IMAGES: List[np.ndarray] = []
+_WORKER_REFERENCES: List[np.ndarray] = []
+_WORKER_KERNEL: Optional[np.ndarray] = None
+_WORKER_NORM: Optional[int] = None
 
 
-# Função worker no nível de módulo: obrigatório para o multiprocessing conseguir
-# serializar (pickle) a referência por nome. Recebe os nomes dos multiplicadores
-# (strings) em vez dos callables para evitar problemas de pickling.
-def _eval_one_image(args: Tuple) -> float:
-    """Aplica o filtro e calcula a SSIM de UMA imagem — executado em processo filho."""
-    img, ref, mult_names, kernel, norm = args
-    from multipliers import get_multiplier  # importação local no worker
+def _init_worker(
+    images: List[np.ndarray],
+    references: List[np.ndarray],
+    kernel: np.ndarray,
+    norm: int,
+) -> None:
+    """Inicializador do processo worker: armazena imagens e referências imutáveis
+    na memória local do processo filho."""
+    global _WORKER_IMAGES, _WORKER_REFERENCES, _WORKER_KERNEL, _WORKER_NORM
+    _WORKER_IMAGES = images
+    _WORKER_REFERENCES = references
+    _WORKER_KERNEL = kernel
+    _WORKER_NORM = norm
+
+
+def _eval_one_image(item: Tuple[int, Tuple[str, ...]]) -> float:
+    """Aplica o filtro e calcula a SSIM de UMA imagem no processo worker.
+    Recebe apenas (img_idx, mult_names), lendo os arrays pesados da memória local."""
+    img_idx, mult_names = item
+    img = _WORKER_IMAGES[img_idx]
+    ref = _WORKER_REFERENCES[img_idx]
+    from multipliers import get_multiplier
     from gaussian_filter import apply_gaussian_filter
     from metrics import calc_ssim as _calc_ssim
     fns = [get_multiplier(name) for name in mult_names]
     disp = _SlotDispatcher(fns)
-    out = apply_gaussian_filter(img, disp, kernel=kernel, norm_factor=norm)
+    out = apply_gaussian_filter(img, disp, kernel=_WORKER_KERNEL, norm_factor=_WORKER_NORM)
     return float(_calc_ssim(ref, out))
 
 
@@ -214,6 +239,7 @@ class DSEProblem:
         sigma: float = 1.0,
         threshold: float = 0.95,
         names: Optional[List[str]] = None,
+        reference_images: Optional[List[np.ndarray]] = None,
     ):
         if isinstance(images, np.ndarray):  # compatibilidade: imagem única
             images = [images]
@@ -225,12 +251,19 @@ class DSEProblem:
         # Mesmo kernel usado em evaluate.py
         self.kernel, self.norm = get_gaussian_kernel(size=kernel_size, sigma=sigma)
 
-        # Imagens de referência: filtro 2D com multiplicador exato (uma por imagem)
-        exact_fn = get_multiplier("multExato")
-        self.references = [
-            apply_gaussian_filter(im, exact_fn, kernel=self.kernel, norm_factor=self.norm)
-            for im in self.images
-        ]
+        # Imagens de referência: reutiliza pré-computadas (se passadas) ou calcula
+        if reference_images is not None:
+            if len(reference_images) != len(self.images):
+                raise ValueError(
+                    f"reference_images tem {len(reference_images)} imagens, mas images tem {len(self.images)}."
+                )
+            self.references = list(reference_images)
+        else:
+            exact_fn = get_multiplier("multExato")
+            self.references = [
+                apply_gaussian_filter(im, exact_fn, kernel=self.kernel, norm_factor=self.norm)
+                for im in self.images
+            ]
 
         self.exact_idx = next(i for i, c in enumerate(library) if c.is_exact)
         self.slot_labels = self._build_slot_labels()
@@ -239,18 +272,44 @@ class DSEProblem:
         self._cache: Dict[Solution, Tuple[int, float]] = {}
         self.n_evals = 0  # avaliações reais (cache misses)
 
-        # Trajetória de convergência: a cada avaliação que melhora o melhor
-        # custo VIÁVEL já visto (best-so-far), registra (time_s, evals, cost, ssim, k).
+        # Trajetória de convergência e melhor solução viável encontrada
         self.trace: List[Dict] = []
         self.best_cost: Optional[int] = None
+        self.best_solution: Optional[Solution] = None
+        self.best_ssim: Optional[float] = None
         self.t0: float = time.process_time()
         self.current_k: int = 0
         # Orçamento da execução atual (definido em vns()):
         self.max_evals: Optional[int] = None   # máx. de avaliações reais (cache misses)
         self.deadline: Optional[float] = None  # teto opcional de CPU (process_time)
 
+        # Pool de processos reutilizável durante todo o ciclo de vida deste problema
+        self._pool: Optional[ProcessPoolExecutor] = ProcessPoolExecutor(
+            initializer=_init_worker,
+            initargs=(self.images, self.references, self.kernel, self.norm),
+        )
+
+    def close(self) -> None:
+        """Encerra o pool de processos worker e desaloca seus recursos."""
+        if self._pool is not None:
+            self._pool.shutdown(wait=True)
+            self._pool = None
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.close()
+
+    def __del__(self):
+        self.close()
+
     # -- parametrização ------------------------------------------------------
     def _build_slot_labels(self) -> List[str]:
+        """Gera os rótulos de cada tap não nulo do kernel em ordem row-major.
+        Essa ordem corresponde exatamente à sequência de chamadas feitas por
+        apply_gaussian_filter através do _SlotDispatcher.
+        """
         k_h, k_w = self.kernel.shape
         return [
             f"tap({r},{c}) w={int(self.kernel[r, c])}"
@@ -278,14 +337,20 @@ class DSEProblem:
         return out
 
     def mean_ssim(self, x: Solution) -> float:
-        """SSIM média de x sobre todas as imagens do conjunto (avaliação paralela por imagem)."""
+        """SSIM média de x sobre todas as imagens do conjunto.
+        Distribui as imagens pelo ProcessPoolExecutor persistente enviando apenas
+        índices e tupla de multiplicadores para evitar sobrecarga de IPC."""
         mult_names = tuple(self.library[i].name for i in x)
-        args = [
-            (self.images[i], self.references[i], mult_names, self.kernel, self.norm)
-            for i in range(len(self.images))
-        ]
-        with ProcessPoolExecutor() as ex:
-            vals = list(ex.map(_eval_one_image, args))
+        if self._pool is not None:
+            tasks = [(i, mult_names) for i in range(len(self.images))]
+            chunk = max(1, len(self.images) // (os.cpu_count() or 4))
+            vals = list(self._pool.map(_eval_one_image, tasks, chunksize=chunk))
+        else:
+            vals = []
+            for i in range(len(self.images)):
+                disp = _SlotDispatcher([self.library[idx].fn for idx in x])
+                out = apply_gaussian_filter(self.images[i], disp, kernel=self.kernel, norm_factor=self.norm)
+                vals.append(calc_ssim(self.references[i], out))
         return float(np.mean(vals))
 
     def per_image_metrics(self, x: Solution) -> List[Dict]:
@@ -313,6 +378,8 @@ class DSEProblem:
             self._cache[x] = (cost, ssim)
             if self.is_feasible(ssim) and (self.best_cost is None or cost < self.best_cost):
                 self.best_cost = cost
+                self.best_solution = x
+                self.best_ssim = ssim
                 self.trace.append({
                     "time_s": time.process_time() - self.t0,
                     "evals": self.n_evals,
@@ -403,12 +470,26 @@ def local_search_dse(problem: DSEProblem, x: Solution, descent: bool = True) -> 
 def change_neighborhood_dse(
     problem: DSEProblem, x: Solution, x_new: Solution, k: int
 ) -> Tuple[Solution, int]:
-    """MudarVizinhançaDSE: aceita x_new se SSIM >= T e R menor que o de x
-    (volta a k=1); caso contrário, k <- k+1."""
-    R_x, _ = problem.evaluate(x)
+    """MudarVizinhançaDSE (Opção A - exploração e reparo de soluções inviáveis):
+    Aceita x_new e reseta a vizinhança para k=1 se:
+      1) x_new é viável e (x era inviável OU R(x_new) < R(x));
+      2) x_new é inviável, mas possui SSIM superior a x (avanço no reparo).
+    Caso contrário, rejeita e incrementa a vizinhança: k <- k + 1.
+    """
+    R_x, s_x = problem.evaluate(x)
     R_n, s_n = problem.evaluate(x_new)
-    if problem.is_feasible(s_n) and R_n < R_x:
+
+    feasible_x = problem.is_feasible(s_x)
+    feasible_n = problem.is_feasible(s_n)
+
+    # 1. Solução viável com menor custo (ou que recuperou a viabilidade)
+    if feasible_n and (not feasible_x or R_n < R_x):
         return x_new, 1
+
+    # 2. Ambas inviáveis, mas x_new melhora o SSIM (avanço no reparo)
+    if not feasible_n and not feasible_x and s_n > s_x:
+        return x_new, 1
+
     return x, k + 1
 
 
@@ -471,14 +552,26 @@ def vns(
             idle = idle + 1 if problem.n_evals == evals_before else 0
 
             if x_new != x:
-                R, s = problem.evaluate(x_new)
+                R_cur, s_cur = problem.evaluate(x_new)
                 if verbose:
-                    print(f"[VNS] t={elapsed():6.2f}s  k={k}  nova melhor: "
-                          f"R={R}  SSIM={s:.4f}  (avaliações={problem.n_evals})")
+                    status = "viável" if problem.is_feasible(s_cur) else "inviável (reparo)"
+                    print(f"[VNS] t={elapsed():6.2f}s  k={k}  nova melhor ({status}): "
+                          f"R={R_cur}  SSIM={s_cur:.4f}  (avaliações={problem.n_evals})")
             x, k = x_new, k_new
 
-    R, s = problem.evaluate(x)
-    return VNSResult(x, R, s, elapsed(), iterations, problem.n_evals, list(problem.trace))
+    # Garante que a solução final retornada seja SEMPRE viável (SSIM >= T).
+    # Se problem.best_solution estiver disponível, usa a melhor viável encontrada;
+    # caso contrário, retrocede para a solução inicial exata (garantidamente viável).
+    if problem.best_solution is not None and problem.is_feasible(problem.best_ssim):
+        final_x = problem.best_solution
+        final_R = problem.best_cost
+        final_s = problem.best_ssim
+    else:
+        init_x = problem.initial_solution()
+        init_R, init_s = problem.evaluate(init_x)
+        final_x, final_R, final_s = init_x, init_R, init_s
+
+    return VNSResult(final_x, final_R, final_s, elapsed(), iterations, problem.n_evals, list(problem.trace))
 
 
 # ===========================================================================
@@ -517,19 +610,44 @@ def validate(
     posições) e UMA linha de VNS por limiar T. 'SSIM treino' é a SSIM média no
     conjunto de treino (a que o VNS otimizou) e 'SSIM val' a média no conjunto de
     validação. 'Viavel (val)' = SSIM val >= T (só nas linhas do VNS)."""
+    if not runs:
+        raise RuntimeError("Nenhuma execução fornecida para validação (runs está vazio).")
+
     train = runs[0][0]  # biblioteca/kernel iguais em todas as execuções
     R_exact = train.cost(train.initial_solution())
 
-    def make_row(label: str, x: Solution, threshold: Optional[float] = None) -> Dict:
+    # Cache de SSIM de treino para configurações uniformes para não reavaliar o treino
+    uniform_train_cache: Dict[Solution, float] = {}
+
+    def get_uniform_train_ssim(x: Solution) -> float:
+        if x not in uniform_train_cache:
+            # Verifica se algum problema das execuções já tem a solução no cache
+            for prob, _ in runs:
+                if x in prob._cache:
+                    uniform_train_cache[x] = prob._cache[x][1]
+                    break
+            else:
+                uniform_train_cache[x] = round(train.evaluate(x)[1], 4)
+        return uniform_train_cache[x]
+
+    def make_row(
+        label: str,
+        x: Solution,
+        threshold: Optional[float] = None,
+        train_ssim: Optional[float] = None,
+    ) -> Dict:
         per_image = val_problem.per_image_metrics(x)
         m = aggregate(per_image)
         R = train.cost(x)
+        if train_ssim is None:
+            train_ssim = get_uniform_train_ssim(x)
+
         return {
             "Configuracao": label,
             "Threshold": "" if threshold is None else threshold,
             "LUT+FF": R,
             "Economia (%)": round((R_exact - R) / R_exact * 100.0, 2) if R_exact else 0.0,
-            "SSIM treino": round(train.evaluate(x)[1], 4),
+            "SSIM treino": round(train_ssim, 4),
             "SSIM val": round(m["SSIM"], 4),
             "SSIM val (min)": round(m["SSIM min"], 4),
             "PSNR val (dB)": m["PSNR (dB)"] if np.isinf(m["PSNR (dB)"]) else round(m["PSNR (dB)"], 2),
@@ -539,11 +657,21 @@ def validate(
             "Viavel (val)": "" if threshold is None else round(m["SSIM"], 4) >= threshold,
         }
 
-    rows = [make_row(f"uniforme: {c.name}", tuple([i] * train.n_slots))
-            for i, c in enumerate(train.library)]
+    rows = []
+    # 1. Configurações uniformes (avaliadas e cacheadas apenas uma vez)
+    for i, c in enumerate(train.library):
+        uniform_x = tuple([i] * train.n_slots)
+        rows.append(make_row(f"uniforme: {c.name}", uniform_x))
+
+    # 2. Soluções do VNS (reutiliza diretamente result.ssim do treino sem reavaliar)
     for problem, result in runs:
-        rows.append(make_row(f"VNS (solução final T={problem.threshold:.2f})",
-                             result.x, problem.threshold))
+        rows.append(make_row(
+            f"VNS (solução final T={problem.threshold:.2f})",
+            result.x,
+            threshold=problem.threshold,
+            train_ssim=result.ssim,
+        ))
+
     rows.sort(key=lambda r: (r["LUT+FF"], -float(r["SSIM val"])))
 
     fmt = "{:<34} | {:>7} | {:>9} | {:>11} | {:>9} | {:>9} | {:>10} | {:>7} | {:>6} | {:>6}"
@@ -597,19 +725,22 @@ def load_solution(path: str, library: List[Component], n_slots: int) -> Solution
 def append_rows(path: str, fieldnames: List[str], rows: List[Dict]) -> None:
     """Acrescenta linhas a um CSV (cria com cabeçalho se não existir).
 
-    Se o arquivo já existir com cabeçalho diferente (ex.: versão antiga),
-    ele é renomeado para *.old para não misturar colunas.
+    Se o arquivo já existir com cabeçalho diferente, emite aviso e anexa
+    respeitando o cabeçalho existente sem destruir os dados anteriores.
     """
-    if os.path.exists(path) and os.path.getsize(path) > 0:
+    if not rows:
+        return
+
+    write_header = not os.path.exists(path) or os.path.getsize(path) == 0
+    if not write_header:
         with open(path, newline="") as f:
             existing = next(csv.reader(f), [])
         if existing != fieldnames:
-            os.replace(path, path + ".old")
-            print(f"[aviso] cabeçalho de {path} diferente; arquivo antigo movido para {path}.old")
+            print(f"[aviso] cabeçalho de {path} diferente ({existing} != {fieldnames}); mantendo cabeçalho existente para não corromper histórico.")
+            fieldnames = existing
 
-    write_header = not os.path.exists(path) or os.path.getsize(path) == 0
     with open(path, "a", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=fieldnames)
+        w = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
         if write_header:
             w.writeheader()
         w.writerows(rows)
@@ -631,6 +762,8 @@ def append_history(path: str, threshold: float, result: VNSResult) -> None:
 def append_trace(path: str, threshold: float, trace: List[Dict]) -> None:
     """vns_trace.csv: pontos de convergência (best-so-far a cada avaliação que melhora),
     acumulados entre execuções. É a fonte do gráfico de convergência."""
+    if not trace:
+        return
     fieldnames = ["Threshold"] + list(trace[0].keys())
     append_rows(path, fieldnames, [{"Threshold": threshold, **t} for t in trace])
 
@@ -655,11 +788,16 @@ def save_outputs(problem: DSEProblem, result: VNSResult, output_dir: str) -> Non
 
     try:
         import matplotlib.pyplot as plt
-        e = [h["evals"] for h in result.history] + [result.evaluations]
-        c = [h["cost"] for h in result.history] + [result.history[-1]["cost"]]
+        if result.history:
+            e = [h["evals"] for h in result.history] + [result.evaluations]
+            c = [h["cost"] for h in result.history] + [result.cost]
+        else:
+            e = [0, result.evaluations]
+            c = [result.cost, result.cost]
         plt.figure(figsize=(7, 4))
         plt.step(e, c, where="post", color="royalblue")
-        plt.scatter(e[:-1], c[:-1], color="royalblue", zorder=3)
+        if result.history:
+            plt.scatter([h["evals"] for h in result.history], [h["cost"] for h in result.history], color="royalblue", zorder=3)
         plt.xlabel("Avaliações (evals)")
         plt.ylabel("Custo R(x) = LUT + FF")
         plt.title(f"Convergência do VNS - treino (T={problem.threshold:.2f})")
@@ -675,7 +813,12 @@ def threshold_sequence(start_pct: int, end_pct: int, step_pct: int) -> List[floa
     """[95, 70, 5] -> [0.95, 0.90, 0.85, 0.80, 0.75, 0.70] (em inteiros para evitar erro de float)."""
     if step_pct <= 0:
         raise ValueError("--t-step deve ser > 0")
-    return [p / 100.0 for p in range(start_pct, end_pct - 1, -step_pct)]
+    if start_pct < end_pct:
+        raise ValueError(f"--t-start ({start_pct}) deve ser >= --t-end ({end_pct}) para decremento.")
+    seq = [p / 100.0 for p in range(start_pct, end_pct - 1, -step_pct)]
+    if not seq:
+        raise ValueError(f"Sequência de limiares vazia para start={start_pct}, end={end_pct}, step={step_pct}.")
+    return seq
 
 
 def main():
@@ -688,7 +831,7 @@ def main():
                    help="Imagens 1..N para treino; as restantes para validação (default: 70)")
     p.add_argument("--csv", "-c", default="metrics_all.csv", help="metrics_all.csv da síntese HLS")
     p.add_argument("--output", "-o", default="output/vns", help="Diretório de saída")
-    p.add_argument("--kernel-size", "-k", type=int, default=3, choices=[3, 5, 7])
+    p.add_argument("--kernel-size", "-k", type=int, default=5, choices=[3, 5, 7])
     p.add_argument("--sigma", "-s", type=float, default=1.0)
     p.add_argument("--t-start", "-ts", type=int, default=95, help="Primeiro limiar de SSIM, em %% (default: 95)")
     p.add_argument("--t-end", "-te", type=int, default=70, help="Último limiar de SSIM, em %% (default: 70)")
@@ -727,9 +870,26 @@ def main():
     thresholds = threshold_sequence(args.t_start, args.t_end, args.t_step)
     print("Limiares:", ", ".join(f"{T:.2f}" for T in thresholds))
 
-    def new_problem(imgs, names, T):
-        return DSEProblem(imgs, library, kernel_size=args.kernel_size,
-                          sigma=args.sigma, threshold=T, names=names)
+    # Fix 3: Pré-computar referências exatas uma única vez para treino e validação
+    exact_kernel, exact_norm = get_gaussian_kernel(size=args.kernel_size, sigma=args.sigma)
+    exact_fn = get_multiplier("multExato")
+    print(f"Pré-computando referências exatas para treino ({len(train_imgs)} imagens)...")
+    train_refs = [
+        apply_gaussian_filter(im, exact_fn, kernel=exact_kernel, norm_factor=exact_norm)
+        for im in train_imgs
+    ]
+    print(f"Pré-computando referências exatas para validação ({len(val_imgs)} imagens)...")
+    val_refs = [
+        apply_gaussian_filter(im, exact_fn, kernel=exact_kernel, norm_factor=exact_norm)
+        for im in val_imgs
+    ]
+
+    def new_problem(imgs, names, T, reference_images=None):
+        return DSEProblem(
+            imgs, library, kernel_size=args.kernel_size,
+            sigma=args.sigma, threshold=T, names=names,
+            reference_images=reference_images,
+        )
 
     os.makedirs(args.output, exist_ok=True)
     runs: List[Tuple[DSEProblem, VNSResult]] = []
@@ -737,7 +897,13 @@ def main():
     for T in thresholds:
         # Problema novo por limiar (cache próprio): cada execução parte do zero,
         # para que o orçamento de avaliações seja idêntico entre limiares.
-        problem = new_problem(train_imgs, train_names, T)
+        problem = new_problem(train_imgs, train_names, T, reference_images=train_refs)
+
+        # Pré-avalia e cacheia as configurações uniformes no primeiro problem enquanto o pool está ativo
+        if len(runs) == 0:
+            for c_idx in range(len(library)):
+                u_x = tuple([c_idx] * problem.n_slots)
+                problem.evaluate(u_x)
 
         if args.validate_only:
             path = os.path.join(args.output, f"vns_solution_{threshold_tag(T)}.csv")
@@ -745,6 +911,7 @@ def main():
             R, s = problem.evaluate(x)
             runs.append((problem, VNSResult(x, R, s, 0.0, 0, problem.n_evals)))
             print(f"[validate-only] {path}: R={R}  SSIM treino={s:.4f}")
+            problem.close()
             continue
 
         print("\n" + "#" * 70)
@@ -762,12 +929,16 @@ def main():
 
         save_outputs(problem, result, args.output)
         runs.append((problem, result))
+        problem.close()
 
     print("\n" + "#" * 70)
     print(f"# FASE 2 - VALIDAÇÃO: {len(val_imgs)} imagens")
     print("#" * 70)
-    val_problem = new_problem(val_imgs, val_names, thresholds[0])
-    validate(runs, val_problem, args.output)
+    val_problem = new_problem(val_imgs, val_names, thresholds[0], reference_images=val_refs)
+    try:
+        validate(runs, val_problem, args.output)
+    finally:
+        val_problem.close()
     print(f"Arquivos salvos em {args.output}/")
 
 
