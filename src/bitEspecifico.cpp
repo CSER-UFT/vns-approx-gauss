@@ -10,8 +10,8 @@ void bitEspecifico(ap_uint<8> a, ap_uint<8> b, ap_uint<16> &c) {
 
     ap_uint<8> mascara = (1 << posicao) - 1;
 
-    ap_uint<7> a_trunc = (a >> (posicao + 1) << P) | (a & mascara);
-    ap_uint<7> b_trunc = (b >> (posicao + 1) << P) | (b & mascara);
+    ap_uint<7> a_trunc = (a >> (posicao + 1) << posicao) | (a & mascara);
+    ap_uint<7> b_trunc = (b >> (posicao + 1) << posicao) | (b & mascara);
 
     ap_uint<14> produto_trunc = a_trunc * b_trunc;
 
