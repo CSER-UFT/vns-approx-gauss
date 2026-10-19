@@ -37,7 +37,8 @@ Uso:
                    --t-start 95 --t-end 70 --t-step 5 --max-evals 500 --kmax 4 --seed 42
 
     # Orçamento: --max-evals N = nº máximo de avaliações REAIS (cache misses) POR limiar.
-    # --time S (opcional) é apenas um teto de segurança em CPU; vale o que ocorrer primeiro.
+    # --time S (opcional) é apenas um teto de segurança em tempo de relógio (wall-clock); vale o que ocorrer primeiro.
+    # --patience P (opcional) interrompe o limiar após P avaliações reais sem melhoria do melhor viável.
 
     # Só validar soluções já geradas (lê output/vns/vns_solution_Txx.csv):
     python vns2.py --dataset imagens/ --validate-only
@@ -58,8 +59,8 @@ from PIL import Image
 
 from evaluate import create_synthetic_test_image, load_hardware_metrics
 from gaussian_filter import apply_gaussian_filter, get_gaussian_kernel
-from metrics import (calc_error_rate, calc_mae, calc_max_error, calc_psnr,
-                     calc_ssim)
+from metrics import (calc_error_rate, calc_mae, calc_max_error, calc_mse,
+                     calc_psnr, calc_ssim)
 from multipliers import get_multiplier
 
 Solution = Tuple[int, ...]  # x[i] = índice do componente da biblioteca na posição i
@@ -224,11 +225,29 @@ def _eval_one_image(item: Tuple[int, Tuple[str, ...]]) -> float:
     return float(_calc_ssim(ref, out))
 
 
+def aggregate_ssim(vals: List[float], mode: str = "mean") -> float:
+    """Agrega os valores de SSIM de acordo com o modo escolhido:
+    - 'mean': média aritmética simples.
+    - 'geomean': média geométrica exp(mean(log(ssim_i))), com proteção ssim_i <= 0.
+    - 'median': mediana dos valores.
+    """
+    arr = np.asarray(vals, dtype=np.float64)
+    if mode == "geomean":
+        clipped = np.clip(arr, 1e-12, 1.0)
+        return float(np.exp(np.mean(np.log(clipped))))
+    elif mode == "median":
+        return float(np.median(arr))
+    elif mode == "mean":
+        return float(np.mean(arr))
+    else:
+        raise ValueError(f"Modo de agregação de SSIM desconhecido: '{mode}'. Opções: 'mean', 'geomean', 'median'.")
+
+
 class DSEProblem:
     """Problema de DSE sobre um CONJUNTO de imagens.
 
-    Avaliar(x) devolve (R(x), SSIM_médio): a SSIM de cada imagem é calculada contra
-    a respectiva referência (filtro exato) e depois promediada.
+    Avaliar(x) devolve (R(x), SSIM_agregada): a SSIM de cada imagem é calculada contra
+    a respectiva referência (filtro exato) e agregada conforme ssim_agg.
     """
 
     def __init__(
@@ -240,6 +259,8 @@ class DSEProblem:
         threshold: float = 0.95,
         names: Optional[List[str]] = None,
         reference_images: Optional[List[np.ndarray]] = None,
+        ssim_agg: str = "mean",
+        patience: Optional[int] = 100,
     ):
         if isinstance(images, np.ndarray):  # compatibilidade: imagem única
             images = [images]
@@ -247,6 +268,9 @@ class DSEProblem:
         self.names = names or [f"img{i + 1}" for i in range(len(self.images))]
         self.library = library
         self.threshold = threshold
+        self.ssim_agg = ssim_agg
+        self.patience = patience
+        self._evals_since_improvement = 0
 
         # Mesmo kernel usado em evaluate.py
         self.kernel, self.norm = get_gaussian_kernel(size=kernel_size, sigma=sigma)
@@ -277,11 +301,11 @@ class DSEProblem:
         self.best_cost: Optional[int] = None
         self.best_solution: Optional[Solution] = None
         self.best_ssim: Optional[float] = None
-        self.t0: float = time.process_time()
+        self.t0: float = time.perf_counter()
         self.current_k: int = 0
         # Orçamento da execução atual (definido em vns()):
         self.max_evals: Optional[int] = None   # máx. de avaliações reais (cache misses)
-        self.deadline: Optional[float] = None  # teto opcional de CPU (process_time)
+        self.deadline: Optional[float] = None  # teto opcional de tempo wall-clock (perf_counter)
 
         # Pool de processos reutilizável durante todo o ciclo de vida deste problema
         self._pool: Optional[ProcessPoolExecutor] = ProcessPoolExecutor(
@@ -336,8 +360,12 @@ class DSEProblem:
         )
         return out
 
-    def mean_ssim(self, x: Solution) -> float:
-        """SSIM média de x sobre todas as imagens do conjunto.
+    def aggregate_ssim(self, vals: List[float]) -> float:
+        """Agrega a lista de valores de SSIM conforme self.ssim_agg."""
+        return aggregate_ssim(vals, self.ssim_agg)
+
+    def dataset_ssim(self, x: Solution) -> float:
+        """SSIM agregada de x sobre todas as imagens do conjunto.
         Distribui as imagens pelo ProcessPoolExecutor persistente enviando apenas
         índices e tupla de multiplicadores para evitar sobrecarga de IPC."""
         mult_names = tuple(self.library[i].name for i in x)
@@ -351,7 +379,11 @@ class DSEProblem:
                 disp = _SlotDispatcher([self.library[idx].fn for idx in x])
                 out = apply_gaussian_filter(self.images[i], disp, kernel=self.kernel, norm_factor=self.norm)
                 vals.append(calc_ssim(self.references[i], out))
-        return float(np.mean(vals))
+        return self.aggregate_ssim(vals)
+
+    def mean_ssim(self, x: Solution) -> float:
+        """Alias para dataset_ssim mantido para compatibilidade retroativa."""
+        return self.dataset_ssim(x)
 
     def per_image_metrics(self, x: Solution) -> List[Dict]:
         """Métricas de qualidade de x, imagem por imagem (usado na validação)."""
@@ -362,6 +394,7 @@ class DSEProblem:
             rows.append({
                 "Imagem": self.names[i],
                 "SSIM": calc_ssim(ref, out),
+                "MSE": calc_mse(ref, out),
                 "PSNR (dB)": calc_psnr(ref, out),
                 "MAE": calc_mae(ref, out),
                 "Max Error": int(calc_max_error(ref, out)),
@@ -370,18 +403,20 @@ class DSEProblem:
         return rows
 
     def evaluate(self, x: Solution) -> Tuple[int, float]:
-        """Avaliar(x): devolve (R(x), SSIM média no conjunto). Resultados são memorizados."""
+        """Avaliar(x): devolve (R(x), SSIM agregada no conjunto). Resultados são memorizados."""
         if x not in self._cache:
             self.n_evals += 1
-            ssim = round(self.mean_ssim(x), 4)
+            self._evals_since_improvement += 1
+            ssim = round(self.dataset_ssim(x), 4)
             cost = self.cost(x)
             self._cache[x] = (cost, ssim)
             if self.is_feasible(ssim) and (self.best_cost is None or cost < self.best_cost):
                 self.best_cost = cost
                 self.best_solution = x
                 self.best_ssim = ssim
+                self._evals_since_improvement = 0
                 self.trace.append({
-                    "time_s": time.process_time() - self.t0,
+                    "time_s": time.perf_counter() - self.t0,
                     "evals": self.n_evals,
                     "cost": cost,
                     "ssim": ssim,
@@ -390,10 +425,18 @@ class DSEProblem:
         return self._cache[x]
 
     def budget_exhausted(self) -> bool:
-        """True quando o orçamento de avaliações (ou o teto opcional de CPU) acabou."""
+        """True quando o orçamento de avaliações (ou o teto opcional de tempo wall-clock) acabou."""
         if self.max_evals is not None and self.n_evals >= self.max_evals:
             return True
-        return self.deadline is not None and time.process_time() >= self.deadline
+        return self.deadline is not None and time.perf_counter() >= self.deadline
+
+    def patience_exhausted(self) -> bool:
+        """True quando a paciência de avaliações sem melhoria viável foi esgotada."""
+        return (
+            self.patience is not None
+            and self.patience > 0
+            and self._evals_since_improvement >= self.patience
+        )
 
     def is_feasible(self, ssim: float) -> bool:
         return ssim >= self.threshold
@@ -457,7 +500,7 @@ def local_search_dse(problem: DSEProblem, x: Solution, descent: bool = True) -> 
         for y in neighbors_n1(problem, center):
             # Respeita o orçamento também DENTRO da busca local (cada avaliação é
             # cara com várias imagens), devolvendo o melhor encontrado até agora.
-            if problem.budget_exhausted():
+            if problem.budget_exhausted() or problem.patience_exhausted():
                 return x_best
             R_y, s_y = problem.evaluate(y)
             if problem.is_better(R_y, s_y, R_best, s_best):
@@ -502,6 +545,7 @@ class VNSResult:
     iterations: int
     evaluations: int
     history: List[Dict] = field(default_factory=list)  # best-so-far: cada avaliação que melhora o custo viável
+    ssim_agg: str = "mean"
 
 
 def vns(
@@ -512,37 +556,45 @@ def vns(
     seed: Optional[int] = None,
     descent: bool = True,
     verbose: bool = True,
+    patience: Optional[int] = 100,
 ) -> VNSResult:
     """Algoritmo principal (VNS para seleção de multiplicadores).
 
     Critério de parada: `max_evals` avaliações reais (a avaliação da solução inicial
-    conta) e/ou `t_max` segundos de CPU (teto opcional); vale o que ocorrer primeiro.
+    conta), `patience` avaliações sem melhoria do melhor viável, e/ou `t_max` segundos
+    de relógio (wall-clock); vale o que ocorrer primeiro.
     """
     if max_evals is None and t_max is None:
         raise ValueError("Defina max_evals e/ou t_max.")
     rng = random.Random(seed)
     k_max = max(1, min(k_max, problem.n_slots))
 
-    t0 = time.process_time()
+    t0 = time.perf_counter()
     problem.t0 = t0
     problem.max_evals = max_evals
     problem.deadline = None if t_max is None else t0 + t_max
-    elapsed = lambda: time.process_time() - t0  # CpuTime()
+    if patience is not None:
+        problem.patience = patience
+    problem._evals_since_improvement = 0
+    elapsed = lambda: time.perf_counter() - t0
 
     x = problem.initial_solution()
     R, s = problem.evaluate(x)
+    start_time_str = time.strftime('%Y-%m-%d %H:%M:%S')
+    teto_str = f"{t_max}s" if t_max is not None else "sem teto"
     if verbose:
+        print(f"[VNS] wall-clock start: {start_time_str}")
         print(f"[VNS] inicial (todos exatos): R={R}  SSIM={s:.4f}  "
               f"posições={problem.n_slots}  biblioteca={len(problem.library)}  T={problem.threshold}  "
-              f"max_evals={max_evals}  teto_cpu={t_max}")
+              f"max_evals={max_evals}  teto_tempo={teto_str}  patience={problem.patience}")
 
     iterations = 0
     idle = 0  # iterações seguidas sem nenhuma avaliação nova (espaço esgotado)
     MAX_IDLE = 1000
 
-    while not problem.budget_exhausted() and idle < MAX_IDLE:
+    while not problem.budget_exhausted() and not problem.patience_exhausted() and idle < MAX_IDLE:
         k = 1
-        while k <= k_max and not problem.budget_exhausted() and idle < MAX_IDLE:
+        while k <= k_max and not problem.budget_exhausted() and not problem.patience_exhausted() and idle < MAX_IDLE:
             problem.current_k = k
             evals_before = problem.n_evals
             x1 = perturbation_dse(problem, x, k, rng)
@@ -559,6 +611,9 @@ def vns(
                           f"R={R_cur}  SSIM={s_cur:.4f}  (avaliações={problem.n_evals})")
             x, k = x_new, k_new
 
+    if problem.patience_exhausted():
+        print(f"[VNS] paciência esgotada após {problem._evals_since_improvement} avaliações sem melhoria (T={problem.threshold})")
+
     # Garante que a solução final retornada seja SEMPRE viável (SSIM >= T).
     # Se problem.best_solution estiver disponível, usa a melhor viável encontrada;
     # caso contrário, retrocede para a solução inicial exata (garantidamente viável).
@@ -571,7 +626,15 @@ def vns(
         init_R, init_s = problem.evaluate(init_x)
         final_x, final_R, final_s = init_x, init_R, init_s
 
-    return VNSResult(final_x, final_R, final_s, elapsed(), iterations, problem.n_evals, list(problem.trace))
+    total_elapsed = elapsed()
+    end_time_str = time.strftime('%Y-%m-%d %H:%M:%S')
+    if verbose:
+        print(f"[VNS] wall-clock end: {end_time_str} (duração: {total_elapsed:.2f}s)")
+
+    return VNSResult(
+        final_x, final_R, final_s, total_elapsed, iterations,
+        problem.n_evals, list(problem.trace), problem.ssim_agg
+    )
 
 
 # ===========================================================================
@@ -583,14 +646,18 @@ def threshold_tag(T: float) -> str:
     return f"T{int(round(T * 100))}"
 
 
-def aggregate(per_image: List[Dict]) -> Dict:
+def aggregate(per_image: List[Dict], ssim_agg: str = "mean") -> Dict:
     """Agrega as métricas por imagem em médias sobre o conjunto.
     PSNR: média apenas dos valores finitos (imagem idêntica à referência dá inf);
-    se todas forem inf, o resultado é inf."""
+    se todas forem inf, o resultado é inf.
+    MSE: média aritmética simples entre imagens (padrão em benchmarks de processamento de imagem).
+    SSIM: agregada conforme o modo ssim_agg (mean, geomean, median)."""
     psnrs = [m["PSNR (dB)"] for m in per_image if np.isfinite(m["PSNR (dB)"])]
+    ssim_vals = [m["SSIM"] for m in per_image]
     return {
-        "SSIM": float(np.mean([m["SSIM"] for m in per_image])),
-        "SSIM min": float(np.min([m["SSIM"] for m in per_image])),
+        "SSIM": aggregate_ssim(ssim_vals, ssim_agg),
+        "SSIM min": float(np.min(ssim_vals)),
+        "MSE": float(np.mean([m["MSE"] for m in per_image])),
         "PSNR (dB)": float(np.mean(psnrs)) if psnrs else float("inf"),
         "MAE": float(np.mean([m["MAE"] for m in per_image])),
         "Max Error": int(np.max([m["Max Error"] for m in per_image])),
@@ -637,7 +704,7 @@ def validate(
         train_ssim: Optional[float] = None,
     ) -> Dict:
         per_image = val_problem.per_image_metrics(x)
-        m = aggregate(per_image)
+        m = aggregate(per_image, ssim_agg=val_problem.ssim_agg)
         R = train.cost(x)
         if train_ssim is None:
             train_ssim = get_uniform_train_ssim(x)
@@ -645,11 +712,13 @@ def validate(
         return {
             "Configuracao": label,
             "Threshold": "" if threshold is None else threshold,
+            "SSIM agg": val_problem.ssim_agg,
             "LUT+FF": R,
             "Economia (%)": round((R_exact - R) / R_exact * 100.0, 2) if R_exact else 0.0,
             "SSIM treino": round(train_ssim, 4),
             "SSIM val": round(m["SSIM"], 4),
             "SSIM val (min)": round(m["SSIM min"], 4),
+            "MSE val": round(m["MSE"], 6),
             "PSNR val (dB)": m["PSNR (dB)"] if np.isinf(m["PSNR (dB)"]) else round(m["PSNR (dB)"], 2),
             "MAE val": round(m["MAE"], 4),
             "Max Error val": m["Max Error"],
@@ -674,22 +743,23 @@ def validate(
 
     rows.sort(key=lambda r: (r["LUT+FF"], -float(r["SSIM val"])))
 
-    fmt = "{:<34} | {:>7} | {:>9} | {:>11} | {:>9} | {:>9} | {:>10} | {:>7} | {:>6} | {:>6}"
-    line = "=" * 130
+    fmt = "{:<34} | {:>7} | {:>9} | {:>11} | {:>9} | {:>9} | {:>10} | {:>10} | {:>7} | {:>6} | {:>6}"
+    line = "=" * 148
     print("\n" + line)
     print(f"VALIDAÇÃO  ({len(val_problem.images)} imagens de validação; médias sobre o conjunto)")
     print(line)
     print(fmt.format("Configuração", "LUT+FF", "Economia", "SSIM treino", "SSIM val",
-                     "SSIM min", "PSNR (dB)", "MAE", "MaxErr", "Viável"))
-    print("-" * 130)
+                     "SSIM min", "MSE", "PSNR (dB)", "MAE", "MaxErr", "Viável"))
+    print("-" * 148)
     for r in rows:
         psnr = "inf" if r["PSNR val (dB)"] == float("inf") else f"{r['PSNR val (dB)']:.2f}"
+        mse_str = f"{r['MSE val']:.4f}"
         is_vns = r["Configuracao"].startswith("VNS")
         viavel = (("sim" if r["Viavel (val)"] else "não") if is_vns else "-")
         mark = "  <== VNS" if is_vns else ""
         print(fmt.format(r["Configuracao"], r["LUT+FF"], f"{r['Economia (%)']:.1f}%",
                          f"{r['SSIM treino']:.4f}", f"{r['SSIM val']:.4f}",
-                         f"{r['SSIM val (min)']:.4f}", psnr, f"{r['MAE val']:.3f}",
+                         f"{r['SSIM val (min)']:.4f}", mse_str, psnr, f"{r['MAE val']:.3f}",
                          r["Max Error val"], viavel) + mark)
     print(line + "\n")
 
@@ -699,12 +769,17 @@ def validate(
         w.writerows(rows)
 
     # Detalhe por imagem de validação para cada solução do VNS
+    def _round_metric(k: str, v):
+        if isinstance(v, float) and np.isfinite(v):
+            return round(v, 6) if k == "MSE" else round(v, 4)
+        return v
+
     detail = []
     for problem, result in runs:
         for m in val_problem.per_image_metrics(result.x):
-            detail.append({"Threshold": problem.threshold, **{
-                k: (round(v, 4) if isinstance(v, float) and np.isfinite(v) else v)
-                for k, v in m.items()}})
+            row = {"Threshold": problem.threshold}
+            row.update({k: _round_metric(k, v) for k, v in m.items()})
+            detail.append(row)
     with open(os.path.join(output_dir, "vns_validation_per_image.csv"), "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(detail[0].keys()))
         w.writeheader()
@@ -746,12 +821,13 @@ def append_rows(path: str, fieldnames: List[str], rows: List[Dict]) -> None:
         w.writerows(rows)
 
 
-def append_history(path: str, threshold: float, result: VNSResult) -> None:
+def append_history(path: str, threshold: float, result: VNSResult, ssim_agg: str = "mean") -> None:
     """vns_history.csv: UMA linha por execução (resumo final), acumulada entre execuções."""
     row = {
         "Threshold": threshold,
         "Cost": result.cost,
         "SSIM": round(result.ssim, 4),
+        "SSIM agg": ssim_agg,
         "Evaluations": result.evaluations,
         "Iterations": result.iterations,
         "Time_s": round(result.elapsed, 2),
@@ -783,7 +859,7 @@ def save_outputs(problem: DSEProblem, result: VNSResult, output_dir: str) -> Non
         w.writeheader()
         w.writerows(rows)
 
-    append_history(os.path.join(output_dir, "vns_history.csv"), problem.threshold, result)
+    append_history(os.path.join(output_dir, "vns_history.csv"), problem.threshold, result, problem.ssim_agg)
     append_trace(os.path.join(output_dir, "vns_trace.csv"), problem.threshold, result.history)
 
     try:
@@ -838,8 +914,12 @@ def main():
     p.add_argument("--t-step", type=int, default=5, help="Decremento do limiar, em %% (default: 5)")
     p.add_argument("--max-evals", "-mev", type=int, default=500,
                    help="Nº máximo de avaliações reais (cache misses) POR limiar (default: 500)")
+    p.add_argument("--patience", "-p", type=int, default=100,
+                   help="Nº de avaliações sem melhoria do melhor viável antes de parar (0 para desativar, default: 100)")
+    p.add_argument("--ssim-agg", choices=["mean", "geomean", "median"], default="mean",
+                   help="Modo de agregação de SSIM sobre o conjunto de imagens (default: mean)")
     p.add_argument("--time", "-t", type=float, default=None,
-                   help="Teto OPCIONAL de CPU POR limiar, em segundos (default: sem teto)")
+                   help="Teto OPCIONAL de tempo de relógio (wall-clock) POR limiar, em segundos (default: sem teto)")
     p.add_argument("--kmax", type=int, default=4, help="Número máximo de vizinhanças (default: 4)")
     p.add_argument("--seed", type=int, default=None, help="Semente aleatória (reprodutibilidade)")
     p.add_argument("--single-sweep", action="store_true",
@@ -849,6 +929,8 @@ def main():
     args = p.parse_args()
     if args.max_evals is not None and args.max_evals < 1:
         p.error("--max-evals deve ser >= 1")
+    if args.patience < 0:
+        p.error("--patience deve ser >= 0")
 
     # Dataset e divisão treino / validação
     if args.dataset:
@@ -889,6 +971,8 @@ def main():
             imgs, library, kernel_size=args.kernel_size,
             sigma=args.sigma, threshold=T, names=names,
             reference_images=reference_images,
+            ssim_agg=args.ssim_agg,
+            patience=args.patience,
         )
 
     os.makedirs(args.output, exist_ok=True)
@@ -909,7 +993,7 @@ def main():
             path = os.path.join(args.output, f"vns_solution_{threshold_tag(T)}.csv")
             x = load_solution(path, library, problem.n_slots)
             R, s = problem.evaluate(x)
-            runs.append((problem, VNSResult(x, R, s, 0.0, 0, problem.n_evals)))
+            runs.append((problem, VNSResult(x, R, s, 0.0, 0, problem.n_evals, ssim_agg=problem.ssim_agg)))
             print(f"[validate-only] {path}: R={R}  SSIM treino={s:.4f}")
             problem.close()
             continue
@@ -919,10 +1003,10 @@ def main():
         print("#" * 70)
         result = vns(problem, max_evals=args.max_evals, t_max=args.time,
                      k_max=args.kmax, seed=args.seed,
-                     descent=not args.single_sweep)
+                     descent=not args.single_sweep, patience=args.patience)
 
         print(f"\n[VNS] fim (T={T:.2f}): {result.iterations} iterações, {result.evaluations} avaliações, "
-              f"{result.elapsed:.2f}s de CPU")
+              f"{result.elapsed:.2f}s (wall-clock)")
         print(f"[VNS] melhor solução: R={result.cost}  SSIM média (treino)={result.ssim:.4f}")
         for row in problem.describe(result.x):
             print(f"    {row['Posicao']:<22} -> {row['Multiplicador']}")
