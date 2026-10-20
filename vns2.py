@@ -36,6 +36,7 @@ Uso:
     python vns2.py --dataset imagens/ --train-count 70 --total 100 \
                    --t-start 95 --t-end 70 --t-step 5 --max-evals 500 --kmax 4 --seed 42
 
+    # Paralelismo: --threads N (ou -w N). Sem valor ou omitido usa todas as threads da CPU.
     # Orçamento: --max-evals N = nº máximo de avaliações REAIS (cache misses) POR limiar.
     # --time S (opcional) é apenas um teto de segurança em tempo de relógio (wall-clock); vale o que ocorrer primeiro.
     # --patience P (opcional) interrompe o limiar após P avaliações reais sem melhoria do melhor viável.
@@ -261,6 +262,7 @@ class DSEProblem:
         reference_images: Optional[List[np.ndarray]] = None,
         ssim_agg: str = "mean",
         patience: Optional[int] = 100,
+        max_workers: Optional[int] = None,
     ):
         if isinstance(images, np.ndarray):  # compatibilidade: imagem única
             images = [images]
@@ -270,6 +272,7 @@ class DSEProblem:
         self.threshold = threshold
         self.ssim_agg = ssim_agg
         self.patience = patience
+        self.max_workers = max_workers if max_workers is not None else (os.cpu_count() or 1)
         self._evals_since_improvement = 0
 
         # Mesmo kernel usado em evaluate.py
@@ -309,6 +312,7 @@ class DSEProblem:
 
         # Pool de processos reutilizável durante todo o ciclo de vida deste problema
         self._pool: Optional[ProcessPoolExecutor] = ProcessPoolExecutor(
+            max_workers=self.max_workers,
             initializer=_init_worker,
             initargs=(self.images, self.references, self.kernel, self.norm),
         )
@@ -371,7 +375,7 @@ class DSEProblem:
         mult_names = tuple(self.library[i].name for i in x)
         if self._pool is not None:
             tasks = [(i, mult_names) for i in range(len(self.images))]
-            chunk = max(1, len(self.images) // (os.cpu_count() or 4))
+            chunk = max(1, len(self.images) // self.max_workers)
             vals = list(self._pool.map(_eval_one_image, tasks, chunksize=chunk))
         else:
             vals = []
@@ -926,7 +930,13 @@ def main():
                    help="Busca local com uma única varredura (como no pseudocódigo do artigo)")
     p.add_argument("--validate-only", action="store_true",
                    help="Pula o treino: lê vns_solution_Txx.csv do diretório de saída e só valida")
+    max_cpu = os.cpu_count() or 1
+    p.add_argument("--threads", "-w", "--workers", type=int, nargs="?",
+                   const=max_cpu, default=max_cpu,
+                   help=f"Número de threads/workers para processamento paralelo (default: {max_cpu}, máx. da CPU)")
     args = p.parse_args()
+    if args.threads is not None and args.threads < 1:
+        p.error("--threads deve ser >= 1")
     if args.max_evals is not None and args.max_evals < 1:
         p.error("--max-evals deve ser >= 1")
     if args.patience < 0:
@@ -945,6 +955,7 @@ def main():
 
     train_imgs, train_names = [im for _, im in train_set], [n for n, _ in train_set]
     val_imgs, val_names = [im for _, im in val_set], [n for n, _ in val_set]
+    print(f"Workers paralelos: {args.threads}")
 
     library = build_library(args.csv)
     print("Biblioteca:", ", ".join(f"{c.name}({c.cost})" for c in library))
@@ -973,6 +984,7 @@ def main():
             reference_images=reference_images,
             ssim_agg=args.ssim_agg,
             patience=args.patience,
+            max_workers=args.threads,
         )
 
     os.makedirs(args.output, exist_ok=True)
