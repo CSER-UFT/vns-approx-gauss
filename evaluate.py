@@ -11,6 +11,8 @@ import csv
 from typing import Dict, List, Optional, Tuple
 import numpy as np
 from PIL import Image
+import matplotlib
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 from multipliers import get_multiplier, MULTIPLIER_REGISTRY

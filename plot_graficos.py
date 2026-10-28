@@ -3,6 +3,8 @@ import csv
 import os
 import random
 
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 COLORS = {'LUT': '#4C72B0', 'FF': '#DD8452', 'DSP': '#55A868'}

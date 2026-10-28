@@ -18,22 +18,25 @@ def parse_report(filepath):
     return None
 
 def get_threshold(filepath):
-    """Extrai o threshold do nome da pasta da solução (vns_solution_<threshold>)."""
+    """Extrai o identificador/threshold do nome da pasta da solução."""
+    # A pasta da solução está 3 níveis acima do arquivo: <solucao>/syn/report/gaussian_csynth.rpt
+    sol_name = os.path.basename(os.path.dirname(os.path.dirname(os.path.dirname(filepath))))
     prefix = 'vns_solution_'
-    for part in os.path.normpath(filepath).split(os.sep):
-        if part.startswith(prefix):
-            return part[len(prefix):]
-    # Fallback: pasta da solução = 3 níveis acima do .rpt (<solucao>/syn/report/arquivo.rpt)
-    return os.path.basename(os.path.dirname(os.path.dirname(os.path.dirname(filepath))))
+    if sol_name.startswith(prefix):
+        return sol_name[len(prefix):]
+    return sol_name
 
 def sort_key(threshold):
-    # baseline primeiro, depois T<número> em ordem numérica, depois o resto
-    if threshold == 'baseline':
-        return (0, 0, threshold)
-    m = re.fullmatch(r'T(\d+)', threshold)
+    # baseline primeiro no grupo, depois T<número> em ordem numérica decrescente, depois o resto
+    m = re.match(r'^(?:(.*?)_)?(baseline|T\d+)$', threshold)
     if m:
-        return (1, -int(m.group(1)), threshold)
-    return (2, 0, threshold)
+        prefix = m.group(1) or ''
+        tag = m.group(2)
+        if tag == 'baseline':
+            return (prefix, 0, 0)
+        t_num = int(tag[1:])
+        return (prefix, 1, -t_num)
+    return (threshold, 2, 0)
 
 def main():
     report_files = glob.glob('build/**/*.rpt', recursive=True)

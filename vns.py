@@ -33,6 +33,8 @@ import time
 from dataclasses import dataclass, field
 from typing import Callable, Dict, Iterator, List, Optional, Tuple
 
+import matplotlib
+matplotlib.use("Agg")
 import numpy as np
 from PIL import Image
 

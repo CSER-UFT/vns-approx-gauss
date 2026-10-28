@@ -28,8 +28,29 @@ if {[info exists env(VNS_CSV)] && $env(VNS_CSV) ne ""} {
     }
 }
 
+# Determine solution name based on directory pattern (e.g. vns5GeoMean0) and threshold (e.g. T95)
+set file_base [file rootname [file tail $vns_csv]]
+set parent_dir [file tail [file dirname [file normalize $vns_csv]]]
+
+if {[regexp {vns_solution_(.+)$} $file_base -> tag]} {
+    set threshold_tag $tag
+} elseif {[regexp {_(T\d+|baseline)$} $file_base -> tag]} {
+    set threshold_tag $tag
+} else {
+    set threshold_tag $file_base
+}
+
+if {[info exists env(SOL_NAME)] && $env(SOL_NAME) ne ""} {
+    set sol_name $env(SOL_NAME)
+} elseif {[string match "vns*" $parent_dir]} {
+    set sol_name "${parent_dir}_${threshold_tag}"
+} else {
+    set sol_name $file_base
+}
+
 puts "============================================================"
 puts "Using VNS Solution CSV: $vns_csv"
+puts "HLS Solution Name:      $sol_name"
 puts "============================================================"
 
 # 2. Generate C++ mapping and selected multipliers TCL snippet
@@ -57,8 +78,6 @@ source ../selected_multipliers.tcl
 if {[file exists ../tb/tb_gaussian.cpp]} {
     add_files -tb ../tb/tb_gaussian.cpp -cflags "-I.. -I../src"
 }
-
-set sol_name [file rootname [file tail $vns_csv]]
 
 open_solution -reset $sol_name
 set_part xc7s50csga324-1

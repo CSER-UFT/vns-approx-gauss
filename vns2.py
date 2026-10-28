@@ -55,6 +55,8 @@ from concurrent.futures import ProcessPoolExecutor
 from dataclasses import dataclass, field
 from typing import Callable, Dict, Iterator, List, Optional, Tuple
 
+import matplotlib
+matplotlib.use("Agg")
 import numpy as np
 from PIL import Image
 
@@ -874,7 +876,7 @@ def save_outputs(problem: DSEProblem, result: VNSResult, output_dir: str) -> Non
         else:
             e = [0, result.evaluations]
             c = [result.cost, result.cost]
-        plt.figure(figsize=(7, 4))
+        fig = plt.figure(figsize=(7, 4))
         plt.step(e, c, where="post", color="royalblue")
         if result.history:
             plt.scatter([h["evals"] for h in result.history], [h["cost"] for h in result.history], color="royalblue", zorder=3)
@@ -884,7 +886,8 @@ def save_outputs(problem: DSEProblem, result: VNSResult, output_dir: str) -> Non
         plt.grid(True, linestyle="--", alpha=0.6)
         plt.tight_layout()
         plt.savefig(os.path.join(output_dir, f"vns_convergence_{tag}.png"), dpi=200)
-        plt.close()
+        plt.close(fig)
+        plt.close("all")
     except Exception as e:  # o gráfico é opcional
         print(f"[aviso] gráfico de convergência não gerado: {e}")
 
