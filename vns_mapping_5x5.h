@@ -1,8 +1,9 @@
 /*
  * AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
- * Generated from: output/vnsSingleSweep/vns_solution_T95.csv
+ * Generated from: output/vns5GeoMean0/vns_solution_T95.csv
  * Target: 5x5 VNS-Optimized Gaussian Filter (25 taps)
- * Predicted Cost: LUT=423, FF=0, DSP=0
+ * Kernel Sum: 256 (Norm Shift: >> 8, Offset: + 128)
+ * Predicted Cost: LUT=420, FF=0, DSP=0
  */
 
 #ifndef VNS_MAPPING_5X5_H_
@@ -11,7 +12,7 @@
 #include <ap_int.h>
 
 // Selected approximate multiplier headers
-#include "src/1bitTruncated.h"
+#include "src/2bitTruncated.h"
 #include "src/3bitTruncated.h"
 #include "src/4bitTruncated.h"
 #include "src/bit2Truncated.h"
@@ -19,13 +20,18 @@
 #include "src/bit4Truncated.h"
 #include "src/bitEspecifico.h"
 
-// Exact 16-bit adders for balanced adder tree
+// Exact 16-bit signed adders for balanced adder tree
 inline ap_int<16> add16se_add1(ap_int<16> a, ap_int<16> b) { return a + b; }
 inline ap_int<16> add16se_add2(ap_int<16> a, ap_int<16> b) { return a + b; }
 inline ap_int<16> add16se_add3(ap_int<16> a, ap_int<16> b) { return a + b; }
 inline ap_int<16> add16se_add4(ap_int<16> a, ap_int<16> b) { return a + b; }
 
-// 5x5 Gaussian Kernel Weights (Sum = 256)
+// Normalization parameters (Kernel Sum = 256)
+constexpr int K_NORM_FACTOR = 256;
+constexpr int K_NORM_SHIFT  = 8;
+constexpr int K_NORM_OFFSET = 128;
+
+// 5x5 Gaussian Kernel Weights
 constexpr unsigned char K_TAP_0_0 = 1;
 constexpr unsigned char K_TAP_0_1 = 4;
 constexpr unsigned char K_TAP_0_2 = 6;
@@ -60,10 +66,10 @@ inline ap_int<16> mul_slot_0(ap_uint<8> a, ap_uint<8> b) {
     return (ap_int<16>)res;
 }
 
-// Slot 1: tap(0,1) w=4 -> bit4Truncated (bit4Truncated)
+// Slot 1: tap(0,1) w=4 -> p_4bitTruncated (_4bitTruncated)
 inline ap_int<16> mul_slot_1(ap_uint<8> a, ap_uint<8> b) {
     ap_uint<16> res;
-    bit4Truncated(a, b, res);
+    _4bitTruncated(a, b, res);
     return (ap_int<16>)res;
 }
 
@@ -81,10 +87,10 @@ inline ap_int<16> mul_slot_3(ap_uint<8> a, ap_uint<8> b) {
     return (ap_int<16>)res;
 }
 
-// Slot 4: tap(0,4) w=1 -> p_4bitTruncated (_4bitTruncated)
+// Slot 4: tap(0,4) w=1 -> bitEspecifico (bitEspecifico)
 inline ap_int<16> mul_slot_4(ap_uint<8> a, ap_uint<8> b) {
     ap_uint<16> res;
-    _4bitTruncated(a, b, res);
+    bitEspecifico(a, b, res);
     return (ap_int<16>)res;
 }
 
@@ -95,17 +101,17 @@ inline ap_int<16> mul_slot_5(ap_uint<8> a, ap_uint<8> b) {
     return (ap_int<16>)res;
 }
 
-// Slot 6: tap(1,1) w=16 -> p_4bitTruncated (_4bitTruncated)
+// Slot 6: tap(1,1) w=16 -> p_2bitTruncated (_2bitTruncated)
 inline ap_int<16> mul_slot_6(ap_uint<8> a, ap_uint<8> b) {
     ap_uint<16> res;
-    _4bitTruncated(a, b, res);
+    _2bitTruncated(a, b, res);
     return (ap_int<16>)res;
 }
 
-// Slot 7: tap(1,2) w=24 -> p_4bitTruncated (_4bitTruncated)
+// Slot 7: tap(1,2) w=24 -> p_3bitTruncated (_3bitTruncated)
 inline ap_int<16> mul_slot_7(ap_uint<8> a, ap_uint<8> b) {
     ap_uint<16> res;
-    _4bitTruncated(a, b, res);
+    _3bitTruncated(a, b, res);
     return (ap_int<16>)res;
 }
 
@@ -130,10 +136,10 @@ inline ap_int<16> mul_slot_10(ap_uint<8> a, ap_uint<8> b) {
     return (ap_int<16>)res;
 }
 
-// Slot 11: tap(2,1) w=24 -> p_1bitTruncated (_1bitTruncated)
+// Slot 11: tap(2,1) w=24 -> p_4bitTruncated (_4bitTruncated)
 inline ap_int<16> mul_slot_11(ap_uint<8> a, ap_uint<8> b) {
     ap_uint<16> res;
-    _1bitTruncated(a, b, res);
+    _4bitTruncated(a, b, res);
     return (ap_int<16>)res;
 }
 
@@ -172,17 +178,17 @@ inline ap_int<16> mul_slot_16(ap_uint<8> a, ap_uint<8> b) {
     return (ap_int<16>)res;
 }
 
-// Slot 17: tap(3,2) w=24 -> bit2Truncated (bit2Truncated)
+// Slot 17: tap(3,2) w=24 -> bit4Truncated (bit4Truncated)
 inline ap_int<16> mul_slot_17(ap_uint<8> a, ap_uint<8> b) {
     ap_uint<16> res;
-    bit2Truncated(a, b, res);
+    bit4Truncated(a, b, res);
     return (ap_int<16>)res;
 }
 
-// Slot 18: tap(3,3) w=16 -> bitEspecifico (bitEspecifico)
+// Slot 18: tap(3,3) w=16 -> bit4Truncated (bit4Truncated)
 inline ap_int<16> mul_slot_18(ap_uint<8> a, ap_uint<8> b) {
     ap_uint<16> res;
-    bitEspecifico(a, b, res);
+    bit4Truncated(a, b, res);
     return (ap_int<16>)res;
 }
 
@@ -200,10 +206,10 @@ inline ap_int<16> mul_slot_20(ap_uint<8> a, ap_uint<8> b) {
     return (ap_int<16>)res;
 }
 
-// Slot 21: tap(4,1) w=4 -> p_4bitTruncated (_4bitTruncated)
+// Slot 21: tap(4,1) w=4 -> p_2bitTruncated (_2bitTruncated)
 inline ap_int<16> mul_slot_21(ap_uint<8> a, ap_uint<8> b) {
     ap_uint<16> res;
-    _4bitTruncated(a, b, res);
+    _2bitTruncated(a, b, res);
     return (ap_int<16>)res;
 }
 

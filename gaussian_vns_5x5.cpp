@@ -19,8 +19,8 @@
 // Per-slot multiplier bindings and constexpr kernel weights
 #include "vns_mapping_5x5.h"
 
-#define MAX_IMAGE_WIDTH     4096
-#define MAX_IMAGE_HEIGHT    4096
+#define MAX_IMAGE_WIDTH     512
+#define MAX_IMAGE_HEIGHT    512
 
 #define FILTER_V_SIZE       5
 #define FILTER_H_SIZE       5

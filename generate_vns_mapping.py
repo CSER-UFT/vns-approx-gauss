@@ -2,17 +2,19 @@
 """
 generate_vns_mapping.py
 
-Generates the C++ mapping header (vns_mapping_5x5.h) and TCL file list
-(selected_multipliers.tcl) for Vitis HLS synthesis from a VNS solution CSV.
+Generates the C++ mapping header (vns_mapping_3x3.h or vns_mapping_5x5.h) and
+TCL file list (selected_multipliers.tcl) for Vitis HLS synthesis from a VNS solution CSV.
 
-Contract:
-- 5x5 Gaussian kernel has 25 taps (all non-zero, sum = 256).
-- Row-major slot ordering: slot 0 to 24 correspond to tap(0,0) through tap(4,4).
+Supports both:
+- 3x3 Gaussian kernel (9 taps, row-major slot 0..8)
+- 5x5 Gaussian kernel (25 taps, row-major slot 0..24)
 """
 
 import argparse
 import csv
+import math
 import os
+import re
 import sys
 from typing import Dict, List, Tuple
 
@@ -58,7 +60,13 @@ MULTIPLIER_INFO = {
     "_bitEspecifico": ("src/bitEspecifico.h", "bitEspecifico", "src/bitEspecifico.cpp"),
 }
 
-KERNEL_5X5 = [
+DEFAULT_KERNEL_3X3 = [
+    [19, 32, 19],
+    [32, 52, 32],
+    [19, 32, 19],
+]
+
+DEFAULT_KERNEL_5X5 = [
     [1,  4,  6,  4, 1],
     [4, 16, 24, 16, 4],
     [6, 24, 36, 24, 6],
@@ -77,7 +85,7 @@ def resolve_multiplier(raw_name: str) -> Tuple[str, str, str]:
     raise ValueError(f"Unknown multiplier '{raw_name}'. Available: {list(MULTIPLIER_INFO.keys())}")
 
 
-def parse_vns_csv(csv_path: str) -> List[Dict]:
+def parse_vns_csv(csv_path: str, expected_k: int = None) -> Tuple[List[Dict], int]:
     if not os.path.exists(csv_path):
         raise FileNotFoundError(f"VNS solution CSV not found: {csv_path}")
 
@@ -87,14 +95,28 @@ def parse_vns_csv(csv_path: str) -> List[Dict]:
         for r in reader:
             rows.append(r)
 
-    if len(rows) != 25:
-        raise ValueError(
-            f"Expected 25 rows in VNS solution CSV for 5x5 kernel, found {len(rows)}."
-        )
-    return rows
+    n_rows = len(rows)
+    if expected_k is not None:
+        expected_rows = expected_k * expected_k
+        if n_rows != expected_rows:
+            raise ValueError(
+                f"Expected {expected_rows} rows for {expected_k}x{expected_k} kernel, but found {n_rows} in {csv_path}."
+            )
+        k_size = expected_k
+    else:
+        if n_rows == 9:
+            k_size = 3
+        elif n_rows == 25:
+            k_size = 5
+        else:
+            raise ValueError(
+                f"Unsupported row count ({n_rows}) in {csv_path}. Expected 9 (for 3x3) or 25 (for 5x5)."
+            )
+
+    return rows, k_size
 
 
-def generate_header(rows: List[Dict], csv_path: str, header_path: str) -> List[str]:
+def generate_header(rows: List[Dict], csv_path: str, k_size: int, header_path: str) -> List[str]:
     unique_headers = set()
     unique_cpps = set()
     slot_info = []
@@ -103,46 +125,68 @@ def generate_header(rows: List[Dict], csv_path: str, header_path: str) -> List[s
     total_ff = 0
     total_dsp = 0
 
-    idx = 0
-    for r in range(5):
-        for c in range(5):
-            expected_w = KERNEL_5X5[r][c]
-            row = rows[idx]
-            mult_name = row["Multiplicador"]
-            lut = int(row.get("LUT", 0))
-            ff = int(row.get("FF", 0))
-            dsp = int(row.get("DSP", 0))
-            total_lut += lut
-            total_ff += ff
-            total_dsp += dsp
+    default_kernel = DEFAULT_KERNEL_3X3 if k_size == 3 else DEFAULT_KERNEL_5X5
 
-            h_file, fn_name, cpp_file = resolve_multiplier(mult_name)
-            unique_headers.add(h_file)
-            unique_cpps.add(cpp_file)
+    for idx, row in enumerate(rows):
+        pos_str = row.get("Posicao", "")
+        # Extract row, col, and weight from Posicao, e.g. "tap(0,1) w=32"
+        m_pos = re.search(r'tap\((\d+)\s*,\s*(\d+)\)', pos_str)
+        m_w = re.search(r'w=(\d+)', pos_str)
 
-            slot_info.append({
-                "slot": idx,
-                "r": r,
-                "c": c,
-                "weight": expected_w,
-                "mult_name": mult_name,
-                "fn_name": fn_name,
-                "lut": lut,
-                "ff": ff,
-                "dsp": dsp,
-            })
-            idx += 1
+        if m_pos:
+            r = int(m_pos.group(1))
+            c = int(m_pos.group(2))
+        else:
+            r = idx // k_size
+            c = idx % k_size
+
+        if m_w:
+            w = int(m_w.group(1))
+        else:
+            w = default_kernel[r][c]
+
+        mult_name = row["Multiplicador"]
+        lut = int(row.get("LUT", 0))
+        ff = int(row.get("FF", 0))
+        dsp = int(row.get("DSP", 0))
+        total_lut += lut
+        total_ff += ff
+        total_dsp += dsp
+
+        h_file, fn_name, cpp_file = resolve_multiplier(mult_name)
+        unique_headers.add(h_file)
+        unique_cpps.add(cpp_file)
+
+        slot_info.append({
+            "slot": idx,
+            "r": r,
+            "c": c,
+            "weight": w,
+            "mult_name": mult_name,
+            "fn_name": fn_name,
+            "lut": lut,
+            "ff": ff,
+            "dsp": dsp,
+        })
+
+    kernel_sum = sum(s["weight"] for s in slot_info)
+    # Hardware shift and rounding calculation
+    is_power_of_2 = (kernel_sum > 0) and (kernel_sum & (kernel_sum - 1) == 0)
+    norm_shift = int(math.log2(kernel_sum)) if is_power_of_2 else 8
+    norm_offset = 1 << (norm_shift - 1) if norm_shift > 0 else 0
 
     lines = []
     lines.append("/*")
     lines.append(" * AUTO-GENERATED FILE - DO NOT EDIT MANUALLY")
     lines.append(f" * Generated from: {csv_path}")
-    lines.append(" * Target: 5x5 VNS-Optimized Gaussian Filter (25 taps)")
+    lines.append(f" * Target: {k_size}x{k_size} VNS-Optimized Gaussian Filter ({len(slot_info)} taps)")
+    lines.append(f" * Kernel Sum: {kernel_sum} (Norm Shift: >> {norm_shift}, Offset: + {norm_offset})")
     lines.append(f" * Predicted Cost: LUT={total_lut}, FF={total_ff}, DSP={total_dsp}")
     lines.append(" */")
     lines.append("")
-    lines.append("#ifndef VNS_MAPPING_5X5_H_")
-    lines.append("#define VNS_MAPPING_5X5_H_")
+    guard_name = f"VNS_MAPPING_{k_size}X{k_size}_H_"
+    lines.append(f"#ifndef {guard_name}")
+    lines.append(f"#define {guard_name}")
     lines.append("")
     lines.append("#include <ap_int.h>")
     lines.append("")
@@ -151,14 +195,20 @@ def generate_header(rows: List[Dict], csv_path: str, header_path: str) -> List[s
         lines.append(f'#include "{h}"')
     lines.append("")
 
-    lines.append("// Exact 16-bit adders for balanced adder tree")
+    lines.append("// Exact 16-bit signed adders for balanced adder tree")
     lines.append("inline ap_int<16> add16se_add1(ap_int<16> a, ap_int<16> b) { return a + b; }")
     lines.append("inline ap_int<16> add16se_add2(ap_int<16> a, ap_int<16> b) { return a + b; }")
     lines.append("inline ap_int<16> add16se_add3(ap_int<16> a, ap_int<16> b) { return a + b; }")
     lines.append("inline ap_int<16> add16se_add4(ap_int<16> a, ap_int<16> b) { return a + b; }")
     lines.append("")
 
-    lines.append("// 5x5 Gaussian Kernel Weights (Sum = 256)")
+    lines.append(f"// Normalization parameters (Kernel Sum = {kernel_sum})")
+    lines.append(f"constexpr int K_NORM_FACTOR = {kernel_sum};")
+    lines.append(f"constexpr int K_NORM_SHIFT  = {norm_shift};")
+    lines.append(f"constexpr int K_NORM_OFFSET = {norm_offset};")
+    lines.append("")
+
+    lines.append(f"// {k_size}x{k_size} Gaussian Kernel Weights")
     for s in slot_info:
         r, c, w = s["r"], s["c"], s["weight"]
         lines.append(f"constexpr unsigned char K_TAP_{r}_{c} = {w};")
@@ -180,12 +230,13 @@ def generate_header(rows: List[Dict], csv_path: str, header_path: str) -> List[s
         lines.append(f"}}")
         lines.append("")
 
-    lines.append("#endif // VNS_MAPPING_5X5_H_")
+    lines.append(f"#endif // {guard_name}")
     lines.append("")
 
     with open(header_path, "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
 
+    print(f"[generate_vns_mapping] Target: {k_size}x{k_size} ({len(slot_info)} taps, sum={kernel_sum})")
     print(f"[generate_vns_mapping] Header written to: {header_path}")
     print(f"[generate_vns_mapping] Predicted HW Cost: LUT={total_lut}, FF={total_ff}, DSP={total_dsp}")
     print(f"[generate_vns_mapping] Unique multiplier IPs: {len(unique_cpps)}")
@@ -207,7 +258,7 @@ def generate_tcl_include(unique_cpps: List[str], tcl_path: str):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Generate VNS 5x5 HLS mapping and TCL script.")
+    parser = argparse.ArgumentParser(description="Generate VNS HLS mapping and TCL script (3x3 or 5x5).")
     parser.add_argument(
         "csv_pos",
         nargs="?",
@@ -218,18 +269,25 @@ def main():
         "--csv",
         type=str,
         default=None,
-        help="Path to VNS solution CSV (25 rows).",
+        help="Path to VNS solution CSV (9 rows for 3x3, 25 rows for 5x5).",
+    )
+    parser.add_argument(
+        "--kernel-size", "-k",
+        type=int,
+        choices=[3, 5],
+        default=None,
+        help="Kernel size (3 or 5). If omitted, automatically inferred from row count.",
     )
     parser.add_argument(
         "--header-out",
         type=str,
-        default="vns_mapping_5x5.h",
-        help="Path for generated C++ header file.",
+        default=None,
+        help="Path for generated C++ header file (defaults to vns_mapping_<K>x<K>.h).",
     )
     parser.add_argument(
         "--tcl-out",
         type=str,
-        default="selected_multipliers.tcl",
+        default=None,
         help="Path for generated TCL script containing add_files for selected multipliers.",
     )
 
@@ -245,9 +303,19 @@ def main():
     if not csv_file:
         csv_file = "output/vnsSingleSweep/vns_solution_T95.csv"
 
-    rows = parse_vns_csv(csv_file)
-    unique_cpps = generate_header(rows, csv_file, args.header_out)
-    generate_tcl_include(unique_cpps, args.tcl_out)
+    rows, k_size = parse_vns_csv(csv_file, expected_k=args.kernel_size)
+
+    # Determine default output filenames based on resolved k_size
+    header_out = args.header_out
+    if not header_out:
+        header_out = f"vns_mapping_{k_size}x{k_size}.h"
+
+    tcl_out = args.tcl_out
+    if not tcl_out:
+        tcl_out = f"selected_multipliers_{k_size}x{k_size}.tcl" if k_size == 3 else "selected_multipliers.tcl"
+
+    unique_cpps = generate_header(rows, csv_file, k_size, header_out)
+    generate_tcl_include(unique_cpps, tcl_out)
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 /*
  * tb_gaussian.cpp
- * C-testbench for 5x5 VNS-optimized Gaussian filter.
+ * C-testbench for 5x5 VNS-optimized Gaussian filter (512x512).
  */
 
 #include <iostream>
@@ -8,8 +8,8 @@
 #include <cmath>
 #include <cstdlib>
 
-#define MAX_IMAGE_WIDTH  4096
-#define MAX_IMAGE_HEIGHT 4096
+#define MAX_IMAGE_WIDTH  512
+#define MAX_IMAGE_HEIGHT 512
 
 extern "C" void gaussian(
     const unsigned char  src[MAX_IMAGE_WIDTH*MAX_IMAGE_HEIGHT],
@@ -18,23 +18,23 @@ extern "C" void gaussian(
     unsigned short width);
 
 int main() {
-    const unsigned short width = 64;
-    const unsigned short height = 64;
+    const unsigned short width = 512;
+    const unsigned short height = 512;
 
     std::vector<unsigned char> src(width * height, 128);
     std::vector<unsigned char> dst(width * height, 0);
 
-    // Create a simple test pattern (checker / gradient)
+    // Create a 512x512 test pattern (gradient pattern)
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
-            src[y * width + x] = (unsigned char)((x * 4 + y * 4) % 256);
+            src[y * width + x] = (unsigned char)((x * 3 + y * 5) % 256);
         }
     }
 
-    std::cout << "[TB] Running gaussian filter on 64x64 test image..." << std::endl;
+    std::cout << "[TB 5x5] Running gaussian filter on 512x512 test image..." << std::endl;
     gaussian(src.data(), dst.data(), height, width);
 
-    // Verify border pixels are 0
+    // Verify border pixels are 0 (5x5 filter has 2-pixel border margin)
     bool border_ok = true;
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
@@ -47,12 +47,12 @@ int main() {
     }
 
     if (!border_ok) {
-        std::cerr << "[TB] FAILED: Border check failed." << std::endl;
+        std::cerr << "[TB 5x5] FAILED: Border check failed." << std::endl;
         return 1;
     }
 
-    std::cout << "[TB] Center pixel (32, 32): Input=" << (int)src[32 * width + 32]
-              << ", Filtered=" << (int)dst[32 * width + 32] << std::endl;
-    std::cout << "[TB] SUCCESS: Testbench passed." << std::endl;
+    std::cout << "[TB 5x5] Center pixel (256, 256): Input=" << (int)src[256 * width + 256]
+              << ", Filtered=" << (int)dst[256 * width + 256] << std::endl;
+    std::cout << "[TB 5x5] SUCCESS: 512x512 testbench passed." << std::endl;
     return 0;
 }
