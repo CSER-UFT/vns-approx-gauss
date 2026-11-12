@@ -1,6 +1,6 @@
 build/hls_proj
 output/
-plots/
+graficos/
 # Created by https://www.toptal.com/developers/gitignore/api/python
 # Edit at https://www.toptal.com/developers/gitignore?templates=python
 
