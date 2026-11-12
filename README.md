@@ -65,7 +65,7 @@ O script principal é **`vns.py`**. Ele aceita as seguintes flags (listadas em `
 | `--validate-only` | flag | off | Apenas valida soluções já geradas (`output/vns/...`). |
 | `--ssim-agg <media\|geomean\|mediana>` | `str` | `media` | Tipo de agregação de SSIM a usar. |
 | `--k-size <3\|5>` | `int` | Detectado | Força o tamanho do kernel (3×3 ou 5×5). |
-| `--output-dir <caminho>` | `str` | `output/` | Diretório onde os CSVs de solução são gravados. |
+| `--output <caminho>` | `str` | `output/` | Diretório onde os CSVs de solução são gravados. |
 | `-h` / `--help` | flag | – | Exibe a mensagem de ajuda com todas as opções. |
 
 **Exemplo de execução completa**
@@ -83,7 +83,7 @@ python vns.py \
     --ssim-agg geomean \
     --patience 0 \
     --k-size 3 \
-    --output-dir output/vns3GeoMean0
+    --output output/vns3GeoMean0
 ```
 
 O VNS grava, em `output/`, arquivos CSV contendo métricas de custo, SSIM, etc., organizados por limiar e por vizinhança (`k=3` ou `k=5`). Para que o script `run_all_hls.py` reconheça corretamente as soluções, os diretórios devem seguir o padrão `vns{kernel-size}{opt_agg}{patience}` (por exemplo `vns3Media0`, `vns5Geomean230`).
