@@ -1,0 +1,247 @@
+
+
+================================================================
+== Vitis HLS Report for 'Filter2D_Pipeline_apply_filter_VITIS_LOOP_243_1'
+================================================================
+* Date:           Mon Nov  2 13:53:52 2026
+
+* Version:        2022.2 (Build 3670227 on Oct 13 2022)
+* Project:        hls_proj_5x5
+* Solution:       vns5GeoMean230_T70 (Vivado IP Flow Target)
+* Product family: spartan7
+* Target device:  xc7s50-csga324-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  6.941 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+------------+-----------+------------+-----+------------+---------+
+    |   Latency (cycles)   |   Latency (absolute)   |     Interval     | Pipeline|
+    |   min   |     max    |    min    |     max    | min |     max    |   Type  |
+    +---------+------------+-----------+------------+-----+------------+---------+
+    |        2|  4294836229|  20.000 ns|  42.948 sec|    2|  4294836229|       no|
+    +---------+------------+-----------+------------+-----+------------+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +---------------------------------+---------+------------+----------+-----------+-----------+----------------+----------+
+        |                                 |   Latency (cycles)   | Iteration|  Initiation Interval  |      Trip      |          |
+        |            Loop Name            |   min   |     max    |  Latency |  achieved |   target  |      Count     | Pipelined|
+        +---------------------------------+---------+------------+----------+-----------+-----------+----------------+----------+
+        |- apply_filter_VITIS_LOOP_243_1  |        0|  4294836227|         4|          1|          1|  0 ~ 4294836225|       yes|
+        +---------------------------------+---------+------------+----------+-----------+-----------+----------------+----------+
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 0
+ResetActiveHigh: 1
+IsCombinational: 0
+IsDatapathOnly: 0
+HasWiredReturn: 1
+HasMFsm: 2
+HasVarLatency: 1
+IsPipeline: 0
+IsRtlPipelined: 0
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
++ Individual pipeline summary: 
+  * Pipeline-0: initiation interval (II) = 1, depth = 5
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states : 5
+* Pipeline : 1
+  Pipeline-0 : II = 1, D = 5, States = { 1 2 3 4 5 }
+* Dataflow Pipeline: 0
+
+* FSM state transitions: 
+1 --> 2 
+2 --> 3 
+3 --> 4 
+4 --> 5 
+5 --> 
+
+* FSM state operations: 
+
+State 1 <SV = 0> <Delay = 1.58>
+ST_1 : Operation 7 [1/1] (0.00ns)   --->   "%j = alloca i32 1"   --->   Operation 7 'alloca' 'j' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 8 [1/1] (0.00ns)   --->   "%i = alloca i32 1"   --->   Operation 8 'alloca' 'i' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 9 [1/1] (0.00ns)   --->   "%indvar_flatten = alloca i32 1"   --->   Operation 9 'alloca' 'indvar_flatten' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 10 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i200 %window_stream, void @empty_5, i32 0, i32 0, void @empty_7, i32 0, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 10 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 11 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i8 %output_stream4, void @empty_5, i32 0, i32 0, void @empty_7, i32 0, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 11 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 12 [1/1] (0.00ns)   --->   "%sub15_read = read i17 @_ssdm_op_Read.ap_auto.i17, i17 %sub15" [../gaussian_vns_5x5.cpp:236]   --->   Operation 12 'read' 'sub15_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 13 [1/1] (0.00ns)   --->   "%width_load_read = read i16 @_ssdm_op_Read.ap_auto.i16, i16 %width_load" [../gaussian_vns_5x5.cpp:236]   --->   Operation 13 'read' 'width_load_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 14 [1/1] (0.00ns)   --->   "%bound_read = read i32 @_ssdm_op_Read.ap_auto.i32, i32 %bound" [../gaussian_vns_5x5.cpp:236]   --->   Operation 14 'read' 'bound_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 15 [1/1] (0.00ns)   --->   "%sub_read = read i17 @_ssdm_op_Read.ap_auto.i17, i17 %sub" [../gaussian_vns_5x5.cpp:236]   --->   Operation 15 'read' 'sub_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 16 [1/1] (1.58ns)   --->   "%store_ln0 = store i32 0, i32 %indvar_flatten"   --->   Operation 16 'store' 'store_ln0' <Predicate = true> <Delay = 1.58>
+ST_1 : Operation 17 [1/1] (1.58ns)   --->   "%store_ln0 = store i16 0, i16 %i"   --->   Operation 17 'store' 'store_ln0' <Predicate = true> <Delay = 1.58>
+ST_1 : Operation 18 [1/1] (1.58ns)   --->   "%store_ln0 = store i16 0, i16 %j"   --->   Operation 18 'store' 'store_ln0' <Predicate = true> <Delay = 1.58>
+ST_1 : Operation 19 [1/1] (0.00ns)   --->   "%br_ln0 = br void %for.body5"   --->   Operation 19 'br' 'br_ln0' <Predicate = true> <Delay = 0.00>
+
+State 2 <SV = 1> <Delay = 6.94>
+ST_2 : Operation 20 [1/1] (0.00ns)   --->   "%i_1 = load i16 %i"   --->   Operation 20 'load' 'i_1' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 21 [1/1] (0.00ns)   --->   "%indvar_flatten_load = load i32 %indvar_flatten" [../gaussian_vns_5x5.cpp:241]   --->   Operation 21 'load' 'indvar_flatten_load' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 22 [1/1] (0.00ns)   --->   "%zext_ln241 = zext i16 %i_1" [../gaussian_vns_5x5.cpp:241]   --->   Operation 22 'zext' 'zext_ln241' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 23 [1/1] (0.00ns)   --->   "%tmp_1 = partselect i15 @_ssdm_op_PartSelect.i15.i16.i32.i32, i16 %i_1, i32 1, i32 15"   --->   Operation 23 'partselect' 'tmp_1' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 24 [1/1] (2.41ns)   --->   "%icmp = icmp_ne  i15 %tmp_1, i15 0"   --->   Operation 24 'icmp' 'icmp' <Predicate = true> <Delay = 2.41> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 2.41> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 25 [1/1] (2.53ns)   --->   "%cmp9 = icmp_slt  i17 %zext_ln241, i17 %sub_read" [../gaussian_vns_5x5.cpp:241]   --->   Operation 25 'icmp' 'cmp9' <Predicate = true> <Delay = 2.53> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 2.53> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 26 [1/1] (0.97ns)   --->   "%and_ln251 = and i1 %icmp, i1 %cmp9" [../gaussian_vns_5x5.cpp:251]   --->   Operation 26 'and' 'and_ln251' <Predicate = true> <Delay = 0.97> <CoreInst = "LogicGate">   --->   Core 74 'LogicGate' <Latency = 0> <II = 1> <Delay = 0.97> <FuncUnit> <Opcode : 'and' 'or' 'xor'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 27 [1/1] (2.55ns)   --->   "%icmp_ln241 = icmp_eq  i32 %indvar_flatten_load, i32 %bound_read" [../gaussian_vns_5x5.cpp:241]   --->   Operation 27 'icmp' 'icmp_ln241' <Predicate = true> <Delay = 2.55> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 2.55> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 28 [1/1] (2.56ns)   --->   "%add_ln241 = add i32 %indvar_flatten_load, i32 1" [../gaussian_vns_5x5.cpp:241]   --->   Operation 28 'add' 'add_ln241' <Predicate = true> <Delay = 2.56> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 2.56> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 29 [1/1] (0.00ns)   --->   "%br_ln241 = br i1 %icmp_ln241, void %for.inc21.loopexit, void %for.end23.loopexit.exitStub" [../gaussian_vns_5x5.cpp:241]   --->   Operation 29 'br' 'br_ln241' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 30 [1/1] (0.00ns)   --->   "%j_load = load i16 %j" [../gaussian_vns_5x5.cpp:243]   --->   Operation 30 'load' 'j_load' <Predicate = (!icmp_ln241)> <Delay = 0.00>
+ST_2 : Operation 31 [1/1] (2.53ns)   --->   "%icmp_ln243 = icmp_eq  i16 %j_load, i16 %width_load_read" [../gaussian_vns_5x5.cpp:243]   --->   Operation 31 'icmp' 'icmp_ln243' <Predicate = (!icmp_ln241)> <Delay = 2.53> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 2.53> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 32 [1/1] (0.69ns)   --->   "%select_ln241 = select i1 %icmp_ln243, i16 0, i16 %j_load" [../gaussian_vns_5x5.cpp:241]   --->   Operation 32 'select' 'select_ln241' <Predicate = (!icmp_ln241)> <Delay = 0.69> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.69> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_2 : Operation 33 [1/1] (2.13ns)   --->   "%add_ln241_1 = add i16 %i_1, i16 1" [../gaussian_vns_5x5.cpp:241]   --->   Operation 33 'add' 'add_ln241_1' <Predicate = (!icmp_ln241)> <Delay = 2.13> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 2.13> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 34 [1/1] (0.00ns)   --->   "%zext_ln241_1 = zext i16 %add_ln241_1" [../gaussian_vns_5x5.cpp:241]   --->   Operation 34 'zext' 'zext_ln241_1' <Predicate = (!icmp_ln241)> <Delay = 0.00>
+ST_2 : Operation 35 [1/1] (0.00ns)   --->   "%tmp_2 = partselect i15 @_ssdm_op_PartSelect.i15.i16.i32.i32, i16 %add_ln241_1, i32 1, i32 15" [../gaussian_vns_5x5.cpp:241]   --->   Operation 35 'partselect' 'tmp_2' <Predicate = (!icmp_ln241)> <Delay = 0.00>
+ST_2 : Operation 36 [1/1] (2.41ns)   --->   "%icmp16 = icmp_ne  i15 %tmp_2, i15 0" [../gaussian_vns_5x5.cpp:241]   --->   Operation 36 'icmp' 'icmp16' <Predicate = (!icmp_ln241)> <Delay = 2.41> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 2.41> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 37 [1/1] (2.53ns)   --->   "%cmp9_mid1 = icmp_slt  i17 %zext_ln241_1, i17 %sub_read" [../gaussian_vns_5x5.cpp:241]   --->   Operation 37 'icmp' 'cmp9_mid1' <Predicate = (!icmp_ln241)> <Delay = 2.53> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 2.53> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 38 [1/1] (0.00ns) (grouped into LUT with out node and_ln251_1)   --->   "%and_ln251_3 = and i1 %icmp16, i1 %cmp9_mid1" [../gaussian_vns_5x5.cpp:251]   --->   Operation 38 'and' 'and_ln251_3' <Predicate = (!icmp_ln241)> <Delay = 0.00> <CoreInst = "LogicGate">   --->   Core 74 'LogicGate' <Latency = 0> <II = 1> <Delay = 0.97> <FuncUnit> <Opcode : 'and' 'or' 'xor'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 39 [1/1] (0.00ns) (grouped into LUT with out node and_ln251_1)   --->   "%select_ln241_1 = select i1 %icmp_ln243, i1 %and_ln251_3, i1 %and_ln251" [../gaussian_vns_5x5.cpp:241]   --->   Operation 39 'select' 'select_ln241_1' <Predicate = (!icmp_ln241)> <Delay = 0.00> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.99> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_2 : Operation 40 [1/1] (0.69ns)   --->   "%select_ln241_2 = select i1 %icmp_ln243, i16 %add_ln241_1, i16 %i_1" [../gaussian_vns_5x5.cpp:241]   --->   Operation 40 'select' 'select_ln241_2' <Predicate = (!icmp_ln241)> <Delay = 0.69> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.69> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_2 : Operation 41 [1/1] (0.00ns)   --->   "%zext_ln243 = zext i16 %select_ln241" [../gaussian_vns_5x5.cpp:243]   --->   Operation 41 'zext' 'zext_ln243' <Predicate = (!icmp_ln241)> <Delay = 0.00>
+ST_2 : Operation 42 [1/1] (0.00ns)   --->   "%tmp_3 = partselect i15 @_ssdm_op_PartSelect.i15.i16.i32.i32, i16 %select_ln241, i32 1, i32 15" [../gaussian_vns_5x5.cpp:251]   --->   Operation 42 'partselect' 'tmp_3' <Predicate = (!icmp_ln241)> <Delay = 0.00>
+ST_2 : Operation 43 [1/1] (2.41ns)   --->   "%icmp_ln251 = icmp_ne  i15 %tmp_3, i15 0" [../gaussian_vns_5x5.cpp:251]   --->   Operation 43 'icmp' 'icmp_ln251' <Predicate = (!icmp_ln241)> <Delay = 2.41> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 2.41> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 44 [1/1] (2.53ns)   --->   "%icmp_ln251_1 = icmp_slt  i17 %zext_ln243, i17 %sub15_read" [../gaussian_vns_5x5.cpp:251]   --->   Operation 44 'icmp' 'icmp_ln251_1' <Predicate = (!icmp_ln241)> <Delay = 2.53> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 2.53> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 45 [1/1] (0.00ns) (grouped into LUT with out node and_ln251_1)   --->   "%and_ln251_2 = and i1 %icmp_ln251, i1 %icmp_ln251_1" [../gaussian_vns_5x5.cpp:251]   --->   Operation 45 'and' 'and_ln251_2' <Predicate = (!icmp_ln241)> <Delay = 0.00> <CoreInst = "LogicGate">   --->   Core 74 'LogicGate' <Latency = 0> <II = 1> <Delay = 0.97> <FuncUnit> <Opcode : 'and' 'or' 'xor'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 46 [1/1] (0.99ns) (out node of the LUT)   --->   "%and_ln251_1 = and i1 %and_ln251_2, i1 %select_ln241_1" [../gaussian_vns_5x5.cpp:251]   --->   Operation 46 'and' 'and_ln251_1' <Predicate = (!icmp_ln241)> <Delay = 0.99> <CoreInst = "LogicGate">   --->   Core 74 'LogicGate' <Latency = 0> <II = 1> <Delay = 0.97> <FuncUnit> <Opcode : 'and' 'or' 'xor'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 47 [1/1] (2.13ns)   --->   "%j_1 = add i16 %select_ln241, i16 1" [../gaussian_vns_5x5.cpp:243]   --->   Operation 47 'add' 'j_1' <Predicate = (!icmp_ln241)> <Delay = 2.13> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 2.13> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 48 [1/1] (1.58ns)   --->   "%store_ln243 = store i32 %add_ln241, i32 %indvar_flatten" [../gaussian_vns_5x5.cpp:243]   --->   Operation 48 'store' 'store_ln243' <Predicate = (!icmp_ln241)> <Delay = 1.58>
+ST_2 : Operation 49 [1/1] (1.58ns)   --->   "%store_ln243 = store i16 %select_ln241_2, i16 %i" [../gaussian_vns_5x5.cpp:243]   --->   Operation 49 'store' 'store_ln243' <Predicate = (!icmp_ln241)> <Delay = 1.58>
+ST_2 : Operation 50 [1/1] (1.58ns)   --->   "%store_ln243 = store i16 %j_1, i16 %j" [../gaussian_vns_5x5.cpp:243]   --->   Operation 50 'store' 'store_ln243' <Predicate = (!icmp_ln241)> <Delay = 1.58>
+
+State 3 <SV = 2> <Delay = 5.48>
+ST_3 : Operation 51 [1/1] (3.65ns)   --->   "%window_stream_read = read i200 @_ssdm_op_Read.ap_fifo.volatile.i200P0A, i200 %window_stream" [../gaussian_vns_5x5.cpp:247]   --->   Operation 51 'read' 'window_stream_read' <Predicate = true> <Delay = 3.65> <CoreInst = "FIFO_SRL">   --->   Core 81 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 3.91> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 200> <Depth = 2> <FIFO>
+ST_3 : Operation 52 [1/1] (0.00ns)   --->   "%a_trunc = partselect i4 @_ssdm_op_PartSelect.i4.i200.i32.i32, i200 %window_stream_read, i32 52, i32 55"   --->   Operation 52 'partselect' 'a_trunc' <Predicate = (and_ln251_1)> <Delay = 0.00>
+ST_3 : Operation 53 [1/1] (0.00ns)   --->   "%a_trunc_1 = partselect i4 @_ssdm_op_PartSelect.i4.i200.i32.i32, i200 %window_stream_read, i32 60, i32 63"   --->   Operation 53 'partselect' 'a_trunc_1' <Predicate = (and_ln251_1)> <Delay = 0.00>
+ST_3 : Operation 54 [1/1] (0.00ns)   --->   "%a_trunc_2 = partselect i4 @_ssdm_op_PartSelect.i4.i200.i32.i32, i200 %window_stream_read, i32 68, i32 71"   --->   Operation 54 'partselect' 'a_trunc_2' <Predicate = (and_ln251_1)> <Delay = 0.00>
+ST_3 : Operation 55 [1/1] (0.00ns)   --->   "%a_trunc_3 = partselect i4 @_ssdm_op_PartSelect.i4.i200.i32.i32, i200 %window_stream_read, i32 92, i32 95"   --->   Operation 55 'partselect' 'a_trunc_3' <Predicate = (and_ln251_1)> <Delay = 0.00>
+ST_3 : Operation 56 [1/1] (0.00ns)   --->   "%tmp = partselect i4 @_ssdm_op_PartSelect.i4.i200.i32.i32, i200 %window_stream_read, i32 100, i32 103"   --->   Operation 56 'partselect' 'tmp' <Predicate = (and_ln251_1)> <Delay = 0.00>
+ST_3 : Operation 57 [1/1] (0.00ns)   --->   "%a_trunc_4 = partselect i4 @_ssdm_op_PartSelect.i4.i200.i32.i32, i200 %window_stream_read, i32 108, i32 111"   --->   Operation 57 'partselect' 'a_trunc_4' <Predicate = (and_ln251_1)> <Delay = 0.00>
+ST_3 : Operation 58 [1/1] (0.00ns)   --->   "%a_trunc_5 = partselect i4 @_ssdm_op_PartSelect.i4.i200.i32.i32, i200 %window_stream_read, i32 132, i32 135"   --->   Operation 58 'partselect' 'a_trunc_5' <Predicate = (and_ln251_1)> <Delay = 0.00>
+ST_3 : Operation 59 [1/1] (0.00ns)   --->   "%a_trunc_6 = partselect i4 @_ssdm_op_PartSelect.i4.i200.i32.i32, i200 %window_stream_read, i32 140, i32 143"   --->   Operation 59 'partselect' 'a_trunc_6' <Predicate = (and_ln251_1)> <Delay = 0.00>
+ST_3 : Operation 60 [1/1] (0.00ns)   --->   "%a_trunc_7 = partselect i4 @_ssdm_op_PartSelect.i4.i200.i32.i32, i200 %window_stream_read, i32 148, i32 151"   --->   Operation 60 'partselect' 'a_trunc_7' <Predicate = (and_ln251_1)> <Delay = 0.00>
+ST_3 : Operation 61 [1/1] (0.00ns)   --->   "%a_trunc_cast = zext i4 %a_trunc"   --->   Operation 61 'zext' 'a_trunc_cast' <Predicate = (and_ln251_1)> <Delay = 0.00>
+ST_3 : Operation 62 [1/1] (0.00ns)   --->   "%a_trunc_1_cast = zext i4 %a_trunc_1"   --->   Operation 62 'zext' 'a_trunc_1_cast' <Predicate = (and_ln251_1)> <Delay = 0.00>
+ST_3 : Operation 63 [1/1] (0.00ns)   --->   "%a_trunc_2_cast8 = zext i4 %a_trunc_2"   --->   Operation 63 'zext' 'a_trunc_2_cast8' <Predicate = (and_ln251_1)> <Delay = 0.00>
+ST_3 : Operation 64 [1/1] (1.83ns)   --->   "%empty = add i5 %a_trunc_1_cast, i5 %a_trunc_cast"   --->   Operation 64 'add' 'empty' <Predicate = (and_ln251_1)> <Delay = 1.83> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 1.83> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 65 [1/1] (0.00ns)   --->   "%a_trunc_3_cast9 = zext i4 %a_trunc_3"   --->   Operation 65 'zext' 'a_trunc_3_cast9' <Predicate = (and_ln251_1)> <Delay = 0.00>
+ST_3 : Operation 66 [1/1] (0.00ns)   --->   "%a_trunc_5_cast10 = zext i4 %a_trunc_4"   --->   Operation 66 'zext' 'a_trunc_5_cast10' <Predicate = (and_ln251_1)> <Delay = 0.00>
+ST_3 : Operation 67 [1/1] (1.83ns)   --->   "%tmp2 = add i5 %a_trunc_2_cast8, i5 %a_trunc_3_cast9"   --->   Operation 67 'add' 'tmp2' <Predicate = (and_ln251_1)> <Delay = 1.83> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 1.83> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 68 [1/1] (0.00ns)   --->   "%a_trunc_6_cast11 = zext i4 %a_trunc_5"   --->   Operation 68 'zext' 'a_trunc_6_cast11' <Predicate = (and_ln251_1)> <Delay = 0.00>
+ST_3 : Operation 69 [1/1] (0.00ns)   --->   "%a_trunc_7_cast12 = zext i4 %a_trunc_6"   --->   Operation 69 'zext' 'a_trunc_7_cast12' <Predicate = (and_ln251_1)> <Delay = 0.00>
+ST_3 : Operation 70 [1/1] (1.83ns)   --->   "%tmp5 = add i5 %a_trunc_5_cast10, i5 %a_trunc_6_cast11"   --->   Operation 70 'add' 'tmp5' <Predicate = (and_ln251_1)> <Delay = 1.83> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 1.83> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 71 [1/1] (0.00ns)   --->   "%a_trunc_8_cast13 = zext i4 %a_trunc_7"   --->   Operation 71 'zext' 'a_trunc_8_cast13' <Predicate = (and_ln251_1)> <Delay = 0.00>
+ST_3 : Operation 72 [1/1] (1.83ns)   --->   "%add_ln21_1 = add i5 %a_trunc_7_cast12, i5 %a_trunc_8_cast13" [../vns_mapping_5x5.h:21]   --->   Operation 72 'add' 'add_ln21_1' <Predicate = (and_ln251_1)> <Delay = 1.83> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 1.83> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+
+State 4 <SV = 3> <Delay = 5.43>
+ST_4 : Operation 73 [1/1] (0.00ns)   --->   "%ret_V = bitconcatenate i5 @_ssdm_op_BitConcatenate.i5.i4.i1, i4 %tmp, i1 0"   --->   Operation 73 'bitconcatenate' 'ret_V' <Predicate = (and_ln251_1)> <Delay = 0.00>
+ST_4 : Operation 74 [1/1] (0.00ns)   --->   "%zext_ln1494 = zext i5 %ret_V"   --->   Operation 74 'zext' 'zext_ln1494' <Predicate = (and_ln251_1)> <Delay = 0.00>
+ST_4 : Operation 75 [1/1] (0.00ns)   --->   "%p_cast7 = zext i5 %empty"   --->   Operation 75 'zext' 'p_cast7' <Predicate = (and_ln251_1)> <Delay = 0.00>
+ST_4 : Operation 76 [1/1] (0.00ns)   --->   "%tmp2_cast = zext i5 %tmp2"   --->   Operation 76 'zext' 'tmp2_cast' <Predicate = (and_ln251_1)> <Delay = 0.00>
+ST_4 : Operation 77 [1/1] (1.84ns)   --->   "%empty_142 = add i6 %tmp2_cast, i6 %p_cast7"   --->   Operation 77 'add' 'empty_142' <Predicate = (and_ln251_1)> <Delay = 1.84> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 1.84> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_4 : Operation 78 [1/1] (0.00ns)   --->   "%p_cast8 = zext i6 %empty_142"   --->   Operation 78 'zext' 'p_cast8' <Predicate = (and_ln251_1)> <Delay = 0.00>
+ST_4 : Operation 79 [1/1] (0.00ns) (grouped into TernaryAdder)   --->   "%tmp4 = add i7 %p_cast8, i7 %zext_ln1494"   --->   Operation 79 'add' 'tmp4' <Predicate = (and_ln251_1)> <Delay = 0.00> <CoreInst = "TAddSub">   --->   Core 10 'TAddSub' <Latency = 0> <II = 1> <Delay = 1.79> <IPBlock> <Opcode : 'add' 'sub'> <InPorts = 3> <OutPorts = 1> <Sync> <CReg>
+ST_4 : Operation 80 [1/1] (0.00ns)   --->   "%tmp5_cast = zext i5 %tmp5"   --->   Operation 80 'zext' 'tmp5_cast' <Predicate = (and_ln251_1)> <Delay = 0.00>
+ST_4 : Operation 81 [1/1] (3.59ns) (root node of TernaryAdder)   --->   "%empty_143 = add i7 %tmp5_cast, i7 %tmp4"   --->   Operation 81 'add' 'empty_143' <Predicate = (and_ln251_1)> <Delay = 3.59> <CoreInst = "TAddSub">   --->   Core 10 'TAddSub' <Latency = 0> <II = 1> <Delay = 1.79> <IPBlock> <Opcode : 'add' 'sub'> <InPorts = 3> <OutPorts = 1> <Sync> <CReg>
+ST_4 : Operation 97 [1/1] (0.00ns)   --->   "%ret_ln0 = ret"   --->   Operation 97 'ret' 'ret_ln0' <Predicate = (icmp_ln241)> <Delay = 0.00>
+
+State 5 <SV = 4> <Delay = 6.50>
+ST_5 : Operation 82 [1/1] (0.00ns)   --->   "%specloopname_ln0 = specloopname void @_ssdm_op_SpecLoopName, void @apply_filter_VITIS_LOOP_243_1_str"   --->   Operation 82 'specloopname' 'specloopname_ln0' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 83 [1/1] (0.00ns)   --->   "%speclooptripcount_ln0 = speclooptripcount void @_ssdm_op_SpecLoopTripCount, i64 0, i64 4294836225, i64 0"   --->   Operation 83 'speclooptripcount' 'speclooptripcount_ln0' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 84 [1/1] (0.00ns)   --->   "%specpipeline_ln245 = specpipeline void @_ssdm_op_SpecPipeline, i32 1, i32 0, i32 0, i32 0, void @empty_7" [../gaussian_vns_5x5.cpp:245]   --->   Operation 84 'specpipeline' 'specpipeline_ln245' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 85 [1/1] (0.00ns)   --->   "%specloopname_ln243 = specloopname void @_ssdm_op_SpecLoopName, void @empty" [../gaussian_vns_5x5.cpp:243]   --->   Operation 85 'specloopname' 'specloopname_ln243' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 86 [1/1] (0.00ns)   --->   "%p_cast9 = zext i7 %empty_143"   --->   Operation 86 'zext' 'p_cast9' <Predicate = (and_ln251_1)> <Delay = 0.00>
+ST_5 : Operation 87 [1/1] (0.00ns)   --->   "%zext_ln21 = zext i5 %add_ln21_1" [../vns_mapping_5x5.h:21]   --->   Operation 87 'zext' 'zext_ln21' <Predicate = (and_ln251_1)> <Delay = 0.00>
+ST_5 : Operation 88 [1/1] (1.86ns)   --->   "%add_ln21 = add i8 %zext_ln21, i8 %p_cast9" [../vns_mapping_5x5.h:21]   --->   Operation 88 'add' 'add_ln21' <Predicate = (and_ln251_1)> <Delay = 1.86> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 1.86> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_5 : Operation 89 [1/1] (0.00ns)   --->   "%zext_ln1035 = zext i5 %add_ln21_1"   --->   Operation 89 'zext' 'zext_ln1035' <Predicate = (and_ln251_1)> <Delay = 0.00>
+ST_5 : Operation 90 [1/1] (1.86ns)   --->   "%add_ln1035 = add i7 %zext_ln1035, i7 %empty_143"   --->   Operation 90 'add' 'add_ln1035' <Predicate = (and_ln251_1)> <Delay = 1.86> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 1.86> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_5 : Operation 91 [1/1] (0.00ns) (grouped into LUT with out node outpix)   --->   "%tmp_4 = bitselect i1 @_ssdm_op_BitSelect.i1.i8.i32, i8 %add_ln21, i32 7"   --->   Operation 91 'bitselect' 'tmp_4' <Predicate = (and_ln251_1)> <Delay = 0.00>
+ST_5 : Operation 92 [1/1] (0.00ns) (grouped into LUT with out node outpix)   --->   "%select_ln253 = select i1 %tmp_4, i7 0, i7 %add_ln1035" [../gaussian_vns_5x5.cpp:253]   --->   Operation 92 'select' 'select_ln253' <Predicate = (and_ln251_1)> <Delay = 0.00> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.99> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_5 : Operation 93 [1/1] (0.99ns) (out node of the LUT)   --->   "%outpix = select i1 %and_ln251_1, i7 %select_ln253, i7 0" [../gaussian_vns_5x5.cpp:251]   --->   Operation 93 'select' 'outpix' <Predicate = true> <Delay = 0.99> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.99> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_5 : Operation 94 [1/1] (0.00ns)   --->   "%zext_ln255 = zext i7 %outpix" [../gaussian_vns_5x5.cpp:255]   --->   Operation 94 'zext' 'zext_ln255' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 95 [1/1] (3.65ns)   --->   "%write_ln256 = write void @_ssdm_op_Write.ap_fifo.volatile.i8P0A, i8 %output_stream4, i8 %zext_ln255" [../gaussian_vns_5x5.cpp:256]   --->   Operation 95 'write' 'write_ln256' <Predicate = true> <Delay = 3.65> <CoreInst = "FIFO_SRL">   --->   Core 81 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 3.91> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 8> <Depth = 2> <FIFO>
+ST_5 : Operation 96 [1/1] (0.00ns)   --->   "%br_ln243 = br void %for.body5" [../gaussian_vns_5x5.cpp:243]   --->   Operation 96 'br' 'br_ln243' <Predicate = true> <Delay = 0.00>
+
+
+============================================================
++ Verbose Summary: Timing violations
+============================================================
+Target clock period: 10ns, clock uncertainty: 2.7ns.
+
+ <State 1>: 1.58ns
+The critical path consists of the following:
+	'alloca' operation ('indvar_flatten') [9]  (0 ns)
+	'store' operation ('store_ln0') of constant 0 on local variable 'indvar_flatten' [16]  (1.58 ns)
+
+ <State 2>: 6.94ns
+The critical path consists of the following:
+	'load' operation ('j_load', ../gaussian_vns_5x5.cpp:243) on local variable 'j' [32]  (0 ns)
+	'icmp' operation ('icmp_ln243', ../gaussian_vns_5x5.cpp:243) [35]  (2.53 ns)
+	'select' operation ('select_ln241', ../gaussian_vns_5x5.cpp:241) [36]  (0.692 ns)
+	'add' operation ('j', ../gaussian_vns_5x5.cpp:243) [94]  (2.14 ns)
+	'store' operation ('store_ln243', ../gaussian_vns_5x5.cpp:243) of variable 'j', ../gaussian_vns_5x5.cpp:243 on local variable 'j' [97]  (1.58 ns)
+
+ <State 3>: 5.49ns
+The critical path consists of the following:
+	fifo read operation ('window_stream_read', ../gaussian_vns_5x5.cpp:247) on port 'window_stream' (../gaussian_vns_5x5.cpp:247) [48]  (3.65 ns)
+	'add' operation ('empty') [68]  (1.84 ns)
+
+ <State 4>: 5.44ns
+The critical path consists of the following:
+	'add' operation ('empty_142') [74]  (1.85 ns)
+	'add' operation ('tmp4') [78]  (0 ns)
+	'add' operation ('empty_143') [81]  (3.59 ns)
+
+ <State 5>: 6.5ns
+The critical path consists of the following:
+	'add' operation ('add_ln21', ../vns_mapping_5x5.h:21) [86]  (1.86 ns)
+	'select' operation ('select_ln253', ../gaussian_vns_5x5.cpp:253) [90]  (0 ns)
+	'select' operation ('outpix', ../gaussian_vns_5x5.cpp:251) [91]  (0.99 ns)
+	fifo write operation ('write_ln256', ../gaussian_vns_5x5.cpp:256) on port 'output_stream4' (../gaussian_vns_5x5.cpp:256) [93]  (3.65 ns)
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+N/A
+* FSMD analyzer results:
+  - Output states:
+ - Input state : 
+  - Chain level:
+	State 1
+	State 2
+	State 3
+	State 4
+	State 5
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+N/A

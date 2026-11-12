@@ -1,0 +1,1124 @@
+{
+  "Top": "gaussian",
+  "RtlTop": "gaussian",
+  "RtlPrefix": "",
+  "RtlSubPrefix": "gaussian_",
+  "SourceLanguage": "cpp",
+  "HostMachineBits": "64",
+  "FunctionProtocol": "ap_ctrl_hs",
+  "ResetStyle": "control",
+  "Target": {
+    "Family": "spartan7",
+    "Device": "xc7s50",
+    "Package": "-csga324",
+    "Speed": "-1",
+    "Triple": "fpga64-xilinx-none"
+  },
+  "Args": {
+    "src": {
+      "index": "0",
+      "direction": "in",
+      "srcType": "unsigned char const *",
+      "srcSize": "8",
+      "hwRefs": [
+        {
+          "type": "port",
+          "interface": "src_address0",
+          "name": "src_address0",
+          "usage": "address",
+          "direction": "out"
+        },
+        {
+          "type": "port",
+          "interface": "src_ce0",
+          "name": "src_ce0",
+          "usage": "control",
+          "direction": "out"
+        },
+        {
+          "type": "port",
+          "interface": "src_d0",
+          "name": "src_d0",
+          "usage": "data",
+          "direction": "out"
+        },
+        {
+          "type": "port",
+          "interface": "src_q0",
+          "name": "src_q0",
+          "usage": "data",
+          "direction": "in"
+        },
+        {
+          "type": "port",
+          "interface": "src_we0",
+          "name": "src_we0",
+          "usage": "control",
+          "direction": "out"
+        },
+        {
+          "type": "port",
+          "interface": "src_address1",
+          "name": "src_address1",
+          "usage": "address",
+          "direction": "out"
+        },
+        {
+          "type": "port",
+          "interface": "src_ce1",
+          "name": "src_ce1",
+          "usage": "control",
+          "direction": "out"
+        },
+        {
+          "type": "port",
+          "interface": "src_d1",
+          "name": "src_d1",
+          "usage": "data",
+          "direction": "out"
+        },
+        {
+          "type": "port",
+          "interface": "src_q1",
+          "name": "src_q1",
+          "usage": "data",
+          "direction": "in"
+        },
+        {
+          "type": "port",
+          "interface": "src_we1",
+          "name": "src_we1",
+          "usage": "control",
+          "direction": "out"
+        }
+      ]
+    },
+    "dst": {
+      "index": "1",
+      "direction": "out",
+      "srcType": "unsigned char*",
+      "srcSize": "8",
+      "hwRefs": [
+        {
+          "type": "port",
+          "interface": "dst_address0",
+          "name": "dst_address0",
+          "usage": "address",
+          "direction": "out"
+        },
+        {
+          "type": "port",
+          "interface": "dst_ce0",
+          "name": "dst_ce0",
+          "usage": "control",
+          "direction": "out"
+        },
+        {
+          "type": "port",
+          "interface": "dst_d0",
+          "name": "dst_d0",
+          "usage": "data",
+          "direction": "out"
+        },
+        {
+          "type": "port",
+          "interface": "dst_q0",
+          "name": "dst_q0",
+          "usage": "data",
+          "direction": "in"
+        },
+        {
+          "type": "port",
+          "interface": "dst_we0",
+          "name": "dst_we0",
+          "usage": "control",
+          "direction": "out"
+        },
+        {
+          "type": "port",
+          "interface": "dst_address1",
+          "name": "dst_address1",
+          "usage": "address",
+          "direction": "out"
+        },
+        {
+          "type": "port",
+          "interface": "dst_ce1",
+          "name": "dst_ce1",
+          "usage": "control",
+          "direction": "out"
+        },
+        {
+          "type": "port",
+          "interface": "dst_d1",
+          "name": "dst_d1",
+          "usage": "data",
+          "direction": "out"
+        },
+        {
+          "type": "port",
+          "interface": "dst_q1",
+          "name": "dst_q1",
+          "usage": "data",
+          "direction": "in"
+        },
+        {
+          "type": "port",
+          "interface": "dst_we1",
+          "name": "dst_we1",
+          "usage": "control",
+          "direction": "out"
+        }
+      ]
+    },
+    "height": {
+      "index": "2",
+      "direction": "in",
+      "srcType": "unsigned short",
+      "srcSize": "16",
+      "hwRefs": [{
+          "type": "port",
+          "interface": "height",
+          "name": "height",
+          "usage": "data",
+          "direction": "in"
+        }]
+    },
+    "width": {
+      "index": "3",
+      "direction": "in",
+      "srcType": "unsigned short",
+      "srcSize": "16",
+      "hwRefs": [{
+          "type": "port",
+          "interface": "width",
+          "name": "width",
+          "usage": "data",
+          "direction": "in"
+        }]
+    }
+  },
+  "HlsSolution": {
+    "FlowTarget": "vivado",
+    "ConfigTcl": [
+      "config_interface -m_axi_latency=0",
+      "config_export -format=ip_catalog"
+    ],
+    "DirectiveTcl": [
+      "set_directive_top gaussian -name gaussian",
+      "set_directive_top gaussian -name gaussian",
+      "set_directive_top gaussian -name gaussian",
+      "set_directive_top gaussian -name gaussian",
+      "set_directive_top gaussian -name gaussian",
+      "set_directive_top gaussian -name gaussian",
+      "set_directive_top gaussian -name gaussian",
+      "set_directive_top gaussian -name gaussian",
+      "set_directive_top gaussian -name gaussian",
+      "set_directive_top gaussian -name gaussian"
+    ],
+    "ProfileOption": "0",
+    "ProfileType": "none",
+    "KernelName": "gaussian"
+  },
+  "ClockInfo": {
+    "ClockName": "ap_clk",
+    "ClockPeriod": "10",
+    "Uncertainty": "2.7",
+    "IsCombinational": "0",
+    "II": "undef",
+    "Latency": "undef"
+  },
+  "Xdc": {"OocClocks": ["create_clock -name ap_clk -period 10.000 [get_ports ap_clk]"]},
+  "Ipx": {
+    "Vendor": "xilinx.com",
+    "Library": "hls",
+    "Name": "gaussian",
+    "Version": "1.0",
+    "DisplayName": "Gaussian",
+    "Revision": "2114856350",
+    "Description": "An IP generated by Vitis HLS",
+    "Taxonomy": "\/VITIS_HLS_IP",
+    "AutoFamilySupport": "",
+    "ZipFile": "xilinx_com_hls_gaussian_1_0.zip"
+  },
+  "Files": {
+    "CSource": [
+      "..\/..\/..\/src\/multExato.cpp",
+      "..\/..\/..\/src\/bitEspecifico.cpp",
+      "..\/..\/..\/src\/bit4Truncated.cpp",
+      "..\/..\/..\/src\/bit3Truncated.cpp",
+      "..\/..\/..\/src\/bit2Truncated.cpp",
+      "..\/..\/..\/src\/4bitTruncated.cpp",
+      "..\/..\/..\/src\/3bitTruncated.cpp",
+      "..\/..\/..\/src\/2bitTruncated.cpp",
+      "..\/..\/..\/src\/1bitTruncated.cpp",
+      "..\/..\/..\/vns_mapping_5x5.h",
+      "..\/..\/..\/gaussian_vns_5x5.cpp"
+    ],
+    "Vhdl": [
+      "impl\/vhdl\/gaussian_fifo_w8_d2_S.vhd",
+      "impl\/vhdl\/gaussian_fifo_w16_d2_S.vhd",
+      "impl\/vhdl\/gaussian_fifo_w200_d2_S.vhd",
+      "impl\/vhdl\/gaussian_Filter2D.vhd",
+      "impl\/vhdl\/gaussian_Filter2D_Pipeline_apply_filter_VITIS_LOOP_243_1.vhd",
+      "impl\/vhdl\/gaussian_flow_control_loop_pipe_sequential_init.vhd",
+      "impl\/vhdl\/gaussian_mul_mul_16ns_10ns_19_4_1.vhd",
+      "impl\/vhdl\/gaussian_mul_mul_16ns_16ns_32_4_1.vhd",
+      "impl\/vhdl\/gaussian_ReadFromMem.vhd",
+      "impl\/vhdl\/gaussian_ReadFromMem_Pipeline_read_image.vhd",
+      "impl\/vhdl\/gaussian_start_for_Filter2D_U0.vhd",
+      "impl\/vhdl\/gaussian_start_for_Window2D_U0.vhd",
+      "impl\/vhdl\/gaussian_start_for_WriteToMem_U0.vhd",
+      "impl\/vhdl\/gaussian_Window2D.vhd",
+      "impl\/vhdl\/gaussian_Window2D_LineBuffer_1_RAM_AUTO_1R1W.vhd",
+      "impl\/vhdl\/gaussian_Window2D_LineBuffer_RAM_AUTO_1R1W.vhd",
+      "impl\/vhdl\/gaussian_Window2D_Pipeline_update_window.vhd",
+      "impl\/vhdl\/gaussian_WriteToMem.vhd",
+      "impl\/vhdl\/gaussian_WriteToMem_Pipeline_write_image.vhd",
+      "impl\/vhdl\/gaussian.vhd"
+    ],
+    "Verilog": [
+      "impl\/verilog\/gaussian_fifo_w8_d2_S.v",
+      "impl\/verilog\/gaussian_fifo_w16_d2_S.v",
+      "impl\/verilog\/gaussian_fifo_w200_d2_S.v",
+      "impl\/verilog\/gaussian_Filter2D.v",
+      "impl\/verilog\/gaussian_Filter2D_Pipeline_apply_filter_VITIS_LOOP_243_1.v",
+      "impl\/verilog\/gaussian_flow_control_loop_pipe_sequential_init.v",
+      "impl\/verilog\/gaussian_hls_deadlock_detection_unit.v",
+      "impl\/verilog\/gaussian_hls_deadlock_detector.vh",
+      "impl\/verilog\/gaussian_hls_deadlock_report_unit.vh",
+      "impl\/verilog\/gaussian_mul_mul_16ns_10ns_19_4_1.v",
+      "impl\/verilog\/gaussian_mul_mul_16ns_16ns_32_4_1.v",
+      "impl\/verilog\/gaussian_ReadFromMem.v",
+      "impl\/verilog\/gaussian_ReadFromMem_Pipeline_read_image.v",
+      "impl\/verilog\/gaussian_start_for_Filter2D_U0.v",
+      "impl\/verilog\/gaussian_start_for_Window2D_U0.v",
+      "impl\/verilog\/gaussian_start_for_WriteToMem_U0.v",
+      "impl\/verilog\/gaussian_Window2D.v",
+      "impl\/verilog\/gaussian_Window2D_LineBuffer_1_RAM_AUTO_1R1W.v",
+      "impl\/verilog\/gaussian_Window2D_LineBuffer_RAM_AUTO_1R1W.v",
+      "impl\/verilog\/gaussian_Window2D_Pipeline_update_window.v",
+      "impl\/verilog\/gaussian_WriteToMem.v",
+      "impl\/verilog\/gaussian_WriteToMem_Pipeline_write_image.v",
+      "impl\/verilog\/gaussian.v"
+    ],
+    "IpMisc": ["impl\/misc\/logo.png"],
+    "CsynthXml": "syn\/report\/csynth.xml",
+    "DebugDir": ".debug",
+    "KernelXml": ".autopilot\/db\/kernel.internal.xml",
+    "Xo": "",
+    "XoHlsDir": "",
+    "ProtoInst": [".debug\/gaussian.protoinst"]
+  },
+  "SubcoreInfo": {
+    "HasXpmMemory": false,
+    "HasClockedDsp": false,
+    "Ip": []
+  },
+  "Interfaces": {
+    "src_address0": {
+      "type": "data",
+      "busTypeName": "data",
+      "protocol": "ap_memory",
+      "mode": "master",
+      "dataWidth": "18",
+      "portMap": {"src_address0": "DATA"},
+      "ports": ["src_address0"],
+      "constraints": [{
+          "constraint_type": "pragma interface",
+          "mode": "ap_memory",
+          "register_option": "0",
+          "argName": "src"
+        }]
+    },
+    "src_d0": {
+      "type": "data",
+      "busTypeName": "data",
+      "protocol": "ap_memory",
+      "mode": "master",
+      "dataWidth": "8",
+      "portMap": {"src_d0": "DATA"},
+      "ports": ["src_d0"],
+      "constraints": [{
+          "constraint_type": "pragma interface",
+          "mode": "ap_memory",
+          "register_option": "0",
+          "argName": "src"
+        }]
+    },
+    "src_q0": {
+      "type": "data",
+      "busTypeName": "data",
+      "protocol": "ap_memory",
+      "mode": "slave",
+      "dataWidth": "8",
+      "portMap": {"src_q0": "DATA"},
+      "ports": ["src_q0"],
+      "constraints": [{
+          "constraint_type": "pragma interface",
+          "mode": "ap_memory",
+          "register_option": "0",
+          "argName": "src"
+        }]
+    },
+    "src_address1": {
+      "type": "data",
+      "busTypeName": "data",
+      "protocol": "ap_memory",
+      "mode": "master",
+      "dataWidth": "18",
+      "portMap": {"src_address1": "DATA"},
+      "ports": ["src_address1"],
+      "constraints": [{
+          "constraint_type": "pragma interface",
+          "mode": "ap_memory",
+          "register_option": "0",
+          "argName": "src"
+        }]
+    },
+    "src_d1": {
+      "type": "data",
+      "busTypeName": "data",
+      "protocol": "ap_memory",
+      "mode": "master",
+      "dataWidth": "8",
+      "portMap": {"src_d1": "DATA"},
+      "ports": ["src_d1"],
+      "constraints": [{
+          "constraint_type": "pragma interface",
+          "mode": "ap_memory",
+          "register_option": "0",
+          "argName": "src"
+        }]
+    },
+    "src_q1": {
+      "type": "data",
+      "busTypeName": "data",
+      "protocol": "ap_memory",
+      "mode": "slave",
+      "dataWidth": "8",
+      "portMap": {"src_q1": "DATA"},
+      "ports": ["src_q1"],
+      "constraints": [{
+          "constraint_type": "pragma interface",
+          "mode": "ap_memory",
+          "register_option": "0",
+          "argName": "src"
+        }]
+    },
+    "dst_address0": {
+      "type": "data",
+      "busTypeName": "data",
+      "protocol": "ap_memory",
+      "mode": "master",
+      "dataWidth": "18",
+      "portMap": {"dst_address0": "DATA"},
+      "ports": ["dst_address0"],
+      "constraints": [{
+          "constraint_type": "pragma interface",
+          "mode": "ap_memory",
+          "register_option": "0",
+          "argName": "dst"
+        }]
+    },
+    "dst_d0": {
+      "type": "data",
+      "busTypeName": "data",
+      "protocol": "ap_memory",
+      "mode": "master",
+      "dataWidth": "8",
+      "portMap": {"dst_d0": "DATA"},
+      "ports": ["dst_d0"],
+      "constraints": [{
+          "constraint_type": "pragma interface",
+          "mode": "ap_memory",
+          "register_option": "0",
+          "argName": "dst"
+        }]
+    },
+    "dst_q0": {
+      "type": "data",
+      "busTypeName": "data",
+      "protocol": "ap_memory",
+      "mode": "slave",
+      "dataWidth": "8",
+      "portMap": {"dst_q0": "DATA"},
+      "ports": ["dst_q0"],
+      "constraints": [{
+          "constraint_type": "pragma interface",
+          "mode": "ap_memory",
+          "register_option": "0",
+          "argName": "dst"
+        }]
+    },
+    "dst_address1": {
+      "type": "data",
+      "busTypeName": "data",
+      "protocol": "ap_memory",
+      "mode": "master",
+      "dataWidth": "18",
+      "portMap": {"dst_address1": "DATA"},
+      "ports": ["dst_address1"],
+      "constraints": [{
+          "constraint_type": "pragma interface",
+          "mode": "ap_memory",
+          "register_option": "0",
+          "argName": "dst"
+        }]
+    },
+    "dst_d1": {
+      "type": "data",
+      "busTypeName": "data",
+      "protocol": "ap_memory",
+      "mode": "master",
+      "dataWidth": "8",
+      "portMap": {"dst_d1": "DATA"},
+      "ports": ["dst_d1"],
+      "constraints": [{
+          "constraint_type": "pragma interface",
+          "mode": "ap_memory",
+          "register_option": "0",
+          "argName": "dst"
+        }]
+    },
+    "dst_q1": {
+      "type": "data",
+      "busTypeName": "data",
+      "protocol": "ap_memory",
+      "mode": "slave",
+      "dataWidth": "8",
+      "portMap": {"dst_q1": "DATA"},
+      "ports": ["dst_q1"],
+      "constraints": [{
+          "constraint_type": "pragma interface",
+          "mode": "ap_memory",
+          "register_option": "0",
+          "argName": "dst"
+        }]
+    },
+    "height": {
+      "type": "data",
+      "busTypeName": "data",
+      "protocol": "ap_none",
+      "mode": "slave",
+      "dataWidth": "16",
+      "portMap": {"height": "DATA"},
+      "ports": ["height"],
+      "constraints": [{
+          "constraint_type": "pragma interface",
+          "mode": "ap_none",
+          "register_option": "0",
+          "argName": "height"
+        }]
+    },
+    "width": {
+      "type": "data",
+      "busTypeName": "data",
+      "protocol": "ap_none",
+      "mode": "slave",
+      "dataWidth": "16",
+      "portMap": {"width": "DATA"},
+      "ports": ["width"],
+      "constraints": [{
+          "constraint_type": "pragma interface",
+          "mode": "ap_none",
+          "register_option": "0",
+          "argName": "width"
+        }]
+    },
+    "ap_clk": {
+      "type": "clock",
+      "busTypeName": "clock",
+      "mode": "slave",
+      "busParams": {"ASSOCIATED_RESET": "ap_rst"},
+      "portMap": {"ap_clk": "CLK"},
+      "ports": ["ap_clk"]
+    },
+    "ap_rst": {
+      "type": "reset",
+      "busTypeName": "reset",
+      "mode": "slave",
+      "busParams": {"POLARITY": "ACTIVE_HIGH"},
+      "portMap": {"ap_rst": "RST"},
+      "ports": ["ap_rst"]
+    },
+    "ap_ctrl": {
+      "type": "ap_ctrl",
+      "busTypeName": "acc_handshake",
+      "mode": "slave",
+      "portMap": {
+        "ap_start": "start",
+        "ap_done": "done",
+        "ap_ready": "ready",
+        "ap_idle": "idle"
+      },
+      "ports": [
+        "ap_done",
+        "ap_idle",
+        "ap_ready",
+        "ap_start"
+      ]
+    }
+  },
+  "RtlPorts": {
+    "src_address0": {
+      "dir": "out",
+      "width": "18"
+    },
+    "src_ce0": {
+      "dir": "out",
+      "width": "1"
+    },
+    "src_d0": {
+      "dir": "out",
+      "width": "8"
+    },
+    "src_q0": {
+      "dir": "in",
+      "width": "8"
+    },
+    "src_we0": {
+      "dir": "out",
+      "width": "1"
+    },
+    "src_address1": {
+      "dir": "out",
+      "width": "18"
+    },
+    "src_ce1": {
+      "dir": "out",
+      "width": "1"
+    },
+    "src_d1": {
+      "dir": "out",
+      "width": "8"
+    },
+    "src_q1": {
+      "dir": "in",
+      "width": "8"
+    },
+    "src_we1": {
+      "dir": "out",
+      "width": "1"
+    },
+    "dst_address0": {
+      "dir": "out",
+      "width": "18"
+    },
+    "dst_ce0": {
+      "dir": "out",
+      "width": "1"
+    },
+    "dst_d0": {
+      "dir": "out",
+      "width": "8"
+    },
+    "dst_q0": {
+      "dir": "in",
+      "width": "8"
+    },
+    "dst_we0": {
+      "dir": "out",
+      "width": "1"
+    },
+    "dst_address1": {
+      "dir": "out",
+      "width": "18"
+    },
+    "dst_ce1": {
+      "dir": "out",
+      "width": "1"
+    },
+    "dst_d1": {
+      "dir": "out",
+      "width": "8"
+    },
+    "dst_q1": {
+      "dir": "in",
+      "width": "8"
+    },
+    "dst_we1": {
+      "dir": "out",
+      "width": "1"
+    },
+    "height": {
+      "dir": "in",
+      "width": "16"
+    },
+    "width": {
+      "dir": "in",
+      "width": "16"
+    },
+    "ap_clk": {
+      "dir": "in",
+      "width": "1"
+    },
+    "ap_rst": {
+      "dir": "in",
+      "width": "1"
+    },
+    "ap_start": {
+      "dir": "in",
+      "width": "1"
+    },
+    "ap_done": {
+      "dir": "out",
+      "width": "1"
+    },
+    "ap_ready": {
+      "dir": "out",
+      "width": "1"
+    },
+    "ap_idle": {
+      "dir": "out",
+      "width": "1"
+    }
+  },
+  "ModuleInfo": {
+    "Hierarchy": {
+      "ModuleName": "gaussian",
+      "Instances": [
+        {
+          "ModuleName": "ReadFromMem",
+          "InstanceName": "ReadFromMem_U0",
+          "Instances": [{
+              "ModuleName": "ReadFromMem_Pipeline_read_image",
+              "InstanceName": "grp_ReadFromMem_Pipeline_read_image_fu_82"
+            }]
+        },
+        {
+          "ModuleName": "Window2D",
+          "InstanceName": "Window2D_U0",
+          "Instances": [{
+              "ModuleName": "Window2D_Pipeline_update_window",
+              "InstanceName": "grp_Window2D_Pipeline_update_window_fu_94"
+            }]
+        },
+        {
+          "ModuleName": "Filter2D",
+          "InstanceName": "Filter2D_U0",
+          "Instances": [{
+              "ModuleName": "Filter2D_Pipeline_apply_filter_VITIS_LOOP_243_1",
+              "InstanceName": "grp_Filter2D_Pipeline_apply_filter_VITIS_LOOP_243_1_fu_72"
+            }]
+        },
+        {
+          "ModuleName": "WriteToMem",
+          "InstanceName": "WriteToMem_U0",
+          "Instances": [{
+              "ModuleName": "WriteToMem_Pipeline_write_image",
+              "InstanceName": "grp_WriteToMem_Pipeline_write_image_fu_60"
+            }]
+        }
+      ]
+    },
+    "Info": {
+      "ReadFromMem_Pipeline_read_image": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "1",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "ReadFromMem": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "Window2D_Pipeline_update_window": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "1",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "Window2D": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "Filter2D_Pipeline_apply_filter_VITIS_LOOP_243_1": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "1",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "Filter2D": {
+        "FunctionProtocol": "ap_ctrl_none",
+        "isTaskLevelControl": "0",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "WriteToMem_Pipeline_write_image": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "1",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "WriteToMem": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "gaussian": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "1",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      }
+    },
+    "Metrics": {
+      "ReadFromMem_Pipeline_read_image": {
+        "Latency": {
+          "LatencyBest": "",
+          "LatencyAvg": "",
+          "LatencyWorst": "",
+          "PipelineII": "",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "2.70",
+          "Estimate": "6.904"
+        },
+        "Loops": [{
+            "Name": "read_image",
+            "TripCount": "",
+            "Latency": "",
+            "PipelineII": "1",
+            "PipelineDepth": "2"
+          }],
+        "Area": {
+          "FF": "116",
+          "AVAIL_FF": "65200",
+          "UTIL_FF": "~0",
+          "LUT": "223",
+          "AVAIL_LUT": "32600",
+          "UTIL_LUT": "~0",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "150",
+          "UTIL_BRAM": "0",
+          "DSP": "0",
+          "AVAIL_DSP": "120",
+          "UTIL_DSP": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "0",
+          "UTIL_URAM": "0"
+        }
+      },
+      "ReadFromMem": {
+        "Latency": {
+          "LatencyBest": "",
+          "LatencyAvg": "",
+          "LatencyWorst": "",
+          "PipelineII": "",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "2.70",
+          "Estimate": "6.904"
+        },
+        "Area": {
+          "DSP": "1",
+          "AVAIL_DSP": "120",
+          "UTIL_DSP": "~0",
+          "FF": "177",
+          "AVAIL_FF": "65200",
+          "UTIL_FF": "~0",
+          "LUT": "327",
+          "AVAIL_LUT": "32600",
+          "UTIL_LUT": "1",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "150",
+          "UTIL_BRAM": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "0",
+          "UTIL_URAM": "0"
+        }
+      },
+      "Window2D_Pipeline_update_window": {
+        "Latency": {
+          "LatencyBest": "4",
+          "LatencyAvg": "131589",
+          "LatencyWorst": "263174",
+          "PipelineIIMin": "4",
+          "PipelineIIMax": "263174",
+          "PipelineII": "4 ~ 263174",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "2.70",
+          "Estimate": "6.904"
+        },
+        "Loops": [{
+            "Name": "update_window",
+            "TripCount": "",
+            "LatencyMin": "2",
+            "LatencyMax": "263172",
+            "Latency": "2 ~ 263172",
+            "PipelineII": "1",
+            "PipelineDepth": "3"
+          }],
+        "Area": {
+          "FF": "379",
+          "AVAIL_FF": "65200",
+          "UTIL_FF": "~0",
+          "LUT": "285",
+          "AVAIL_LUT": "32600",
+          "UTIL_LUT": "~0",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "150",
+          "UTIL_BRAM": "0",
+          "DSP": "0",
+          "AVAIL_DSP": "120",
+          "UTIL_DSP": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "0",
+          "UTIL_URAM": "0"
+        }
+      },
+      "Window2D": {
+        "Latency": {
+          "LatencyBest": "8",
+          "LatencyAvg": "131593",
+          "LatencyWorst": "263178",
+          "PipelineIIMin": "8",
+          "PipelineIIMax": "263178",
+          "PipelineII": "8 ~ 263178",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "2.70",
+          "Estimate": "7.300"
+        },
+        "Area": {
+          "BRAM_18K": "4",
+          "AVAIL_BRAM": "150",
+          "UTIL_BRAM": "2",
+          "DSP": "1",
+          "AVAIL_DSP": "120",
+          "UTIL_DSP": "~0",
+          "FF": "501",
+          "AVAIL_FF": "65200",
+          "UTIL_FF": "~0",
+          "LUT": "480",
+          "AVAIL_LUT": "32600",
+          "UTIL_LUT": "1",
+          "URAM": "0",
+          "AVAIL_URAM": "0",
+          "UTIL_URAM": "0"
+        }
+      },
+      "Filter2D_Pipeline_apply_filter_VITIS_LOOP_243_1": {
+        "Latency": {
+          "LatencyBest": "2",
+          "LatencyAvg": "",
+          "LatencyWorst": "4294836231",
+          "PipelineIIMin": "2",
+          "PipelineIIMax": "4294836231",
+          "PipelineII": "2 ~ 4294836231",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "2.70",
+          "Estimate": "7.026"
+        },
+        "Loops": [{
+            "Name": "apply_filter_VITIS_LOOP_243_1",
+            "TripCount": "",
+            "LatencyMin": "0",
+            "LatencyMax": "4294836229",
+            "Latency": "0 ~ 4294836229",
+            "PipelineII": "1",
+            "PipelineDepth": "6"
+          }],
+        "Area": {
+          "FF": "364",
+          "AVAIL_FF": "65200",
+          "UTIL_FF": "~0",
+          "LUT": "708",
+          "AVAIL_LUT": "32600",
+          "UTIL_LUT": "2",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "150",
+          "UTIL_BRAM": "0",
+          "DSP": "0",
+          "AVAIL_DSP": "120",
+          "UTIL_DSP": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "0",
+          "UTIL_URAM": "0"
+        }
+      },
+      "Filter2D": {
+        "Latency": {
+          "LatencyBest": "6",
+          "LatencyAvg": "",
+          "LatencyWorst": "4294836235",
+          "PipelineIIMin": "6",
+          "PipelineIIMax": "4294836235",
+          "PipelineII": "6 ~ 4294836235",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "2.70",
+          "Estimate": "7.300"
+        },
+        "Area": {
+          "DSP": "1",
+          "AVAIL_DSP": "120",
+          "UTIL_DSP": "~0",
+          "FF": "470",
+          "AVAIL_FF": "65200",
+          "UTIL_FF": "~0",
+          "LUT": "863",
+          "AVAIL_LUT": "32600",
+          "UTIL_LUT": "2",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "150",
+          "UTIL_BRAM": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "0",
+          "UTIL_URAM": "0"
+        }
+      },
+      "WriteToMem_Pipeline_write_image": {
+        "Latency": {
+          "LatencyBest": "2",
+          "LatencyAvg": "",
+          "LatencyWorst": "523779",
+          "PipelineIIMin": "2",
+          "PipelineIIMax": "523779",
+          "PipelineII": "2 ~ 523779",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "2.70",
+          "Estimate": "5.530"
+        },
+        "Loops": [{
+            "Name": "write_image",
+            "TripCount": "",
+            "LatencyMin": "0",
+            "LatencyMax": "523777",
+            "Latency": "0 ~ 523777",
+            "PipelineII": "1",
+            "PipelineDepth": "3"
+          }],
+        "Area": {
+          "FF": "163",
+          "AVAIL_FF": "65200",
+          "UTIL_FF": "~0",
+          "LUT": "228",
+          "AVAIL_LUT": "32600",
+          "UTIL_LUT": "~0",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "150",
+          "UTIL_BRAM": "0",
+          "DSP": "0",
+          "AVAIL_DSP": "120",
+          "UTIL_DSP": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "0",
+          "UTIL_URAM": "0"
+        }
+      },
+      "WriteToMem": {
+        "Latency": {
+          "LatencyBest": "6",
+          "LatencyAvg": "",
+          "LatencyWorst": "523783",
+          "PipelineIIMin": "6",
+          "PipelineIIMax": "523783",
+          "PipelineII": "6 ~ 523783",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "2.70",
+          "Estimate": "5.800"
+        },
+        "Area": {
+          "DSP": "1",
+          "AVAIL_DSP": "120",
+          "UTIL_DSP": "~0",
+          "FF": "208",
+          "AVAIL_FF": "65200",
+          "UTIL_FF": "~0",
+          "LUT": "317",
+          "AVAIL_LUT": "32600",
+          "UTIL_LUT": "~0",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "150",
+          "UTIL_BRAM": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "0",
+          "UTIL_URAM": "0"
+        }
+      },
+      "gaussian": {
+        "Latency": {
+          "LatencyBest": "",
+          "LatencyAvg": "",
+          "LatencyWorst": "",
+          "PipelineII": "",
+          "PipelineDepth": "",
+          "PipelineType": "dataflow"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "2.70",
+          "Estimate": "7.300"
+        },
+        "Area": {
+          "BRAM_18K": "4",
+          "AVAIL_BRAM": "150",
+          "UTIL_BRAM": "2",
+          "DSP": "4",
+          "AVAIL_DSP": "120",
+          "UTIL_DSP": "3",
+          "FF": "2256",
+          "AVAIL_FF": "65200",
+          "UTIL_FF": "3",
+          "LUT": "2601",
+          "AVAIL_LUT": "32600",
+          "UTIL_LUT": "7",
+          "URAM": "0",
+          "AVAIL_URAM": "0",
+          "UTIL_URAM": "0"
+        }
+      }
+    }
+  },
+  "GenerateBdFiles": "0",
+  "GenData": {
+    "DataVersion": "0.2",
+    "Time": "2026-11-02 15:50:51 -03",
+    "ToolName": "vitis_hls",
+    "ToolVersion": "2022.2"
+  }
+}

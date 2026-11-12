@@ -1,0 +1,122 @@
+set moduleName ReadFromMem_Pipeline_read_image
+set isTopModule 0
+set isCombinational 0
+set isDatapathOnly 0
+set isPipelined 1
+set pipeline_type none
+set FunctionProtocol ap_ctrl_hs
+set isOneStateSeq 0
+set ProfileFlag 0
+set StallSigGenFlag 0
+set isEnableWaveformDebug 1
+set hasInterrupt 0
+set C_modelName {ReadFromMem_Pipeline_read_image}
+set C_modelType { void 0 }
+set C_modelArgList {
+	{ mul_ln53 int 32 regular  }
+	{ sext_ln53 int 17 regular  }
+	{ src int 8 regular {array 262144 { 1 3 } 1 1 }  }
+	{ conv5 int 16 regular  }
+	{ pixel_stream3 int 8 regular {fifo 1 volatile }  }
+}
+set C_modelArgMapList {[ 
+	{ "Name" : "mul_ln53", "interface" : "wire", "bitwidth" : 32, "direction" : "READONLY"} , 
+ 	{ "Name" : "sext_ln53", "interface" : "wire", "bitwidth" : 17, "direction" : "READONLY"} , 
+ 	{ "Name" : "src", "interface" : "memory", "bitwidth" : 8, "direction" : "READONLY"} , 
+ 	{ "Name" : "conv5", "interface" : "wire", "bitwidth" : 16, "direction" : "READONLY"} , 
+ 	{ "Name" : "pixel_stream3", "interface" : "fifo", "bitwidth" : 8, "direction" : "WRITEONLY"} ]}
+# RTL Port declarations: 
+set portNum 17
+set portList { 
+	{ ap_clk sc_in sc_logic 1 clock -1 } 
+	{ ap_rst sc_in sc_logic 1 reset -1 active_high_sync } 
+	{ ap_start sc_in sc_logic 1 start -1 } 
+	{ ap_done sc_out sc_logic 1 predone -1 } 
+	{ ap_idle sc_out sc_logic 1 done -1 } 
+	{ ap_ready sc_out sc_logic 1 ready -1 } 
+	{ pixel_stream3_din sc_out sc_lv 8 signal 4 } 
+	{ pixel_stream3_num_data_valid sc_in sc_lv 2 signal 4 } 
+	{ pixel_stream3_fifo_cap sc_in sc_lv 2 signal 4 } 
+	{ pixel_stream3_full_n sc_in sc_logic 1 signal 4 } 
+	{ pixel_stream3_write sc_out sc_logic 1 signal 4 } 
+	{ mul_ln53 sc_in sc_lv 32 signal 0 } 
+	{ sext_ln53 sc_in sc_lv 17 signal 1 } 
+	{ src_address0 sc_out sc_lv 18 signal 2 } 
+	{ src_ce0 sc_out sc_logic 1 signal 2 } 
+	{ src_q0 sc_in sc_lv 8 signal 2 } 
+	{ conv5 sc_in sc_lv 16 signal 3 } 
+}
+set NewPortList {[ 
+	{ "name": "ap_clk", "direction": "in", "datatype": "sc_logic", "bitwidth":1, "type": "clock", "bundle":{"name": "ap_clk", "role": "default" }} , 
+ 	{ "name": "ap_rst", "direction": "in", "datatype": "sc_logic", "bitwidth":1, "type": "reset", "bundle":{"name": "ap_rst", "role": "default" }} , 
+ 	{ "name": "ap_start", "direction": "in", "datatype": "sc_logic", "bitwidth":1, "type": "start", "bundle":{"name": "ap_start", "role": "default" }} , 
+ 	{ "name": "ap_done", "direction": "out", "datatype": "sc_logic", "bitwidth":1, "type": "predone", "bundle":{"name": "ap_done", "role": "default" }} , 
+ 	{ "name": "ap_idle", "direction": "out", "datatype": "sc_logic", "bitwidth":1, "type": "done", "bundle":{"name": "ap_idle", "role": "default" }} , 
+ 	{ "name": "ap_ready", "direction": "out", "datatype": "sc_logic", "bitwidth":1, "type": "ready", "bundle":{"name": "ap_ready", "role": "default" }} , 
+ 	{ "name": "pixel_stream3_din", "direction": "out", "datatype": "sc_lv", "bitwidth":8, "type": "signal", "bundle":{"name": "pixel_stream3", "role": "din" }} , 
+ 	{ "name": "pixel_stream3_num_data_valid", "direction": "in", "datatype": "sc_lv", "bitwidth":2, "type": "signal", "bundle":{"name": "pixel_stream3", "role": "num_data_valid" }} , 
+ 	{ "name": "pixel_stream3_fifo_cap", "direction": "in", "datatype": "sc_lv", "bitwidth":2, "type": "signal", "bundle":{"name": "pixel_stream3", "role": "fifo_cap" }} , 
+ 	{ "name": "pixel_stream3_full_n", "direction": "in", "datatype": "sc_logic", "bitwidth":1, "type": "signal", "bundle":{"name": "pixel_stream3", "role": "full_n" }} , 
+ 	{ "name": "pixel_stream3_write", "direction": "out", "datatype": "sc_logic", "bitwidth":1, "type": "signal", "bundle":{"name": "pixel_stream3", "role": "write" }} , 
+ 	{ "name": "mul_ln53", "direction": "in", "datatype": "sc_lv", "bitwidth":32, "type": "signal", "bundle":{"name": "mul_ln53", "role": "default" }} , 
+ 	{ "name": "sext_ln53", "direction": "in", "datatype": "sc_lv", "bitwidth":17, "type": "signal", "bundle":{"name": "sext_ln53", "role": "default" }} , 
+ 	{ "name": "src_address0", "direction": "out", "datatype": "sc_lv", "bitwidth":18, "type": "signal", "bundle":{"name": "src", "role": "address0" }} , 
+ 	{ "name": "src_ce0", "direction": "out", "datatype": "sc_logic", "bitwidth":1, "type": "signal", "bundle":{"name": "src", "role": "ce0" }} , 
+ 	{ "name": "src_q0", "direction": "in", "datatype": "sc_lv", "bitwidth":8, "type": "signal", "bundle":{"name": "src", "role": "q0" }} , 
+ 	{ "name": "conv5", "direction": "in", "datatype": "sc_lv", "bitwidth":16, "type": "signal", "bundle":{"name": "conv5", "role": "default" }}  ]}
+
+set RtlHierarchyInfo {[
+	{"ID" : "0", "Level" : "0", "Path" : "`AUTOTB_DUT_INST", "Parent" : "", "Child" : ["1"],
+		"CDFG" : "ReadFromMem_Pipeline_read_image",
+		"Protocol" : "ap_ctrl_hs",
+		"ControlExist" : "1", "ap_start" : "1", "ap_ready" : "1", "ap_done" : "1", "ap_continue" : "0", "ap_idle" : "1", "real_start" : "0",
+		"Pipeline" : "None", "UnalignedPipeline" : "0", "RewindPipeline" : "0", "ProcessNetwork" : "0",
+		"II" : "0",
+		"VariableLatency" : "1", "ExactLatency" : "-1", "EstimateLatencyMin" : "-1", "EstimateLatencyMax" : "-1",
+		"Combinational" : "0",
+		"Datapath" : "0",
+		"ClockEnable" : "0",
+		"HasSubDataflow" : "0",
+		"InDataflowNetwork" : "0",
+		"HasNonBlockingOperation" : "0",
+		"IsBlackBox" : "0",
+		"Port" : [
+			{"Name" : "mul_ln53", "Type" : "None", "Direction" : "I"},
+			{"Name" : "sext_ln53", "Type" : "None", "Direction" : "I"},
+			{"Name" : "src", "Type" : "Memory", "Direction" : "I"},
+			{"Name" : "conv5", "Type" : "None", "Direction" : "I"},
+			{"Name" : "pixel_stream3", "Type" : "Fifo", "Direction" : "O",
+				"BlockSignal" : [
+					{"Name" : "pixel_stream3_blk_n", "Type" : "RtlSignal"}]}],
+		"Loop" : [
+			{"Name" : "read_image", "PipelineType" : "UPC",
+				"LoopDec" : {"FSMBitwidth" : "1", "FirstState" : "ap_ST_fsm_pp0_stage0", "FirstStateIter" : "ap_enable_reg_pp0_iter1", "FirstStateBlock" : "ap_block_pp0_stage0_subdone", "LastState" : "ap_ST_fsm_pp0_stage0", "LastStateIter" : "ap_enable_reg_pp0_iter2", "LastStateBlock" : "ap_block_pp0_stage0_subdone", "QuitState" : "ap_ST_fsm_pp0_stage0", "QuitStateIter" : "ap_enable_reg_pp0_iter1", "QuitStateBlock" : "ap_block_pp0_stage0_subdone", "OneDepthLoop" : "0", "has_ap_ctrl" : "1", "has_continue" : "0"}}]},
+	{"ID" : "1", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.flow_control_loop_pipe_sequential_init_U", "Parent" : "0"}]}
+
+
+set ArgLastReadFirstWriteLatency {
+	ReadFromMem_Pipeline_read_image {
+		mul_ln53 {Type I LastRead 0 FirstWrite -1}
+		sext_ln53 {Type I LastRead 0 FirstWrite -1}
+		src {Type I LastRead 1 FirstWrite -1}
+		conv5 {Type I LastRead 0 FirstWrite -1}
+		pixel_stream3 {Type O LastRead -1 FirstWrite 2}}}
+
+set hasDtUnsupportedChannel 0
+
+set PerformanceInfo {[
+	{"Name" : "Latency", "Min" : "-1", "Max" : "-1"}
+	, {"Name" : "Interval", "Min" : "-1", "Max" : "-1"}
+]}
+
+set PipelineEnableSignalInfo {[
+	{"Pipeline" : "0", "EnableSignal" : "ap_enable_pp0"}
+]}
+
+set Spec2ImplPortList { 
+	mul_ln53 { ap_none {  { mul_ln53 in_data 0 32 } } }
+	sext_ln53 { ap_none {  { sext_ln53 in_data 0 17 } } }
+	src { ap_memory {  { src_address0 mem_address 1 18 }  { src_ce0 mem_ce 1 1 }  { src_q0 in_data 0 8 } } }
+	conv5 { ap_none {  { conv5 in_data 0 16 } } }
+	pixel_stream3 { ap_fifo {  { pixel_stream3_din fifo_port_we 1 8 }  { pixel_stream3_num_data_valid fifo_status_num_data_valid 0 2 }  { pixel_stream3_fifo_cap fifo_update 0 2 }  { pixel_stream3_full_n fifo_status 0 1 }  { pixel_stream3_write fifo_data 1 1 } } }
+}

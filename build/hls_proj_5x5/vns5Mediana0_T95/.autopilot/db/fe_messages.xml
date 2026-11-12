@@ -1,0 +1,417 @@
+<xilinx:hls_fe_msgs>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/tools/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_int_ref.h:678:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="and_reduce" ARG_PragmaIsValid="1" ARG_PragmaType="unroll" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/tools/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_int_ref.h:692:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="or_reduce" ARG_PragmaIsValid="1" ARG_PragmaType="unroll" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/tools/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_int_ref.h:706:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="xor_reduce" ARG_PragmaIsValid="1" ARG_PragmaType="unroll" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/bitEspecifico.cpp:4:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="bitEspecifico" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_none port=a" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/bitEspecifico.cpp:5:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="bitEspecifico" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_none port=b" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/bitEspecifico.cpp:6:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="bitEspecifico" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_none port=c" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/bitEspecifico.cpp:7:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="bitEspecifico" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_ctrl_none port=return" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/tools/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_int_ref.h:678:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="and_reduce" ARG_PragmaIsValid="1" ARG_PragmaType="unroll" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/tools/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_int_ref.h:692:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="or_reduce" ARG_PragmaIsValid="1" ARG_PragmaType="unroll" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/tools/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_int_ref.h:706:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="xor_reduce" ARG_PragmaIsValid="1" ARG_PragmaType="unroll" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/bit4Truncated.cpp:4:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="bit4Truncated" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_none port=a" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/bit4Truncated.cpp:5:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="bit4Truncated" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_none port=b" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/bit4Truncated.cpp:6:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="bit4Truncated" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_none port=c" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/bit4Truncated.cpp:7:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="bit4Truncated" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_ctrl_none port=return" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/tools/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_int_ref.h:678:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="and_reduce" ARG_PragmaIsValid="1" ARG_PragmaType="unroll" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/tools/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_int_ref.h:692:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="or_reduce" ARG_PragmaIsValid="1" ARG_PragmaType="unroll" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/tools/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_int_ref.h:706:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="xor_reduce" ARG_PragmaIsValid="1" ARG_PragmaType="unroll" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/bit3Truncated.cpp:4:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="bit3Truncated" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_none port=a" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/bit3Truncated.cpp:5:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="bit3Truncated" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_none port=b" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/bit3Truncated.cpp:6:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="bit3Truncated" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_none port=c" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/bit3Truncated.cpp:7:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="bit3Truncated" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_ctrl_none port=return" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/tools/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_int_ref.h:678:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="and_reduce" ARG_PragmaIsValid="1" ARG_PragmaType="unroll" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/tools/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_int_ref.h:692:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="or_reduce" ARG_PragmaIsValid="1" ARG_PragmaType="unroll" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/tools/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_int_ref.h:706:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="xor_reduce" ARG_PragmaIsValid="1" ARG_PragmaType="unroll" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/bit2Truncated.cpp:4:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="bit2Truncated" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_none port=a" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/bit2Truncated.cpp:5:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="bit2Truncated" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_none port=b" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/bit2Truncated.cpp:6:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="bit2Truncated" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_none port=c" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/bit2Truncated.cpp:7:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="bit2Truncated" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_ctrl_none port=return" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/tools/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_int_ref.h:678:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="and_reduce" ARG_PragmaIsValid="1" ARG_PragmaType="unroll" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/tools/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_int_ref.h:692:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="or_reduce" ARG_PragmaIsValid="1" ARG_PragmaType="unroll" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/tools/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_int_ref.h:706:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="xor_reduce" ARG_PragmaIsValid="1" ARG_PragmaType="unroll" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/4bitTruncated.cpp:4:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="_4bitTruncated" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_none port=a" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/4bitTruncated.cpp:5:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="_4bitTruncated" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_none port=b" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/4bitTruncated.cpp:6:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="_4bitTruncated" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_none port=c" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/4bitTruncated.cpp:7:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="_4bitTruncated" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_ctrl_none port=return" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/tools/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_int_ref.h:678:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="and_reduce" ARG_PragmaIsValid="1" ARG_PragmaType="unroll" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/tools/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_int_ref.h:692:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="or_reduce" ARG_PragmaIsValid="1" ARG_PragmaType="unroll" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/tools/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_int_ref.h:706:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="xor_reduce" ARG_PragmaIsValid="1" ARG_PragmaType="unroll" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/3bitTruncated.cpp:4:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="_3bitTruncated" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_none port=a" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/3bitTruncated.cpp:5:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="_3bitTruncated" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_none port=b" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/3bitTruncated.cpp:6:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="_3bitTruncated" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_none port=c" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/3bitTruncated.cpp:7:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="_3bitTruncated" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_ctrl_none port=return" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/tools/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_int_ref.h:678:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="and_reduce" ARG_PragmaIsValid="1" ARG_PragmaType="unroll" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/tools/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_int_ref.h:692:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="or_reduce" ARG_PragmaIsValid="1" ARG_PragmaType="unroll" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/tools/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_int_ref.h:706:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="xor_reduce" ARG_PragmaIsValid="1" ARG_PragmaType="unroll" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/2bitTruncated.cpp:4:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="_2bitTruncated" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_none port=a" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/2bitTruncated.cpp:5:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="_2bitTruncated" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_none port=b" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/2bitTruncated.cpp:6:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="_2bitTruncated" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_none port=c" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/2bitTruncated.cpp:7:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="_2bitTruncated" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_ctrl_none port=return" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/tools/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_int_ref.h:678:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="and_reduce" ARG_PragmaIsValid="1" ARG_PragmaType="unroll" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/tools/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_int_ref.h:692:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="or_reduce" ARG_PragmaIsValid="1" ARG_PragmaType="unroll" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/tools/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_int_ref.h:706:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="xor_reduce" ARG_PragmaIsValid="1" ARG_PragmaType="unroll" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../gaussian_vns_5x5.cpp:92:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="Window2D" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=LineBuffer dim=1 complete" ARG_PragmaType="array_partition" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../gaussian_vns_5x5.cpp:93:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="Window2D" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=LineBuffer inter false" ARG_PragmaType="dependence" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../gaussian_vns_5x5.cpp:94:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="Window2D" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=LineBuffer intra false" ARG_PragmaType="dependence" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../gaussian_vns_5x5.cpp:108:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="Window2D" ARG_PragmaIsValid="1" ARG_PragmaOptions="max=max_iterations" ARG_PragmaType="loop_tripcount" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../gaussian_vns_5x5.cpp:109:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="Window2D" ARG_PragmaIsValid="1" ARG_PragmaOptions="II=1" ARG_PragmaType="pipeline" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../gaussian_vns_5x5.cpp:151:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="filter" ARG_PragmaIsValid="1" ARG_PragmaType="inline" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../gaussian_vns_5x5.cpp:245:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="Filter2D" ARG_PragmaIsValid="1" ARG_PragmaOptions="II=1" ARG_PragmaType="pipeline" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/home/daniel.costa/hls_proj/run_hls.tcl:112:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaContext="directive" ARG_PragmaFunction="gaussian" ARG_PragmaIsValid="1" ARG_PragmaOptions="name=gaussian" ARG_PragmaType="top" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../gaussian_vns_5x5.cpp:269:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="gaussian" ARG_PragmaIsValid="1" ARG_PragmaType="dataflow" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/tools/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_int_ref.h:678:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="and_reduce" ARG_PragmaIsValid="1" ARG_PragmaType="unroll" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/tools/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_int_ref.h:692:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="or_reduce" ARG_PragmaIsValid="1" ARG_PragmaType="unroll" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/tools/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_int_ref.h:706:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="xor_reduce" ARG_PragmaIsValid="1" ARG_PragmaType="unroll" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/multExato.cpp:4:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="multExato" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_none port=a" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/multExato.cpp:5:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="multExato" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_none port=b" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/multExato.cpp:6:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="multExato" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_none port=c" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/multExato.cpp:7:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="multExato" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_ctrl_none port=return" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/tools/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_int_ref.h:678:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="and_reduce" ARG_PragmaIsValid="1" ARG_PragmaType="unroll" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/tools/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_int_ref.h:692:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="or_reduce" ARG_PragmaIsValid="1" ARG_PragmaType="unroll" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/tools/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_int_ref.h:706:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="xor_reduce" ARG_PragmaIsValid="1" ARG_PragmaType="unroll" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/1bitTruncated.cpp:4:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="_1bitTruncated" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_none port=a" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/1bitTruncated.cpp:5:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="_1bitTruncated" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_none port=b" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/1bitTruncated.cpp:6:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="_1bitTruncated" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_none port=c" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/1bitTruncated.cpp:7:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="_1bitTruncated" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_ctrl_none port=return" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="CODE_UNSUPPORTED" msg_id="214-131" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:252:23" msg_body="Inlining function 'filter(window)' into 'Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)'">
+        <args Callee="filter(window)" Caller="Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_UNROLL" msg_id="214-291" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:115:27" msg_body="Loop 'VITIS_LOOP_115_1' is marked as complete unroll implied by the pipeline pragma">
+        <args LoopName="VITIS_LOOP_115_1"/>
+    </msg>
+    <msg msg_groups="PRAGMA_UNROLL" msg_id="214-291" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:116:31" msg_body="Loop 'VITIS_LOOP_116_2' is marked as complete unroll implied by the pipeline pragma">
+        <args LoopName="VITIS_LOOP_116_2"/>
+    </msg>
+    <msg msg_groups="PRAGMA_UNROLL" msg_id="214-291" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:123:27" msg_body="Loop 'VITIS_LOOP_123_3' is marked as complete unroll implied by the pipeline pragma">
+        <args LoopName="VITIS_LOOP_123_3"/>
+    </msg>
+    <msg msg_groups="PRAGMA_UNROLL" msg_id="214-186" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:89:0" msg_body="Unrolling loop 'VITIS_LOOP_115_1' (../gaussian_vns_5x5.cpp:115:27) in function 'Window2D' completely with a factor of 5">
+        <args Factor="5" LoopLoc="../gaussian_vns_5x5.cpp:115:27" LoopName="VITIS_LOOP_115_1"/>
+    </msg>
+    <msg msg_groups="PRAGMA_UNROLL" msg_id="214-186" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:89:0" msg_body="Unrolling loop 'VITIS_LOOP_116_2' (../gaussian_vns_5x5.cpp:116:31) in function 'Window2D' completely with a factor of 4">
+        <args Factor="4" LoopLoc="../gaussian_vns_5x5.cpp:116:31" LoopName="VITIS_LOOP_116_2"/>
+    </msg>
+    <msg msg_groups="PRAGMA_UNROLL" msg_id="214-186" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:89:0" msg_body="Unrolling loop 'VITIS_LOOP_123_3' (../gaussian_vns_5x5.cpp:123:27) in function 'Window2D' completely with a factor of 3">
+        <args Factor="3" LoopLoc="../gaussian_vns_5x5.cpp:123:27" LoopName="VITIS_LOOP_123_3"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../vns_mapping_5x5.h:63:0" msg_body="Inlining function 'bit3Truncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)' into 'mul_slot_0(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)'">
+        <args Callee="bit3Truncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)" Caller="mul_slot_0(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../vns_mapping_5x5.h:70:0" msg_body="Inlining function '_4bitTruncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)' into 'mul_slot_1(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)'">
+        <args Callee="_4bitTruncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)" Caller="mul_slot_1(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../vns_mapping_5x5.h:77:0" msg_body="Inlining function 'bit4Truncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)' into 'mul_slot_2(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)'">
+        <args Callee="bit4Truncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)" Caller="mul_slot_2(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../vns_mapping_5x5.h:84:0" msg_body="Inlining function 'bit4Truncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)' into 'mul_slot_3(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)'">
+        <args Callee="bit4Truncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)" Caller="mul_slot_3(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../vns_mapping_5x5.h:91:0" msg_body="Inlining function 'bitEspecifico(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)' into 'mul_slot_4(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)'">
+        <args Callee="bitEspecifico(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)" Caller="mul_slot_4(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../vns_mapping_5x5.h:98:0" msg_body="Inlining function 'bit2Truncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)' into 'mul_slot_5(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)'">
+        <args Callee="bit2Truncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)" Caller="mul_slot_5(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../vns_mapping_5x5.h:105:0" msg_body="Inlining function '_2bitTruncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)' into 'mul_slot_6(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)'">
+        <args Callee="_2bitTruncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)" Caller="mul_slot_6(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../vns_mapping_5x5.h:112:0" msg_body="Inlining function '_3bitTruncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)' into 'mul_slot_7(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)'">
+        <args Callee="_3bitTruncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)" Caller="mul_slot_7(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../vns_mapping_5x5.h:119:0" msg_body="Inlining function '_3bitTruncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)' into 'mul_slot_8(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)'">
+        <args Callee="_3bitTruncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)" Caller="mul_slot_8(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../vns_mapping_5x5.h:126:0" msg_body="Inlining function 'bit4Truncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)' into 'mul_slot_9(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)'">
+        <args Callee="bit4Truncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)" Caller="mul_slot_9(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../vns_mapping_5x5.h:133:0" msg_body="Inlining function 'bitEspecifico(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)' into 'mul_slot_10(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)'">
+        <args Callee="bitEspecifico(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)" Caller="mul_slot_10(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../vns_mapping_5x5.h:140:0" msg_body="Inlining function '_4bitTruncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)' into 'mul_slot_11(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)'">
+        <args Callee="_4bitTruncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)" Caller="mul_slot_11(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../vns_mapping_5x5.h:147:0" msg_body="Inlining function '_4bitTruncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)' into 'mul_slot_12(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)'">
+        <args Callee="_4bitTruncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)" Caller="mul_slot_12(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../vns_mapping_5x5.h:154:0" msg_body="Inlining function '_3bitTruncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)' into 'mul_slot_13(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)'">
+        <args Callee="_3bitTruncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)" Caller="mul_slot_13(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../vns_mapping_5x5.h:161:0" msg_body="Inlining function 'bit4Truncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)' into 'mul_slot_14(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)'">
+        <args Callee="bit4Truncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)" Caller="mul_slot_14(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../vns_mapping_5x5.h:168:0" msg_body="Inlining function 'bit4Truncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)' into 'mul_slot_15(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)'">
+        <args Callee="bit4Truncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)" Caller="mul_slot_15(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../vns_mapping_5x5.h:175:0" msg_body="Inlining function '_4bitTruncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)' into 'mul_slot_16(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)'">
+        <args Callee="_4bitTruncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)" Caller="mul_slot_16(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../vns_mapping_5x5.h:182:0" msg_body="Inlining function 'bit4Truncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)' into 'mul_slot_17(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)'">
+        <args Callee="bit4Truncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)" Caller="mul_slot_17(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../vns_mapping_5x5.h:189:0" msg_body="Inlining function 'bit4Truncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)' into 'mul_slot_18(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)'">
+        <args Callee="bit4Truncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)" Caller="mul_slot_18(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../vns_mapping_5x5.h:196:0" msg_body="Inlining function 'bit4Truncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)' into 'mul_slot_19(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)'">
+        <args Callee="bit4Truncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)" Caller="mul_slot_19(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../vns_mapping_5x5.h:203:0" msg_body="Inlining function '_4bitTruncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)' into 'mul_slot_20(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)'">
+        <args Callee="_4bitTruncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)" Caller="mul_slot_20(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../vns_mapping_5x5.h:210:0" msg_body="Inlining function '_2bitTruncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)' into 'mul_slot_21(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)'">
+        <args Callee="_2bitTruncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)" Caller="mul_slot_21(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../vns_mapping_5x5.h:217:0" msg_body="Inlining function 'bit4Truncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)' into 'mul_slot_22(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)'">
+        <args Callee="bit4Truncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)" Caller="mul_slot_22(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../vns_mapping_5x5.h:224:0" msg_body="Inlining function '_4bitTruncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)' into 'mul_slot_23(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)'">
+        <args Callee="_4bitTruncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)" Caller="mul_slot_23(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../vns_mapping_5x5.h:231:0" msg_body="Inlining function '_4bitTruncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)' into 'mul_slot_24(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)'">
+        <args Callee="_4bitTruncated(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;, ap_uint&lt;16&gt;&amp;)" Caller="mul_slot_24(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:240:0" msg_body="Inlining function 'mul_slot_0(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)' into 'Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)'">
+        <args Callee="mul_slot_0(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)" Caller="Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:240:0" msg_body="Inlining function 'mul_slot_1(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)' into 'Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)'">
+        <args Callee="mul_slot_1(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)" Caller="Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:240:0" msg_body="Inlining function 'mul_slot_2(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)' into 'Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)'">
+        <args Callee="mul_slot_2(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)" Caller="Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:240:0" msg_body="Inlining function 'mul_slot_3(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)' into 'Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)'">
+        <args Callee="mul_slot_3(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)" Caller="Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:240:0" msg_body="Inlining function 'mul_slot_4(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)' into 'Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)'">
+        <args Callee="mul_slot_4(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)" Caller="Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:240:0" msg_body="Inlining function 'mul_slot_5(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)' into 'Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)'">
+        <args Callee="mul_slot_5(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)" Caller="Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:240:0" msg_body="Inlining function 'mul_slot_6(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)' into 'Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)'">
+        <args Callee="mul_slot_6(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)" Caller="Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:240:0" msg_body="Inlining function 'mul_slot_7(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)' into 'Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)'">
+        <args Callee="mul_slot_7(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)" Caller="Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:240:0" msg_body="Inlining function 'mul_slot_8(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)' into 'Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)'">
+        <args Callee="mul_slot_8(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)" Caller="Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:240:0" msg_body="Inlining function 'mul_slot_9(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)' into 'Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)'">
+        <args Callee="mul_slot_9(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)" Caller="Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:240:0" msg_body="Inlining function 'mul_slot_10(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)' into 'Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)'">
+        <args Callee="mul_slot_10(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)" Caller="Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:240:0" msg_body="Inlining function 'mul_slot_11(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)' into 'Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)'">
+        <args Callee="mul_slot_11(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)" Caller="Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:240:0" msg_body="Inlining function 'mul_slot_12(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)' into 'Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)'">
+        <args Callee="mul_slot_12(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)" Caller="Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:240:0" msg_body="Inlining function 'mul_slot_13(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)' into 'Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)'">
+        <args Callee="mul_slot_13(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)" Caller="Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:240:0" msg_body="Inlining function 'mul_slot_14(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)' into 'Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)'">
+        <args Callee="mul_slot_14(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)" Caller="Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:240:0" msg_body="Inlining function 'mul_slot_15(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)' into 'Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)'">
+        <args Callee="mul_slot_15(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)" Caller="Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:240:0" msg_body="Inlining function 'mul_slot_16(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)' into 'Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)'">
+        <args Callee="mul_slot_16(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)" Caller="Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:240:0" msg_body="Inlining function 'mul_slot_17(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)' into 'Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)'">
+        <args Callee="mul_slot_17(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)" Caller="Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:240:0" msg_body="Inlining function 'mul_slot_18(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)' into 'Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)'">
+        <args Callee="mul_slot_18(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)" Caller="Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:240:0" msg_body="Inlining function 'mul_slot_19(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)' into 'Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)'">
+        <args Callee="mul_slot_19(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)" Caller="Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:240:0" msg_body="Inlining function 'mul_slot_20(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)' into 'Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)'">
+        <args Callee="mul_slot_20(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)" Caller="Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:240:0" msg_body="Inlining function 'mul_slot_21(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)' into 'Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)'">
+        <args Callee="mul_slot_21(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)" Caller="Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:240:0" msg_body="Inlining function 'mul_slot_22(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)' into 'Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)'">
+        <args Callee="mul_slot_22(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)" Caller="Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:240:0" msg_body="Inlining function 'mul_slot_23(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)' into 'Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)'">
+        <args Callee="mul_slot_23(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)" Caller="Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:240:0" msg_body="Inlining function 'mul_slot_24(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)' into 'Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)'">
+        <args Callee="mul_slot_24(ap_uint&lt;8&gt;, ap_uint&lt;8&gt;)" Caller="Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:240:0" msg_body="Inlining function 'add16se_add1(ap_int&lt;16&gt;, ap_int&lt;16&gt;)' into 'Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)'">
+        <args Callee="add16se_add1(ap_int&lt;16&gt;, ap_int&lt;16&gt;)" Caller="Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:240:0" msg_body="Inlining function 'add16se_add2(ap_int&lt;16&gt;, ap_int&lt;16&gt;)' into 'Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)'">
+        <args Callee="add16se_add2(ap_int&lt;16&gt;, ap_int&lt;16&gt;)" Caller="Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:240:0" msg_body="Inlining function 'add16se_add3(ap_int&lt;16&gt;, ap_int&lt;16&gt;)' into 'Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)'">
+        <args Callee="add16se_add3(ap_int&lt;16&gt;, ap_int&lt;16&gt;)" Caller="Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:240:0" msg_body="Inlining function 'add16se_add4(ap_int&lt;16&gt;, ap_int&lt;16&gt;)' into 'Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)'">
+        <args Callee="add16se_add4(ap_int&lt;16&gt;, ap_int&lt;16&gt;)" Caller="Filter2D(unsigned short, unsigned short, hls::stream&lt;window, 0&gt;&amp;, hls::stream&lt;unsigned char, 0&gt;&amp;)"/>
+    </msg>
+    <msg msg_groups="PRAGMA_MISC" msg_id="214-248" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:91:8" msg_body="Applying array_partition to 'LineBuffer': Complete partitioning on dimension 1.">
+        <args Dim="1" Mode="Complete" UOName="LineBuffer"/>
+    </msg>
+    <msg msg_groups="PRAGMA_AGGREGATE" msg_id="214-241" msg_severity="INFO" msg_loc="../gaussian_vns_5x5.cpp:271:25" msg_body="Aggregating fifo (hls::stream) variable 'window_stream' with compact=bit mode in 200-bits">
+        <args AggregateTypeName="compact=bit" Bitwidth="200" HwTyName="fifo (hls::stream)" Name="window_stream"/>
+    </msg>
+</xilinx:hls_fe_msgs>
+

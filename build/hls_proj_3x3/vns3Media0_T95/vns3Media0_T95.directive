@@ -1,0 +1,15 @@
+<AutoPilot:ProjectResources xmlns:AutoPilot="com.autoesl.autopilot.ui.directiveView">
+    <sourceFile name="">
+        <directive functionName="gaussian" label="" functionLabel="">
+            <pragma name="TOP">
+                <option name="name" value="gaussian"/>
+            </pragma>
+        </directive>
+        <directive functionName="gaussian" label="" functionLabel="">
+            <pragma name="TOP">
+                <option name="name" value="gaussian"/>
+            </pragma>
+        </directive>
+    </sourceFile>
+</AutoPilot:ProjectResources>
+

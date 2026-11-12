@@ -1,0 +1,203 @@
+
+
+================================================================
+== Vitis HLS Report for 'gaussian'
+================================================================
+* Date:           Mon Nov  2 15:26:50 2026
+
+* Version:        2022.2 (Build 3670227 on Oct 13 2022)
+* Project:        hls_proj_5x5
+* Solution:       vns5Mediana0_T95 (Vivado IP Flow Target)
+* Product family: spartan7
+* Target device:  xc7s50-csga324-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  7.300 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-----+-----+----------+
+    |  Latency (cycles) |  Latency (absolute) |  Interval | Pipeline |
+    |   min   |   max   |    min   |    max   | min | max |   Type   |
+    +---------+---------+----------+----------+-----+-----+----------+
+    |        ?|        ?|         ?|         ?|    ?|    ?|  dataflow|
+    +---------+---------+----------+----------+-----+-----+----------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        N/A
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 1
+ResetActiveHigh: 1
+IsCombinational: 2
+IsDatapathOnly: 0
+HasWiredReturn: 1
+HasMFsm: 0
+HasVarLatency: 1
+IsPipeline: 0
+IsRtlPipelined: 0
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states : 8
+* Pipeline : 0
+* Dataflow Pipeline: 1
+  DF-Pipeline-0: Size = 8, States = { 1 2 3 4 5 6 7 8 }
+
+* FSM state transitions: 
+1 --> 2 
+2 --> 3 
+3 --> 4 
+4 --> 5 
+5 --> 6 
+6 --> 7 
+7 --> 8 
+8 --> 
+
+* FSM state operations: 
+
+State 1 <SV = 0> <Delay = 3.65>
+ST_1 : Operation 9 [1/1] (0.00ns)   --->   "%width_read = read i16 @_ssdm_op_Read.ap_auto.i16, i16 %width" [../gaussian_vns_5x5.cpp:269]   --->   Operation 9 'read' 'width_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 10 [1/1] (0.00ns)   --->   "%height_read = read i16 @_ssdm_op_Read.ap_auto.i16, i16 %height" [../gaussian_vns_5x5.cpp:269]   --->   Operation 10 'read' 'height_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 11 [1/1] (0.00ns)   --->   "%width_c14 = alloca i64 1" [../gaussian_vns_5x5.cpp:269]   --->   Operation 11 'alloca' 'width_c14' <Predicate = true> <Delay = 0.00> <CoreInst = "FIFO_SRL">   --->   Core 81 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 3.91> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 16> <Depth = 2> <FIFO>
+ST_1 : Operation 12 [1/1] (0.00ns)   --->   "%width_c13 = alloca i64 1" [../gaussian_vns_5x5.cpp:269]   --->   Operation 12 'alloca' 'width_c13' <Predicate = true> <Delay = 0.00> <CoreInst = "FIFO_SRL">   --->   Core 81 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 3.91> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 16> <Depth = 2> <FIFO>
+ST_1 : Operation 13 [1/1] (0.00ns)   --->   "%width_c = alloca i64 1" [../gaussian_vns_5x5.cpp:269]   --->   Operation 13 'alloca' 'width_c' <Predicate = true> <Delay = 0.00> <CoreInst = "FIFO_SRL">   --->   Core 81 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 3.91> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 16> <Depth = 2> <FIFO>
+ST_1 : Operation 14 [1/1] (0.00ns)   --->   "%height_c12 = alloca i64 1" [../gaussian_vns_5x5.cpp:269]   --->   Operation 14 'alloca' 'height_c12' <Predicate = true> <Delay = 0.00> <CoreInst = "FIFO_SRL">   --->   Core 81 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 3.91> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 16> <Depth = 2> <FIFO>
+ST_1 : Operation 15 [1/1] (0.00ns)   --->   "%height_c11 = alloca i64 1" [../gaussian_vns_5x5.cpp:269]   --->   Operation 15 'alloca' 'height_c11' <Predicate = true> <Delay = 0.00> <CoreInst = "FIFO_SRL">   --->   Core 81 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 3.91> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 16> <Depth = 2> <FIFO>
+ST_1 : Operation 16 [1/1] (0.00ns)   --->   "%height_c = alloca i64 1" [../gaussian_vns_5x5.cpp:269]   --->   Operation 16 'alloca' 'height_c' <Predicate = true> <Delay = 0.00> <CoreInst = "FIFO_SRL">   --->   Core 81 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 3.91> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 16> <Depth = 2> <FIFO>
+ST_1 : Operation 17 [1/1] (0.00ns)   --->   "%pixel_stream = alloca i64 1" [../gaussian_vns_5x5.cpp:270]   --->   Operation 17 'alloca' 'pixel_stream' <Predicate = true> <Delay = 0.00> <CoreInst = "FIFO_SRL">   --->   Core 81 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 3.91> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 8> <Depth = 2> <FIFO>
+ST_1 : Operation 18 [1/1] (0.00ns)   --->   "%window_stream = alloca i64 1"   --->   Operation 18 'alloca' 'window_stream' <Predicate = true> <Delay = 0.00> <CoreInst = "FIFO_SRL">   --->   Core 81 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 3.91> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 200> <Depth = 2> <FIFO>
+ST_1 : Operation 19 [1/1] (0.00ns)   --->   "%output_stream = alloca i64 1" [../gaussian_vns_5x5.cpp:272]   --->   Operation 19 'alloca' 'output_stream' <Predicate = true> <Delay = 0.00> <CoreInst = "FIFO_SRL">   --->   Core 81 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 3.91> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 8> <Depth = 2> <FIFO>
+ST_1 : Operation 20 [2/2] (3.65ns)   --->   "%call_ln275 = call void @ReadFromMem, i16 %width_read, i16 %height_read, i8 %src, i8 %pixel_stream, i16 %height_c12, i16 %width_c14" [../gaussian_vns_5x5.cpp:275]   --->   Operation 20 'call' 'call_ln275' <Predicate = true> <Delay = 3.65> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 2 <SV = 1> <Delay = 0.00>
+ST_2 : Operation 21 [1/2] (0.00ns)   --->   "%call_ln275 = call void @ReadFromMem, i16 %width_read, i16 %height_read, i8 %src, i8 %pixel_stream, i16 %height_c12, i16 %width_c14" [../gaussian_vns_5x5.cpp:275]   --->   Operation 21 'call' 'call_ln275' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 3 <SV = 2> <Delay = 0.00>
+ST_3 : Operation 22 [2/2] (0.00ns)   --->   "%call_ln278 = call void @Window2D, i16 %width_c14, i16 %height_c12, i8 %pixel_stream, i200 %window_stream, i16 %height_c11, i16 %width_c13" [../gaussian_vns_5x5.cpp:278]   --->   Operation 22 'call' 'call_ln278' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 4 <SV = 3> <Delay = 0.00>
+ST_4 : Operation 23 [1/2] (0.00ns)   --->   "%call_ln278 = call void @Window2D, i16 %width_c14, i16 %height_c12, i8 %pixel_stream, i200 %window_stream, i16 %height_c11, i16 %width_c13" [../gaussian_vns_5x5.cpp:278]   --->   Operation 23 'call' 'call_ln278' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 5 <SV = 4> <Delay = 0.00>
+ST_5 : Operation 24 [2/2] (0.00ns)   --->   "%call_ln281 = call void @Filter2D, i16 %width_c13, i16 %height_c11, i200 %window_stream, i8 %output_stream, i16 %height_c, i16 %width_c" [../gaussian_vns_5x5.cpp:281]   --->   Operation 24 'call' 'call_ln281' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 6 <SV = 5> <Delay = 0.00>
+ST_6 : Operation 25 [1/2] (0.00ns)   --->   "%call_ln281 = call void @Filter2D, i16 %width_c13, i16 %height_c11, i200 %window_stream, i8 %output_stream, i16 %height_c, i16 %width_c" [../gaussian_vns_5x5.cpp:281]   --->   Operation 25 'call' 'call_ln281' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 7 <SV = 6> <Delay = 0.00>
+ST_7 : Operation 26 [2/2] (0.00ns)   --->   "%call_ln284 = call void @WriteToMem, i16 %width_c, i16 %height_c, i8 %output_stream, i8 %dst" [../gaussian_vns_5x5.cpp:284]   --->   Operation 26 'call' 'call_ln284' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 8 <SV = 7> <Delay = 0.00>
+ST_8 : Operation 27 [1/1] (0.00ns)   --->   "%empty = specchannel i32 @_ssdm_op_SpecChannel, void @width_c14_str, i32 1, void @p_str, void @p_str, i32 2, i32 0, i16 %width_c14, i16 %width_c14" [../gaussian_vns_5x5.cpp:269]   --->   Operation 27 'specchannel' 'empty' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 28 [1/1] (0.00ns)   --->   "%specinterface_ln269 = specinterface void @_ssdm_op_SpecInterface, i16 %width_c14, void @ap_fifo_str, i32 0, i32 0, void @p_str, i32 0, i32 0, void @p_str, void @p_str, void @p_str, i32 2, i32 2, i32 16, i32 16, void @p_str, void @p_str, i32 4294967295, i32 0" [../gaussian_vns_5x5.cpp:269]   --->   Operation 28 'specinterface' 'specinterface_ln269' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 29 [1/1] (0.00ns)   --->   "%empty_21 = specchannel i32 @_ssdm_op_SpecChannel, void @width_c13_str, i32 1, void @p_str, void @p_str, i32 2, i32 0, i16 %width_c13, i16 %width_c13" [../gaussian_vns_5x5.cpp:269]   --->   Operation 29 'specchannel' 'empty_21' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 30 [1/1] (0.00ns)   --->   "%specinterface_ln269 = specinterface void @_ssdm_op_SpecInterface, i16 %width_c13, void @ap_fifo_str, i32 0, i32 0, void @p_str, i32 0, i32 0, void @p_str, void @p_str, void @p_str, i32 2, i32 2, i32 16, i32 16, void @p_str, void @p_str, i32 4294967295, i32 0" [../gaussian_vns_5x5.cpp:269]   --->   Operation 30 'specinterface' 'specinterface_ln269' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 31 [1/1] (0.00ns)   --->   "%empty_22 = specchannel i32 @_ssdm_op_SpecChannel, void @width_c_str, i32 1, void @p_str, void @p_str, i32 2, i32 0, i16 %width_c, i16 %width_c" [../gaussian_vns_5x5.cpp:269]   --->   Operation 31 'specchannel' 'empty_22' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 32 [1/1] (0.00ns)   --->   "%specinterface_ln269 = specinterface void @_ssdm_op_SpecInterface, i16 %width_c, void @ap_fifo_str, i32 0, i32 0, void @p_str, i32 0, i32 0, void @p_str, void @p_str, void @p_str, i32 2, i32 2, i32 16, i32 16, void @p_str, void @p_str, i32 4294967295, i32 0" [../gaussian_vns_5x5.cpp:269]   --->   Operation 32 'specinterface' 'specinterface_ln269' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 33 [1/1] (0.00ns)   --->   "%empty_23 = specchannel i32 @_ssdm_op_SpecChannel, void @height_c12_str, i32 1, void @p_str, void @p_str, i32 2, i32 0, i16 %height_c12, i16 %height_c12" [../gaussian_vns_5x5.cpp:269]   --->   Operation 33 'specchannel' 'empty_23' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 34 [1/1] (0.00ns)   --->   "%specinterface_ln269 = specinterface void @_ssdm_op_SpecInterface, i16 %height_c12, void @ap_fifo_str, i32 0, i32 0, void @p_str, i32 0, i32 0, void @p_str, void @p_str, void @p_str, i32 2, i32 2, i32 16, i32 16, void @p_str, void @p_str, i32 4294967295, i32 0" [../gaussian_vns_5x5.cpp:269]   --->   Operation 34 'specinterface' 'specinterface_ln269' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 35 [1/1] (0.00ns)   --->   "%empty_24 = specchannel i32 @_ssdm_op_SpecChannel, void @height_c11_str, i32 1, void @p_str, void @p_str, i32 2, i32 0, i16 %height_c11, i16 %height_c11" [../gaussian_vns_5x5.cpp:269]   --->   Operation 35 'specchannel' 'empty_24' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 36 [1/1] (0.00ns)   --->   "%specinterface_ln269 = specinterface void @_ssdm_op_SpecInterface, i16 %height_c11, void @ap_fifo_str, i32 0, i32 0, void @p_str, i32 0, i32 0, void @p_str, void @p_str, void @p_str, i32 2, i32 2, i32 16, i32 16, void @p_str, void @p_str, i32 4294967295, i32 0" [../gaussian_vns_5x5.cpp:269]   --->   Operation 36 'specinterface' 'specinterface_ln269' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 37 [1/1] (0.00ns)   --->   "%empty_25 = specchannel i32 @_ssdm_op_SpecChannel, void @height_c_str, i32 1, void @p_str, void @p_str, i32 2, i32 0, i16 %height_c, i16 %height_c" [../gaussian_vns_5x5.cpp:269]   --->   Operation 37 'specchannel' 'empty_25' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 38 [1/1] (0.00ns)   --->   "%specinterface_ln269 = specinterface void @_ssdm_op_SpecInterface, i16 %height_c, void @ap_fifo_str, i32 0, i32 0, void @p_str, i32 0, i32 0, void @p_str, void @p_str, void @p_str, i32 2, i32 2, i32 16, i32 16, void @p_str, void @p_str, i32 4294967295, i32 0" [../gaussian_vns_5x5.cpp:269]   --->   Operation 38 'specinterface' 'specinterface_ln269' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 39 [1/1] (0.00ns)   --->   "%specdataflowpipeline_ln269 = specdataflowpipeline void @_ssdm_op_SpecDataflowPipeline, i32 4294967295, i32 0, void @empty_7" [../gaussian_vns_5x5.cpp:269]   --->   Operation 39 'specdataflowpipeline' 'specdataflowpipeline_ln269' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 40 [1/1] (0.00ns)   --->   "%spectopmodule_ln263 = spectopmodule void @_ssdm_op_SpecTopModule, void @empty_4" [../gaussian_vns_5x5.cpp:263]   --->   Operation 40 'spectopmodule' 'spectopmodule_ln263' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 41 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i8 %src, void @empty_8, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 41 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 42 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i8 %src"   --->   Operation 42 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 43 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i8 %dst, void @empty_8, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 43 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 44 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i8 %dst"   --->   Operation 44 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 45 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i16 %height"   --->   Operation 45 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 46 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i16 %height, void @empty_6, i32 0, i32 0, void @empty_7, i32 0, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 46 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 47 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i16 %width"   --->   Operation 47 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 48 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i16 %width, void @empty_6, i32 0, i32 0, void @empty_7, i32 0, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 48 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 49 [1/1] (0.00ns)   --->   "%empty_26 = specchannel i32 @_ssdm_op_SpecChannel, void @pixel_stream_str, i32 1, void @p_str, void @p_str, i32 2, i32 2, i8 %pixel_stream, i8 %pixel_stream"   --->   Operation 49 'specchannel' 'empty_26' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 50 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i8 %pixel_stream, void @empty_5, i32 0, i32 0, void @empty_7, i32 0, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 50 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 51 [1/1] (0.00ns)   --->   "%empty_27 = specchannel i32 @_ssdm_op_SpecChannel, void @window_stream_str, i32 1, void @p_str, void @p_str, i32 2, i32 2, i200 %window_stream, i200 %window_stream"   --->   Operation 51 'specchannel' 'empty_27' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 52 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i200 %window_stream, void @empty_5, i32 0, i32 0, void @empty_7, i32 0, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 52 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 53 [1/1] (0.00ns)   --->   "%empty_28 = specchannel i32 @_ssdm_op_SpecChannel, void @output_stream_str, i32 1, void @p_str, void @p_str, i32 2, i32 2, i8 %output_stream, i8 %output_stream"   --->   Operation 53 'specchannel' 'empty_28' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 54 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i8 %output_stream, void @empty_5, i32 0, i32 0, void @empty_7, i32 0, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 54 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 55 [1/2] (0.00ns)   --->   "%call_ln284 = call void @WriteToMem, i16 %width_c, i16 %height_c, i8 %output_stream, i8 %dst" [../gaussian_vns_5x5.cpp:284]   --->   Operation 55 'call' 'call_ln284' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_8 : Operation 56 [1/1] (0.00ns)   --->   "%ret_ln285 = ret" [../gaussian_vns_5x5.cpp:285]   --->   Operation 56 'ret' 'ret_ln285' <Predicate = true> <Delay = 0.00>
+
+
+============================================================
++ Verbose Summary: Timing violations
+============================================================
+Target clock period: 10ns, clock uncertainty: 2.7ns.
+
+ <State 1>: 3.65ns
+The critical path consists of the following:
+	wire read operation ('width', ../gaussian_vns_5x5.cpp:269) on port 'width' (../gaussian_vns_5x5.cpp:269) [5]  (0 ns)
+	'call' operation ('call_ln275', ../gaussian_vns_5x5.cpp:275) to 'ReadFromMem' [44]  (3.65 ns)
+
+ <State 2>: 0ns
+The critical path consists of the following:
+
+ <State 3>: 0ns
+The critical path consists of the following:
+
+ <State 4>: 0ns
+The critical path consists of the following:
+
+ <State 5>: 0ns
+The critical path consists of the following:
+
+ <State 6>: 0ns
+The critical path consists of the following:
+
+ <State 7>: 0ns
+The critical path consists of the following:
+
+ <State 8>: 0ns
+The critical path consists of the following:
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+N/A
+* FSMD analyzer results:
+  - Output states:
+ - Input state : 
+  - Chain level:
+	State 1
+	State 2
+	State 3
+	State 4
+	State 5
+	State 6
+	State 7
+	State 8
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+N/A

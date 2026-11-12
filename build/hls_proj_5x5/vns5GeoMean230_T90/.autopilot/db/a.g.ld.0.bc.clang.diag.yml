@@ -1,0 +1,946 @@
+--- !Passed
+Pass:            inline
+Name:            AlwaysInline
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 252, Column: 23 }
+Function:        _Z8Filter2DttRN3hls6streamI6windowLi0EEERNS0_IhLi0EEE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'filter(window)'
+    DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 150, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'Filter2D(unsigned short, unsigned short, hls::stream<window, 0>&, hls::stream<unsigned char, 0>&)'
+    DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-infer-unroll
+Name:            ImplicitUnroll
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 115, Column: 27 }
+Function:        _Z8Window2DttRN3hls6streamIhLi0EEERNS0_I6windowLi0EEE
+Args:            
+  - String:          'Loop '''
+  - LoopName:        VITIS_LOOP_115_1
+  - String:          ''' is marked as complete unroll implied by the pipeline pragma'
+...
+--- !Passed
+Pass:            reflow-infer-unroll
+Name:            ImplicitUnroll
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 116, Column: 31 }
+Function:        _Z8Window2DttRN3hls6streamIhLi0EEERNS0_I6windowLi0EEE
+Args:            
+  - String:          'Loop '''
+  - LoopName:        VITIS_LOOP_116_2
+  - String:          ''' is marked as complete unroll implied by the pipeline pragma'
+...
+--- !Passed
+Pass:            reflow-infer-unroll
+Name:            ImplicitUnroll
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 123, Column: 27 }
+Function:        _Z8Window2DttRN3hls6streamIhLi0EEERNS0_I6windowLi0EEE
+Args:            
+  - String:          'Loop '''
+  - LoopName:        VITIS_LOOP_123_3
+  - String:          ''' is marked as complete unroll implied by the pipeline pragma'
+...
+--- !Passed
+Pass:            reflow-pragma-loop-unroll
+Name:            PragmaFullyUnroll
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 89, Column: 0 }
+Function:        _Z8Window2DttRN3hls6streamIhLi0EEERNS0_I6windowLi0EEE
+Args:            
+  - String:          'Unrolling loop '''
+  - LoopName:        VITIS_LOOP_115_1
+  - String:          ''' ('
+  - LoopLoc:         '../gaussian_vns_5x5.cpp:115:27'
+  - String:          ') '
+  - String:          'in function '''
+  - String:          Window2D
+  - String:          ''' completely with a factor of '
+  - Factor:          '5'
+...
+--- !Passed
+Pass:            reflow-pragma-loop-unroll
+Name:            PragmaFullyUnroll
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 89, Column: 0 }
+Function:        _Z8Window2DttRN3hls6streamIhLi0EEERNS0_I6windowLi0EEE
+Args:            
+  - String:          'Unrolling loop '''
+  - LoopName:        VITIS_LOOP_116_2
+  - String:          ''' ('
+  - LoopLoc:         '../gaussian_vns_5x5.cpp:116:31'
+  - String:          ') '
+  - String:          'in function '''
+  - String:          Window2D
+  - String:          ''' completely with a factor of '
+  - Factor:          '4'
+...
+--- !Passed
+Pass:            reflow-pragma-loop-unroll
+Name:            PragmaFullyUnroll
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 89, Column: 0 }
+Function:        _Z8Window2DttRN3hls6streamIhLi0EEERNS0_I6windowLi0EEE
+Args:            
+  - String:          'Unrolling loop '''
+  - LoopName:        VITIS_LOOP_116_2
+  - String:          ''' ('
+  - LoopLoc:         '../gaussian_vns_5x5.cpp:116:31'
+  - String:          ') '
+  - String:          'in function '''
+  - String:          Window2D
+  - String:          ''' completely with a factor of '
+  - Factor:          '4'
+...
+--- !Passed
+Pass:            reflow-pragma-loop-unroll
+Name:            PragmaFullyUnroll
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 89, Column: 0 }
+Function:        _Z8Window2DttRN3hls6streamIhLi0EEERNS0_I6windowLi0EEE
+Args:            
+  - String:          'Unrolling loop '''
+  - LoopName:        VITIS_LOOP_116_2
+  - String:          ''' ('
+  - LoopLoc:         '../gaussian_vns_5x5.cpp:116:31'
+  - String:          ') '
+  - String:          'in function '''
+  - String:          Window2D
+  - String:          ''' completely with a factor of '
+  - Factor:          '4'
+...
+--- !Passed
+Pass:            reflow-pragma-loop-unroll
+Name:            PragmaFullyUnroll
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 89, Column: 0 }
+Function:        _Z8Window2DttRN3hls6streamIhLi0EEERNS0_I6windowLi0EEE
+Args:            
+  - String:          'Unrolling loop '''
+  - LoopName:        VITIS_LOOP_116_2
+  - String:          ''' ('
+  - LoopLoc:         '../gaussian_vns_5x5.cpp:116:31'
+  - String:          ') '
+  - String:          'in function '''
+  - String:          Window2D
+  - String:          ''' completely with a factor of '
+  - Factor:          '4'
+...
+--- !Passed
+Pass:            reflow-pragma-loop-unroll
+Name:            PragmaFullyUnroll
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 89, Column: 0 }
+Function:        _Z8Window2DttRN3hls6streamIhLi0EEERNS0_I6windowLi0EEE
+Args:            
+  - String:          'Unrolling loop '''
+  - LoopName:        VITIS_LOOP_116_2
+  - String:          ''' ('
+  - LoopLoc:         '../gaussian_vns_5x5.cpp:116:31'
+  - String:          ') '
+  - String:          'in function '''
+  - String:          Window2D
+  - String:          ''' completely with a factor of '
+  - Factor:          '4'
+...
+--- !Passed
+Pass:            reflow-pragma-loop-unroll
+Name:            PragmaFullyUnroll
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 89, Column: 0 }
+Function:        _Z8Window2DttRN3hls6streamIhLi0EEERNS0_I6windowLi0EEE
+Args:            
+  - String:          'Unrolling loop '''
+  - LoopName:        VITIS_LOOP_123_3
+  - String:          ''' ('
+  - LoopLoc:         '../gaussian_vns_5x5.cpp:123:27'
+  - String:          ') '
+  - String:          'in function '''
+  - String:          Window2D
+  - String:          ''' completely with a factor of '
+  - Factor:          '3'
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 57, Column: 0 }
+Function:        _Z10mul_slot_07ap_uintILi8EES0_
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'bit4Truncated(ap_uint<8>, ap_uint<8>, ap_uint<16>&)'
+    DebugLoc:        { File: ../src/bit4Truncated.cpp, Line: 3, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'mul_slot_0(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 57, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 64, Column: 0 }
+Function:        _Z10mul_slot_17ap_uintILi8EES0_
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'bit4Truncated(ap_uint<8>, ap_uint<8>, ap_uint<16>&)'
+    DebugLoc:        { File: ../src/bit4Truncated.cpp, Line: 3, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'mul_slot_1(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 64, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 71, Column: 0 }
+Function:        _Z10mul_slot_27ap_uintILi8EES0_
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'bit4Truncated(ap_uint<8>, ap_uint<8>, ap_uint<16>&)'
+    DebugLoc:        { File: ../src/bit4Truncated.cpp, Line: 3, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'mul_slot_2(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 71, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 78, Column: 0 }
+Function:        _Z10mul_slot_37ap_uintILi8EES0_
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'bit4Truncated(ap_uint<8>, ap_uint<8>, ap_uint<16>&)'
+    DebugLoc:        { File: ../src/bit4Truncated.cpp, Line: 3, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'mul_slot_3(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 78, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 85, Column: 0 }
+Function:        _Z10mul_slot_47ap_uintILi8EES0_
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'bit4Truncated(ap_uint<8>, ap_uint<8>, ap_uint<16>&)'
+    DebugLoc:        { File: ../src/bit4Truncated.cpp, Line: 3, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'mul_slot_4(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 85, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 92, Column: 0 }
+Function:        _Z10mul_slot_57ap_uintILi8EES0_
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'bit4Truncated(ap_uint<8>, ap_uint<8>, ap_uint<16>&)'
+    DebugLoc:        { File: ../src/bit4Truncated.cpp, Line: 3, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'mul_slot_5(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 92, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 99, Column: 0 }
+Function:        _Z10mul_slot_67ap_uintILi8EES0_
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'bit4Truncated(ap_uint<8>, ap_uint<8>, ap_uint<16>&)'
+    DebugLoc:        { File: ../src/bit4Truncated.cpp, Line: 3, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'mul_slot_6(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 99, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 106, Column: 0 }
+Function:        _Z10mul_slot_77ap_uintILi8EES0_
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'bit4Truncated(ap_uint<8>, ap_uint<8>, ap_uint<16>&)'
+    DebugLoc:        { File: ../src/bit4Truncated.cpp, Line: 3, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'mul_slot_7(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 106, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 113, Column: 0 }
+Function:        _Z10mul_slot_87ap_uintILi8EES0_
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'bit4Truncated(ap_uint<8>, ap_uint<8>, ap_uint<16>&)'
+    DebugLoc:        { File: ../src/bit4Truncated.cpp, Line: 3, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'mul_slot_8(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 113, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 120, Column: 0 }
+Function:        _Z10mul_slot_97ap_uintILi8EES0_
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'bit4Truncated(ap_uint<8>, ap_uint<8>, ap_uint<16>&)'
+    DebugLoc:        { File: ../src/bit4Truncated.cpp, Line: 3, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'mul_slot_9(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 120, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 127, Column: 0 }
+Function:        _Z11mul_slot_107ap_uintILi8EES0_
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'bit4Truncated(ap_uint<8>, ap_uint<8>, ap_uint<16>&)'
+    DebugLoc:        { File: ../src/bit4Truncated.cpp, Line: 3, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'mul_slot_10(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 127, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 134, Column: 0 }
+Function:        _Z11mul_slot_117ap_uintILi8EES0_
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'bit4Truncated(ap_uint<8>, ap_uint<8>, ap_uint<16>&)'
+    DebugLoc:        { File: ../src/bit4Truncated.cpp, Line: 3, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'mul_slot_11(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 134, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 141, Column: 0 }
+Function:        _Z11mul_slot_127ap_uintILi8EES0_
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'bit4Truncated(ap_uint<8>, ap_uint<8>, ap_uint<16>&)'
+    DebugLoc:        { File: ../src/bit4Truncated.cpp, Line: 3, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'mul_slot_12(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 141, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 148, Column: 0 }
+Function:        _Z11mul_slot_137ap_uintILi8EES0_
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'bit4Truncated(ap_uint<8>, ap_uint<8>, ap_uint<16>&)'
+    DebugLoc:        { File: ../src/bit4Truncated.cpp, Line: 3, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'mul_slot_13(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 148, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 155, Column: 0 }
+Function:        _Z11mul_slot_147ap_uintILi8EES0_
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'bit4Truncated(ap_uint<8>, ap_uint<8>, ap_uint<16>&)'
+    DebugLoc:        { File: ../src/bit4Truncated.cpp, Line: 3, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'mul_slot_14(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 155, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 162, Column: 0 }
+Function:        _Z11mul_slot_157ap_uintILi8EES0_
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'bit4Truncated(ap_uint<8>, ap_uint<8>, ap_uint<16>&)'
+    DebugLoc:        { File: ../src/bit4Truncated.cpp, Line: 3, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'mul_slot_15(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 162, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 169, Column: 0 }
+Function:        _Z11mul_slot_167ap_uintILi8EES0_
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'bit4Truncated(ap_uint<8>, ap_uint<8>, ap_uint<16>&)'
+    DebugLoc:        { File: ../src/bit4Truncated.cpp, Line: 3, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'mul_slot_16(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 169, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 176, Column: 0 }
+Function:        _Z11mul_slot_177ap_uintILi8EES0_
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'bit4Truncated(ap_uint<8>, ap_uint<8>, ap_uint<16>&)'
+    DebugLoc:        { File: ../src/bit4Truncated.cpp, Line: 3, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'mul_slot_17(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 176, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 183, Column: 0 }
+Function:        _Z11mul_slot_187ap_uintILi8EES0_
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'bit4Truncated(ap_uint<8>, ap_uint<8>, ap_uint<16>&)'
+    DebugLoc:        { File: ../src/bit4Truncated.cpp, Line: 3, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'mul_slot_18(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 183, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 190, Column: 0 }
+Function:        _Z11mul_slot_197ap_uintILi8EES0_
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'bit4Truncated(ap_uint<8>, ap_uint<8>, ap_uint<16>&)'
+    DebugLoc:        { File: ../src/bit4Truncated.cpp, Line: 3, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'mul_slot_19(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 190, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 197, Column: 0 }
+Function:        _Z11mul_slot_207ap_uintILi8EES0_
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'bit4Truncated(ap_uint<8>, ap_uint<8>, ap_uint<16>&)'
+    DebugLoc:        { File: ../src/bit4Truncated.cpp, Line: 3, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'mul_slot_20(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 197, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 204, Column: 0 }
+Function:        _Z11mul_slot_217ap_uintILi8EES0_
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'bit4Truncated(ap_uint<8>, ap_uint<8>, ap_uint<16>&)'
+    DebugLoc:        { File: ../src/bit4Truncated.cpp, Line: 3, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'mul_slot_21(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 204, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 211, Column: 0 }
+Function:        _Z11mul_slot_227ap_uintILi8EES0_
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'bit4Truncated(ap_uint<8>, ap_uint<8>, ap_uint<16>&)'
+    DebugLoc:        { File: ../src/bit4Truncated.cpp, Line: 3, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'mul_slot_22(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 211, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 218, Column: 0 }
+Function:        _Z11mul_slot_237ap_uintILi8EES0_
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'bit4Truncated(ap_uint<8>, ap_uint<8>, ap_uint<16>&)'
+    DebugLoc:        { File: ../src/bit4Truncated.cpp, Line: 3, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'mul_slot_23(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 218, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 225, Column: 0 }
+Function:        _Z11mul_slot_247ap_uintILi8EES0_
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'bit4Truncated(ap_uint<8>, ap_uint<8>, ap_uint<16>&)'
+    DebugLoc:        { File: ../src/bit4Truncated.cpp, Line: 3, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'mul_slot_24(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 225, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+Function:        _Z8Filter2DttRN3hls6streamI6windowLi0EEERNS0_IhLi0EEE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'mul_slot_0(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 57, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'Filter2D(unsigned short, unsigned short, hls::stream<window, 0>&, hls::stream<unsigned char, 0>&)'
+    DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+Function:        _Z8Filter2DttRN3hls6streamI6windowLi0EEERNS0_IhLi0EEE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'mul_slot_1(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 64, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'Filter2D(unsigned short, unsigned short, hls::stream<window, 0>&, hls::stream<unsigned char, 0>&)'
+    DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+Function:        _Z8Filter2DttRN3hls6streamI6windowLi0EEERNS0_IhLi0EEE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'mul_slot_2(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 71, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'Filter2D(unsigned short, unsigned short, hls::stream<window, 0>&, hls::stream<unsigned char, 0>&)'
+    DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+Function:        _Z8Filter2DttRN3hls6streamI6windowLi0EEERNS0_IhLi0EEE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'mul_slot_3(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 78, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'Filter2D(unsigned short, unsigned short, hls::stream<window, 0>&, hls::stream<unsigned char, 0>&)'
+    DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+Function:        _Z8Filter2DttRN3hls6streamI6windowLi0EEERNS0_IhLi0EEE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'mul_slot_4(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 85, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'Filter2D(unsigned short, unsigned short, hls::stream<window, 0>&, hls::stream<unsigned char, 0>&)'
+    DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+Function:        _Z8Filter2DttRN3hls6streamI6windowLi0EEERNS0_IhLi0EEE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'mul_slot_5(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 92, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'Filter2D(unsigned short, unsigned short, hls::stream<window, 0>&, hls::stream<unsigned char, 0>&)'
+    DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+Function:        _Z8Filter2DttRN3hls6streamI6windowLi0EEERNS0_IhLi0EEE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'mul_slot_6(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 99, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'Filter2D(unsigned short, unsigned short, hls::stream<window, 0>&, hls::stream<unsigned char, 0>&)'
+    DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+Function:        _Z8Filter2DttRN3hls6streamI6windowLi0EEERNS0_IhLi0EEE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'mul_slot_7(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 106, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'Filter2D(unsigned short, unsigned short, hls::stream<window, 0>&, hls::stream<unsigned char, 0>&)'
+    DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+Function:        _Z8Filter2DttRN3hls6streamI6windowLi0EEERNS0_IhLi0EEE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'mul_slot_8(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 113, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'Filter2D(unsigned short, unsigned short, hls::stream<window, 0>&, hls::stream<unsigned char, 0>&)'
+    DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+Function:        _Z8Filter2DttRN3hls6streamI6windowLi0EEERNS0_IhLi0EEE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'mul_slot_9(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 120, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'Filter2D(unsigned short, unsigned short, hls::stream<window, 0>&, hls::stream<unsigned char, 0>&)'
+    DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+Function:        _Z8Filter2DttRN3hls6streamI6windowLi0EEERNS0_IhLi0EEE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'mul_slot_10(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 127, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'Filter2D(unsigned short, unsigned short, hls::stream<window, 0>&, hls::stream<unsigned char, 0>&)'
+    DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+Function:        _Z8Filter2DttRN3hls6streamI6windowLi0EEERNS0_IhLi0EEE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'mul_slot_11(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 134, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'Filter2D(unsigned short, unsigned short, hls::stream<window, 0>&, hls::stream<unsigned char, 0>&)'
+    DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+Function:        _Z8Filter2DttRN3hls6streamI6windowLi0EEERNS0_IhLi0EEE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'mul_slot_12(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 141, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'Filter2D(unsigned short, unsigned short, hls::stream<window, 0>&, hls::stream<unsigned char, 0>&)'
+    DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+Function:        _Z8Filter2DttRN3hls6streamI6windowLi0EEERNS0_IhLi0EEE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'mul_slot_13(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 148, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'Filter2D(unsigned short, unsigned short, hls::stream<window, 0>&, hls::stream<unsigned char, 0>&)'
+    DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+Function:        _Z8Filter2DttRN3hls6streamI6windowLi0EEERNS0_IhLi0EEE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'mul_slot_14(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 155, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'Filter2D(unsigned short, unsigned short, hls::stream<window, 0>&, hls::stream<unsigned char, 0>&)'
+    DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+Function:        _Z8Filter2DttRN3hls6streamI6windowLi0EEERNS0_IhLi0EEE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'mul_slot_15(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 162, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'Filter2D(unsigned short, unsigned short, hls::stream<window, 0>&, hls::stream<unsigned char, 0>&)'
+    DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+Function:        _Z8Filter2DttRN3hls6streamI6windowLi0EEERNS0_IhLi0EEE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'mul_slot_16(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 169, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'Filter2D(unsigned short, unsigned short, hls::stream<window, 0>&, hls::stream<unsigned char, 0>&)'
+    DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+Function:        _Z8Filter2DttRN3hls6streamI6windowLi0EEERNS0_IhLi0EEE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'mul_slot_17(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 176, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'Filter2D(unsigned short, unsigned short, hls::stream<window, 0>&, hls::stream<unsigned char, 0>&)'
+    DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+Function:        _Z8Filter2DttRN3hls6streamI6windowLi0EEERNS0_IhLi0EEE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'mul_slot_18(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 183, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'Filter2D(unsigned short, unsigned short, hls::stream<window, 0>&, hls::stream<unsigned char, 0>&)'
+    DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+Function:        _Z8Filter2DttRN3hls6streamI6windowLi0EEERNS0_IhLi0EEE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'mul_slot_19(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 190, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'Filter2D(unsigned short, unsigned short, hls::stream<window, 0>&, hls::stream<unsigned char, 0>&)'
+    DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+Function:        _Z8Filter2DttRN3hls6streamI6windowLi0EEERNS0_IhLi0EEE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'mul_slot_20(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 197, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'Filter2D(unsigned short, unsigned short, hls::stream<window, 0>&, hls::stream<unsigned char, 0>&)'
+    DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+Function:        _Z8Filter2DttRN3hls6streamI6windowLi0EEERNS0_IhLi0EEE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'mul_slot_21(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 204, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'Filter2D(unsigned short, unsigned short, hls::stream<window, 0>&, hls::stream<unsigned char, 0>&)'
+    DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+Function:        _Z8Filter2DttRN3hls6streamI6windowLi0EEERNS0_IhLi0EEE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'mul_slot_22(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 211, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'Filter2D(unsigned short, unsigned short, hls::stream<window, 0>&, hls::stream<unsigned char, 0>&)'
+    DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+Function:        _Z8Filter2DttRN3hls6streamI6windowLi0EEERNS0_IhLi0EEE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'mul_slot_23(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 218, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'Filter2D(unsigned short, unsigned short, hls::stream<window, 0>&, hls::stream<unsigned char, 0>&)'
+    DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+Function:        _Z8Filter2DttRN3hls6streamI6windowLi0EEERNS0_IhLi0EEE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'mul_slot_24(ap_uint<8>, ap_uint<8>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 225, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'Filter2D(unsigned short, unsigned short, hls::stream<window, 0>&, hls::stream<unsigned char, 0>&)'
+    DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+Function:        _Z8Filter2DttRN3hls6streamI6windowLi0EEERNS0_IhLi0EEE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'add16se_add1(ap_int<16>, ap_int<16>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 18, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'Filter2D(unsigned short, unsigned short, hls::stream<window, 0>&, hls::stream<unsigned char, 0>&)'
+    DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+Function:        _Z8Filter2DttRN3hls6streamI6windowLi0EEERNS0_IhLi0EEE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'add16se_add2(ap_int<16>, ap_int<16>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 19, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'Filter2D(unsigned short, unsigned short, hls::stream<window, 0>&, hls::stream<unsigned char, 0>&)'
+    DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+Function:        _Z8Filter2DttRN3hls6streamI6windowLi0EEERNS0_IhLi0EEE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'add16se_add3(ap_int<16>, ap_int<16>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 20, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'Filter2D(unsigned short, unsigned short, hls::stream<window, 0>&, hls::stream<unsigned char, 0>&)'
+    DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            AutoInline
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+Function:        _Z8Filter2DttRN3hls6streamI6windowLi0EEERNS0_IhLi0EEE
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          'add16se_add4(ap_int<16>, ap_int<16>)'
+    DebugLoc:        { File: ../vns_mapping_5x5.h, Line: 21, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          'Filter2D(unsigned short, unsigned short, hls::stream<window, 0>&, hls::stream<unsigned char, 0>&)'
+    DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 240, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-array-partition
+Name:            ArrayXform
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 91, Column: 8 }
+Function:        _Z8Window2DttRN3hls6streamIhLi0EEERNS0_I6windowLi0EEE
+Args:            
+  - String:          'Applying '
+  - String:          array_partition
+  - String:          ' to '''
+  - UOName:          LineBuffer
+  - String:          ''':'
+  - String:          ' '
+  - Mode:            Complete
+  - String:          ' partitioning'
+  - String:          ' on dimension '
+  - Dim:             '1'
+  - String:          .
+...
+--- !Passed
+Pass:            reflow-aggr
+Name:            AggrSucc
+DebugLoc:        { File: ../gaussian_vns_5x5.cpp, Line: 271, Column: 25 }
+Function:        gaussian
+Args:            
+  - String:          'Aggregating '
+  - HwTyName:        'fifo (hls::stream)'
+  - String:          ' variable '''
+  - Name:            window_stream
+  - String:          ''' with '
+  - AggregateTypeName: 'compact=bit'
+  - String:          ' mode in '
+  - Bitwidth:        '200'
+  - String:          '-bits'
+...

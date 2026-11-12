@@ -1,0 +1,217 @@
+
+
+================================================================
+== Vitis HLS Report for 'Filter2D_Pipeline_apply_filter_VITIS_LOOP_243_1'
+================================================================
+* Date:           Mon Nov  2 14:39:01 2026
+
+* Version:        2022.2 (Build 3670227 on Oct 13 2022)
+* Project:        hls_proj_5x5
+* Solution:       vns5Media0_T95 (Vivado IP Flow Target)
+* Product family: spartan7
+* Target device:  xc7s50-csga324-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  7.026 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+------------+-----------+------------+-----+------------+---------+
+    |   Latency (cycles)   |   Latency (absolute)   |     Interval     | Pipeline|
+    |   min   |     max    |    min    |     max    | min |     max    |   Type  |
+    +---------+------------+-----------+------------+-----+------------+---------+
+    |        2|  4294836231|  20.000 ns|  42.948 sec|    2|  4294836231|       no|
+    +---------+------------+-----------+------------+-----+------------+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +---------------------------------+---------+------------+----------+-----------+-----------+----------------+----------+
+        |                                 |   Latency (cycles)   | Iteration|  Initiation Interval  |      Trip      |          |
+        |            Loop Name            |   min   |     max    |  Latency |  achieved |   target  |      Count     | Pipelined|
+        +---------------------------------+---------+------------+----------+-----------+-----------+----------------+----------+
+        |- apply_filter_VITIS_LOOP_243_1  |        0|  4294836229|         6|          1|          1|  0 ~ 4294836225|       yes|
+        +---------------------------------+---------+------------+----------+-----------+-----------+----------------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+-----+-------+-------+-----+
+|       Name      | BRAM_18K| DSP |   FF  |  LUT  | URAM|
++-----------------+---------+-----+-------+-------+-----+
+|DSP              |        -|    -|      -|      -|    -|
+|Expression       |        -|    -|      0|    514|    -|
+|FIFO             |        -|    -|      -|      -|    -|
+|Instance         |        -|    -|      -|      -|    -|
+|Memory           |        -|    -|      -|      -|    -|
+|Multiplexer      |        -|    -|      -|     72|    -|
+|Register         |        -|    -|    325|     64|    -|
++-----------------+---------+-----+-------+-------+-----+
+|Total            |        0|    0|    325|    650|    0|
++-----------------+---------+-----+-------+-------+-----+
+|Available        |      150|  120|  65200|  32600|    0|
++-----------------+---------+-----+-------+-------+-----+
+|Utilization (%)  |        0|    0|     ~0|      1|    0|
++-----------------+---------+-----+-------+-------+-----+
+
++ Detail: 
+    * Instance: 
+    N/A
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +---------------------------+----------+----+---+----+------------+------------+
+    |       Variable Name       | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +---------------------------+----------+----+---+----+------------+------------+
+    |add_ln241_1_fu_300_p2      |         +|   0|  0|  23|          16|           1|
+    |add_ln241_fu_278_p2        |         +|   0|  0|  39|          32|           1|
+    |add_ln27_1_fu_804_p2       |         +|   0|  0|  16|          16|          16|
+    |add_ln27_2_fu_771_p2       |         +|   0|  0|  16|          16|          16|
+    |add_ln27_3_fu_777_p2       |         +|   0|  0|  20|          13|          12|
+    |add_ln27_4_fu_787_p2       |         +|   0|  0|  16|          16|          16|
+    |add_ln27_fu_703_p2         |         +|   0|  0|  23|          16|          16|
+    |empty_202_fu_666_p2        |         +|   0|  0|  14|           6|           6|
+    |empty_203_fu_579_p2        |         +|   0|  0|  18|          11|          11|
+    |empty_fu_573_p2            |         +|   0|  0|  13|           5|           5|
+    |j_1_fu_390_p2              |         +|   0|  0|  23|          16|           1|
+    |ret_V_fu_817_p2            |         +|   0|  0|  24|          17|           8|
+    |sum_V_fu_809_p2            |         +|   0|  0|  16|          16|          16|
+    |tmp443_fu_676_p2           |         +|   0|  0|  14|           7|           7|
+    |tmp471_fu_685_p2           |         +|   0|  0|  20|          13|          13|
+    |ret_V_10_fu_642_p2         |         -|   0|  0|  15|           8|           8|
+    |ret_V_11_fu_742_p2         |         -|   0|  0|  17|          10|          10|
+    |ret_V_8_fu_607_p2          |         -|   0|  0|  19|          12|          12|
+    |and_ln251_1_fu_384_p2      |       and|   0|  0|   2|           1|           1|
+    |and_ln251_2_fu_378_p2      |       and|   0|  0|   2|           1|           1|
+    |and_ln251_3_fu_331_p2      |       and|   0|  0|   2|           1|           1|
+    |and_ln251_fu_267_p2        |       and|   0|  0|   2|           1|           1|
+    |cmp9_fu_262_p2             |      icmp|   0|  0|  13|          17|          17|
+    |cmp9_mid1_fu_326_p2        |      icmp|   0|  0|  13|          17|          17|
+    |icmp10_fu_320_p2           |      icmp|   0|  0|  12|          15|           1|
+    |icmp_fu_256_p2             |      icmp|   0|  0|  12|          15|           1|
+    |icmp_ln241_fu_273_p2       |      icmp|   0|  0|  18|          32|          32|
+    |icmp_ln243_fu_287_p2       |      icmp|   0|  0|  13|          16|          16|
+    |icmp_ln251_1_fu_373_p2     |      icmp|   0|  0|  13|          17|          17|
+    |icmp_ln251_fu_367_p2       |      icmp|   0|  0|  12|          15|           1|
+    |ap_block_pp0_stage0_01001  |        or|   0|  0|   2|           1|           1|
+    |output_stream4_din         |    select|   0|  0|   8|           1|           8|
+    |select_ln241_1_fu_337_p3   |    select|   0|  0|   2|           1|           1|
+    |select_ln241_2_fu_345_p3   |    select|   0|  0|  16|           1|          16|
+    |select_ln241_fu_292_p3     |    select|   0|  0|  16|           1|           1|
+    |select_ln253_fu_841_p3     |    select|   0|  0|   8|           1|           1|
+    |ap_enable_pp0              |       xor|   0|  0|   2|           1|           2|
+    +---------------------------+----------+----+---+----+------------+------------+
+    |Total                      |          |   0|  0| 514|         401|         311|
+    +---------------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +-------------------------+----+-----------+-----+-----------+
+    |           Name          | LUT| Input Size| Bits| Total Bits|
+    +-------------------------+----+-----------+-----+-----------+
+    |ap_done_int              |   9|          2|    1|          2|
+    |ap_enable_reg_pp0_iter1  |   9|          2|    1|          2|
+    |ap_enable_reg_pp0_iter2  |   9|          2|    1|          2|
+    |i_fu_176                 |   9|          2|   16|         32|
+    |indvar_flatten_fu_180    |   9|          2|   32|         64|
+    |j_fu_172                 |   9|          2|   16|         32|
+    |output_stream4_blk_n     |   9|          2|    1|          2|
+    |window_stream_blk_n      |   9|          2|    1|          2|
+    +-------------------------+----+-----------+-----+-----------+
+    |Total                    |  72|         16|   69|        138|
+    +-------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +----------------------------------+----+----+-----+-----------+
+    |               Name               | FF | LUT| Bits| Const Bits|
+    +----------------------------------+----+----+-----+-----------+
+    |a_trunc_3_reg_935                 |   4|   0|    4|          0|
+    |a_trunc_4_reg_929                 |   5|   0|    5|          0|
+    |add_ln27_4_reg_966                |  11|   0|   16|          5|
+    |add_ln27_reg_961                  |  13|   0|   16|          3|
+    |add_ln27_reg_961_pp0_iter4_reg    |  13|   0|   16|          3|
+    |and_ln251_1_reg_903               |   1|   0|    1|          0|
+    |ap_CS_fsm                         |   1|   0|    1|          0|
+    |ap_done_reg                       |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter1           |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter2           |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter3           |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter4           |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter5           |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter6           |   1|   0|    1|          0|
+    |ap_loop_exit_ready_pp0_iter2_reg  |   1|   0|    1|          0|
+    |ap_loop_exit_ready_pp0_iter3_reg  |   1|   0|    1|          0|
+    |ap_loop_exit_ready_pp0_iter4_reg  |   1|   0|    1|          0|
+    |ap_loop_exit_ready_pp0_iter5_reg  |   1|   0|    1|          0|
+    |empty_203_reg_951                 |  10|   0|   11|          1|
+    |empty_reg_946                     |   5|   0|    5|          0|
+    |i_fu_176                          |  16|   0|   16|          0|
+    |indvar_flatten_fu_180             |  32|   0|   32|          0|
+    |j_fu_172                          |  16|   0|   16|          0|
+    |sum_V_reg_971                     |  13|   0|   16|          3|
+    |tmp443_reg_956                    |   7|   0|    7|          0|
+    |tmp_2_reg_913                     |   5|   0|    5|          0|
+    |tmp_2_reg_913_pp0_iter3_reg       |   5|   0|    5|          0|
+    |tmp_4_reg_918                     |   7|   0|    7|          0|
+    |tmp_6_reg_924                     |   4|   0|    4|          0|
+    |tmp_9_reg_940                     |   6|   0|    6|          0|
+    |tmp_9_reg_940_pp0_iter3_reg       |   6|   0|    6|          0|
+    |tmp_reg_908                       |   6|   0|    6|          0|
+    |and_ln251_1_reg_903               |  64|  32|    1|          0|
+    |tmp_reg_908                       |  64|  32|    6|          0|
+    +----------------------------------+----+----+-----+-----------+
+    |Total                             | 325|  64|  219|         15|
+    +----------------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++-------------------------------+-----+-----+------------+-------------------------------------------------+--------------+
+|           RTL Ports           | Dir | Bits|  Protocol  |                  Source Object                  |    C Type    |
++-------------------------------+-----+-----+------------+-------------------------------------------------+--------------+
+|ap_clk                         |   in|    1|  ap_ctrl_hs|  Filter2D_Pipeline_apply_filter_VITIS_LOOP_243_1|  return value|
+|ap_rst                         |   in|    1|  ap_ctrl_hs|  Filter2D_Pipeline_apply_filter_VITIS_LOOP_243_1|  return value|
+|ap_start                       |   in|    1|  ap_ctrl_hs|  Filter2D_Pipeline_apply_filter_VITIS_LOOP_243_1|  return value|
+|ap_done                        |  out|    1|  ap_ctrl_hs|  Filter2D_Pipeline_apply_filter_VITIS_LOOP_243_1|  return value|
+|ap_idle                        |  out|    1|  ap_ctrl_hs|  Filter2D_Pipeline_apply_filter_VITIS_LOOP_243_1|  return value|
+|ap_ready                       |  out|    1|  ap_ctrl_hs|  Filter2D_Pipeline_apply_filter_VITIS_LOOP_243_1|  return value|
+|window_stream_dout             |   in|  200|     ap_fifo|                                    window_stream|       pointer|
+|window_stream_num_data_valid   |   in|    2|     ap_fifo|                                    window_stream|       pointer|
+|window_stream_fifo_cap         |   in|    2|     ap_fifo|                                    window_stream|       pointer|
+|window_stream_empty_n          |   in|    1|     ap_fifo|                                    window_stream|       pointer|
+|window_stream_read             |  out|    1|     ap_fifo|                                    window_stream|       pointer|
+|output_stream4_din             |  out|    8|     ap_fifo|                                   output_stream4|       pointer|
+|output_stream4_num_data_valid  |   in|    2|     ap_fifo|                                   output_stream4|       pointer|
+|output_stream4_fifo_cap        |   in|    2|     ap_fifo|                                   output_stream4|       pointer|
+|output_stream4_full_n          |   in|    1|     ap_fifo|                                   output_stream4|       pointer|
+|output_stream4_write           |  out|    1|     ap_fifo|                                   output_stream4|       pointer|
+|sub                            |   in|   17|     ap_none|                                              sub|        scalar|
+|bound                          |   in|   32|     ap_none|                                            bound|        scalar|
+|width_load                     |   in|   16|     ap_none|                                       width_load|        scalar|
+|sub15                          |   in|   17|     ap_none|                                            sub15|        scalar|
++-------------------------------+-----+-----+------------+-------------------------------------------------+--------------+
+

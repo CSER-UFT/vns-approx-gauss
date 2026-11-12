@@ -1,0 +1,246 @@
+
+
+================================================================
+== Synthesis Summary Report of 'gaussian'
+================================================================
++ General Information: 
+    * Date:           Mon Nov  2 15:10:59 2026
+    * Version:        2022.2 (Build 3670227 on Oct 13 2022)
+    * Project:        hls_proj_5x5
+    * Solution:       vns5Media350_T95 (Vivado IP Flow Target)
+    * Product family: spartan7
+    * Target device:  xc7s50-csga324-1
+    
+
++ Performance & Resource Estimates: 
+    
+    PS: '+' for module; 'o' for loop; '*' for dataflow
+    +-----------------------------------------------------+------+------+------------+-----------+----------+------------+------------+----------+--------+---------+-----------+-----------+-----+
+    |                       Modules                       | Issue|      |  Latency   |  Latency  | Iteration|            |    Trip    |          |        |         |           |           |     |
+    |                       & Loops                       | Type | Slack|  (cycles)  |    (ns)   |  Latency |  Interval  |    Count   | Pipelined|  BRAM  |   DSP   |     FF    |    LUT    | URAM|
+    +-----------------------------------------------------+------+------+------------+-----------+----------+------------+------------+----------+--------+---------+-----------+-----------+-----+
+    |+ gaussian*                                          |     -|  0.00|           -|          -|         -|           -|           -|  dataflow|  4 (2%)|   4 (3%)|  2119 (3%)|  2520 (7%)|    -|
+    | + ReadFromMem                                       |     -|  0.40|           -|          -|         -|           -|           -|        no|       -|  1 (~0%)|  177 (~0%)|   327 (1%)|    -|
+    |  + ReadFromMem_Pipeline_read_image                  |     -|  0.40|           -|          -|         -|           -|           -|        no|       -|        -|  116 (~0%)|  223 (~0%)|    -|
+    |   o read_image                                      |     -|  7.30|           -|          -|         2|           1|           -|       yes|       -|        -|          -|          -|    -|
+    | + Window2D                                          |     -|  0.00|      263178|  2.632e+06|         -|      263178|           -|        no|  4 (2%)|  1 (~0%)|  501 (~0%)|   480 (1%)|    -|
+    |  + Window2D_Pipeline_update_window                  |     -|  0.40|      263174|  2.632e+06|         -|      263174|           -|        no|       -|        -|  379 (~0%)|  285 (~0%)|    -|
+    |   o update_window                                   |     -|  7.30|      263172|  2.632e+06|         3|           1|      263170|       yes|       -|        -|          -|          -|    -|
+    | + Filter2D                                          |     -|  0.00|  4294836234|  4.295e+10|         -|  4294836234|           -|        no|       -|  1 (~0%)|  333 (~0%)|   782 (2%)|    -|
+    |  + Filter2D_Pipeline_apply_filter_VITIS_LOOP_243_1  |     -|  0.27|  4294836230|  4.295e+10|         -|  4294836230|           -|        no|       -|        -|  227 (~0%)|   627 (1%)|    -|
+    |   o apply_filter_VITIS_LOOP_243_1                   |     -|  7.30|  4294836228|  4.295e+10|         5|           1|  4294836225|       yes|       -|        -|          -|          -|    -|
+    | + WriteToMem                                        |     -|  1.50|      523783|  5.238e+06|         -|      523783|           -|        no|       -|  1 (~0%)|  208 (~0%)|  317 (~0%)|    -|
+    |  + WriteToMem_Pipeline_write_image                  |     -|  1.77|      523779|  5.238e+06|         -|      523779|           -|        no|       -|        -|  163 (~0%)|  228 (~0%)|    -|
+    |   o write_image                                     |     -|  7.30|      523777|  5.238e+06|         3|           1|      523776|       yes|       -|        -|          -|          -|    -|
+    +-----------------------------------------------------+------+------+------------+-----------+----------+------------+------------+----------+--------+---------+-----------+-----------+-----+
+
+
+================================================================
+== HW Interfaces
+================================================================
+* AP_MEMORY
++--------------+----------+
+| Interface    | Bitwidth |
++--------------+----------+
+| dst_address0 | 18       |
+| dst_address1 | 18       |
+| dst_d0       | 8        |
+| dst_d1       | 8        |
+| dst_q0       | 8        |
+| dst_q1       | 8        |
+| src_address0 | 18       |
+| src_address1 | 18       |
+| src_d0       | 8        |
+| src_d1       | 8        |
+| src_q0       | 8        |
+| src_q1       | 8        |
++--------------+----------+
+
+* Other Ports
++-----------+---------+----------+
+| Interface | Mode    | Bitwidth |
++-----------+---------+----------+
+| height    | ap_none | 16       |
+| width     | ap_none | 16       |
++-----------+---------+----------+
+
+* TOP LEVEL CONTROL
++-----------+------------+-----------------------------------+
+| Interface | Type       | Ports                             |
++-----------+------------+-----------------------------------+
+| ap_clk    | clock      | ap_clk                            |
+| ap_rst    | reset      | ap_rst                            |
+| ap_ctrl   | ap_ctrl_hs | ap_done ap_idle ap_ready ap_start |
++-----------+------------+-----------------------------------+
+
+
+================================================================
+== SW I/O Information
+================================================================
+* Top Function Arguments
++----------+-----------+-----------------------+
+| Argument | Direction | Datatype              |
++----------+-----------+-----------------------+
+| src      | in        | unsigned char const * |
+| dst      | out       | unsigned char*        |
+| height   | in        | unsigned short        |
+| width    | in        | unsigned short        |
++----------+-----------+-----------------------+
+
+* SW-to-HW Mapping
++----------+--------------+---------+----------+
+| Argument | HW Interface | HW Type | HW Usage |
++----------+--------------+---------+----------+
+| src      | src_address0 | port    | offset   |
+| src      | src_ce0      | port    |          |
+| src      | src_d0       | port    |          |
+| src      | src_q0       | port    |          |
+| src      | src_we0      | port    |          |
+| src      | src_address1 | port    | offset   |
+| src      | src_ce1      | port    |          |
+| src      | src_d1       | port    |          |
+| src      | src_q1       | port    |          |
+| src      | src_we1      | port    |          |
+| dst      | dst_address0 | port    | offset   |
+| dst      | dst_ce0      | port    |          |
+| dst      | dst_d0       | port    |          |
+| dst      | dst_q0       | port    |          |
+| dst      | dst_we0      | port    |          |
+| dst      | dst_address1 | port    | offset   |
+| dst      | dst_ce1      | port    |          |
+| dst      | dst_d1       | port    |          |
+| dst      | dst_q1       | port    |          |
+| dst      | dst_we1      | port    |          |
+| height   | height       | port    |          |
+| width    | width        | port    |          |
++----------+--------------+---------+----------+
+
+
+================================================================
+== Bind Op Report
+================================================================
++-----------------------------------------------------+-----+--------+----------------+-----+--------+---------+
+| Name                                                | DSP | Pragma | Variable       | Op  | Impl   | Latency |
++-----------------------------------------------------+-----+--------+----------------+-----+--------+---------+
+| + gaussian                                          | 4   |        |                |     |        |         |
+|  + ReadFromMem                                      | 1   |        |                |     |        |         |
+|    sub_fu_122_p2                                    | -   |        | sub            | add | fabric | 0       |
+|    mul_mul_16ns_16ns_32_4_1_U6                      | 1   |        | mul_ln53       | mul | dsp48  | 3       |
+|   + ReadFromMem_Pipeline_read_image                 | 0   |        |                |     |        |         |
+|     add_ln53_fu_126_p2                              | -   |        | add_ln53       | add | fabric | 0       |
+|     x_fu_147_p2                                     | -   |        | x              | add | fabric | 0       |
+|  + Window2D                                         | 1   |        |                |     |        |         |
+|    ramp_up_fu_132_p2                                | -   |        | ramp_up        | add | fabric | 0       |
+|    mul_mul_16ns_16ns_32_4_1_U24                     | 1   |        | num_pixels     | mul | dsp48  | 3       |
+|    num_iterations_fu_143_p2                         | -   |        | num_iterations | add | fabric | 0       |
+|    sub_fu_149_p2                                    | -   |        | sub            | add | fabric | 0       |
+|   + Window2D_Pipeline_update_window                 | 0   |        |                |     |        |         |
+|     n_3_fu_289_p2                                   | -   |        | n_3            | add | fabric | 0       |
+|     col_ptr_1_fu_316_p2                             | -   |        | col_ptr_1      | add | fabric | 0       |
+|  + Filter2D                                         | 1   |        |                |     |        |         |
+|    sub_fu_98_p2                                     | -   |        | sub            | add | fabric | 0       |
+|    sub15_fu_105_p2                                  | -   |        | sub15          | add | fabric | 0       |
+|    mul_mul_16ns_16ns_32_4_1_U39                     | 1   |        | bound          | mul | dsp48  | 3       |
+|   + Filter2D_Pipeline_apply_filter_VITIS_LOOP_243_1 | 0   |        |                |     |        |         |
+|     add_ln241_fu_232_p2                             | -   |        | add_ln241      | add | fabric | 0       |
+|     add_ln241_1_fu_254_p2                           | -   |        | add_ln241_1    | add | fabric | 0       |
+|     ret_V_5_fu_469_p2                               | -   |        | ret_V_5        | sub | fabric | 0       |
+|     ret_V_6_fu_500_p2                               | -   |        | ret_V_6        | sub | fabric | 0       |
+|     ret_V_7_fu_543_p2                               | -   |        | ret_V_7        | sub | fabric | 0       |
+|     ret_V_8_fu_586_p2                               | -   |        | ret_V_8        | sub | fabric | 0       |
+|     add_ln21_fu_689_p2                              | -   |        | add_ln21       | add | fabric | 0       |
+|     add_ln21_1_fu_615_p2                            | -   |        | add_ln21_1     | add | fabric | 0       |
+|     add_ln21_2_fu_625_p2                            | -   |        | add_ln21_2     | add | fabric | 0       |
+|     add_ln21_4_fu_631_p2                            | -   |        | add_ln21_4     | add | fabric | 0       |
+|     add_ln21_5_fu_641_p2                            | -   |        | add_ln21_5     | add | fabric | 0       |
+|     add_ln21_6_fu_651_p2                            | -   |        | add_ln21_6     | add | fabric | 0       |
+|     add_ln21_7_fu_661_p2                            | -   |        | add_ln21_7     | add | fabric | 0       |
+|     ret_V_fu_712_p2                                 | -   |        | ret_V          | add | fabric | 0       |
+|     j_1_fu_344_p2                                   | -   |        | j_1            | add | fabric | 0       |
+|  + WriteToMem                                       | 1   |        |                |     |        |         |
+|    mul_mul_16ns_10ns_19_4_1_U51                     | 1   |        | mul_ln73       | mul | dsp48  | 3       |
+|    sub_fu_104_p2                                    | -   |        | sub            | add | fabric | 0       |
+|   + WriteToMem_Pipeline_write_image                 | 0   |        |                |     |        |         |
+|     add_ln73_fu_138_p2                              | -   |        | add_ln73       | add | fabric | 0       |
+|     x_4_fu_154_p2                                   | -   |        | x_4            | add | fabric | 0       |
++-----------------------------------------------------+-----+--------+----------------+-----+--------+---------+
+
+
+================================================================
+== Bind Storage Report
+================================================================
++-------------------+------+------+--------+---------------+---------+------+---------+
+| Name              | BRAM | URAM | Pragma | Variable      | Storage | Impl | Latency |
++-------------------+------+------+--------+---------------+---------+------+---------+
+| + gaussian        | 4    | 0    |        |               |         |      |         |
+|   width_c14_U     | -    | -    |        | width_c14     | fifo    | srl  | 0       |
+|   width_c13_U     | -    | -    |        | width_c13     | fifo    | srl  | 0       |
+|   width_c_U       | -    | -    |        | width_c       | fifo    | srl  | 0       |
+|   height_c12_U    | -    | -    |        | height_c12    | fifo    | srl  | 0       |
+|   height_c11_U    | -    | -    |        | height_c11    | fifo    | srl  | 0       |
+|   height_c_U      | -    | -    |        | height_c      | fifo    | srl  | 0       |
+|   pixel_stream_U  | -    | -    |        | pixel_stream  | fifo    | srl  | 0       |
+|   window_stream_U | -    | -    |        | window_stream | fifo    | srl  | 0       |
+|   output_stream_U | -    | -    |        | output_stream | fifo    | srl  | 0       |
+|  + Window2D       | 4    | 0    |        |               |         |      |         |
+|    LineBuffer_U   | 1    | -    |        | LineBuffer    | ram_1p  | auto | 1       |
+|    LineBuffer_1_U | 1    | -    |        | LineBuffer_1  | ram_s2p | auto | 1       |
+|    LineBuffer_2_U | 1    | -    |        | LineBuffer_2  | ram_s2p | auto | 1       |
+|    LineBuffer_3_U | 1    | -    |        | LineBuffer_3  | ram_s2p | auto | 1       |
++-------------------+------+------+--------+---------------+---------+------+---------+
+
+
+================================================================
+== Pragma Report
+================================================================
+* Valid Pragma Syntax
++-----------------+------------------------------------+------------------------------------------------------+
+| Type            | Options                            | Location                                             |
++-----------------+------------------------------------+------------------------------------------------------+
+| array_partition | variable=LineBuffer dim=1 complete | ../gaussian_vns_5x5.cpp:92 in window2d, LineBuffer   |
+| dependence      | variable=LineBuffer inter false    | ../gaussian_vns_5x5.cpp:93 in window2d, LineBuffer   |
+| dependence      | variable=LineBuffer intra false    | ../gaussian_vns_5x5.cpp:94 in window2d, LineBuffer   |
+| loop_tripcount  | max=max_iterations                 | ../gaussian_vns_5x5.cpp:108 in window2d              |
+| pipeline        | II=1                               | ../gaussian_vns_5x5.cpp:109 in window2d              |
+| inline          |                                    | ../gaussian_vns_5x5.cpp:151 in filter                |
+| pipeline        | II=1                               | ../gaussian_vns_5x5.cpp:245 in filter2d              |
+| dataflow        |                                    | ../gaussian_vns_5x5.cpp:269 in gaussian              |
+| interface       | ap_none port=a                     | ../src/1bitTruncated.cpp:4 in _1bittruncated, a      |
+| interface       | ap_none port=b                     | ../src/1bitTruncated.cpp:5 in _1bittruncated, b      |
+| interface       | ap_none port=c                     | ../src/1bitTruncated.cpp:6 in _1bittruncated, c      |
+| interface       | ap_ctrl_none port=return           | ../src/1bitTruncated.cpp:7 in _1bittruncated, return |
+| interface       | ap_none port=a                     | ../src/2bitTruncated.cpp:4 in _2bittruncated, a      |
+| interface       | ap_none port=b                     | ../src/2bitTruncated.cpp:5 in _2bittruncated, b      |
+| interface       | ap_none port=c                     | ../src/2bitTruncated.cpp:6 in _2bittruncated, c      |
+| interface       | ap_ctrl_none port=return           | ../src/2bitTruncated.cpp:7 in _2bittruncated, return |
+| interface       | ap_none port=a                     | ../src/3bitTruncated.cpp:4 in _3bittruncated, a      |
+| interface       | ap_none port=b                     | ../src/3bitTruncated.cpp:5 in _3bittruncated, b      |
+| interface       | ap_none port=c                     | ../src/3bitTruncated.cpp:6 in _3bittruncated, c      |
+| interface       | ap_ctrl_none port=return           | ../src/3bitTruncated.cpp:7 in _3bittruncated, return |
+| interface       | ap_none port=a                     | ../src/4bitTruncated.cpp:4 in _4bittruncated, a      |
+| interface       | ap_none port=b                     | ../src/4bitTruncated.cpp:5 in _4bittruncated, b      |
+| interface       | ap_none port=c                     | ../src/4bitTruncated.cpp:6 in _4bittruncated, c      |
+| interface       | ap_ctrl_none port=return           | ../src/4bitTruncated.cpp:7 in _4bittruncated, return |
+| interface       | ap_none port=a                     | ../src/bit2Truncated.cpp:4 in bit2truncated, a       |
+| interface       | ap_none port=b                     | ../src/bit2Truncated.cpp:5 in bit2truncated, b       |
+| interface       | ap_none port=c                     | ../src/bit2Truncated.cpp:6 in bit2truncated, c       |
+| interface       | ap_ctrl_none port=return           | ../src/bit2Truncated.cpp:7 in bit2truncated, return  |
+| interface       | ap_none port=a                     | ../src/bit3Truncated.cpp:4 in bit3truncated, a       |
+| interface       | ap_none port=b                     | ../src/bit3Truncated.cpp:5 in bit3truncated, b       |
+| interface       | ap_none port=c                     | ../src/bit3Truncated.cpp:6 in bit3truncated, c       |
+| interface       | ap_ctrl_none port=return           | ../src/bit3Truncated.cpp:7 in bit3truncated, return  |
+| interface       | ap_none port=a                     | ../src/bit4Truncated.cpp:4 in bit4truncated, a       |
+| interface       | ap_none port=b                     | ../src/bit4Truncated.cpp:5 in bit4truncated, b       |
+| interface       | ap_none port=c                     | ../src/bit4Truncated.cpp:6 in bit4truncated, c       |
+| interface       | ap_ctrl_none port=return           | ../src/bit4Truncated.cpp:7 in bit4truncated, return  |
+| interface       | ap_none port=a                     | ../src/bitEspecifico.cpp:4 in bitespecifico, a       |
+| interface       | ap_none port=b                     | ../src/bitEspecifico.cpp:5 in bitespecifico, b       |
+| interface       | ap_none port=c                     | ../src/bitEspecifico.cpp:6 in bitespecifico, c       |
+| interface       | ap_ctrl_none port=return           | ../src/bitEspecifico.cpp:7 in bitespecifico, return  |
+| interface       | ap_none port=a                     | ../src/multExato.cpp:4 in multexato, a               |
+| interface       | ap_none port=b                     | ../src/multExato.cpp:5 in multexato, b               |
+| interface       | ap_none port=c                     | ../src/multExato.cpp:6 in multexato, c               |
+| interface       | ap_ctrl_none port=return           | ../src/multExato.cpp:7 in multexato, return          |
++-----------------+------------------------------------+------------------------------------------------------+
+
+

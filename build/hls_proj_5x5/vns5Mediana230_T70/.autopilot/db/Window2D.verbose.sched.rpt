@@ -1,0 +1,168 @@
+
+
+================================================================
+== Vitis HLS Report for 'Window2D'
+================================================================
+* Date:           Mon Nov  2 15:29:28 2026
+
+* Version:        2022.2 (Build 3670227 on Oct 13 2022)
+* Project:        hls_proj_5x5
+* Solution:       vns5Mediana230_T70 (Vivado IP Flow Target)
+* Product family: spartan7
+* Target device:  xc7s50-csga324-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  7.300 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+-----------+----------+-----+--------+---------+
+    |  Latency (cycles) |  Latency (absolute)  |   Interval   | Pipeline|
+    |   min   |   max   |    min    |    max   | min |   max  |   Type  |
+    +---------+---------+-----------+----------+-----+--------+---------+
+    |        8|   263178|  80.000 ns|  2.632 ms|    8|  263178|       no|
+    +---------+---------+-----------+----------+-----+--------+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        N/A
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 0
+ResetActiveHigh: 1
+IsCombinational: 2
+IsDatapathOnly: 0
+HasWiredReturn: 1
+HasMFsm: 0
+HasVarLatency: 1
+IsPipeline: 0
+IsRtlPipelined: 0
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states : 5
+* Pipeline : 0
+* Dataflow Pipeline: 0
+
+* FSM state transitions: 
+1 --> 2 
+2 --> 3 
+3 --> 4 
+4 --> 5 
+5 --> 
+
+* FSM state operations: 
+
+State 1 <SV = 0> <Delay = 7.30>
+ST_1 : Operation 6 [1/1] (3.65ns)   --->   "%width_read = read i16 @_ssdm_op_Read.ap_fifo.i16P0A, i16 %width"   --->   Operation 6 'read' 'width_read' <Predicate = true> <Delay = 3.65> <CoreInst = "FIFO_SRL">   --->   Core 81 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 3.91> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 16> <Depth = 2> <FIFO>
+ST_1 : Operation 7 [1/1] (3.65ns)   --->   "%write_ln0 = write void @_ssdm_op_Write.ap_fifo.i16P0A, i16 %width_c13, i16 %width_read"   --->   Operation 7 'write' 'write_ln0' <Predicate = true> <Delay = 3.65> <CoreInst = "FIFO_SRL">   --->   Core 81 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 3.91> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 16> <Depth = 2> <FIFO>
+ST_1 : Operation 8 [1/1] (3.65ns)   --->   "%height_read = read i16 @_ssdm_op_Read.ap_fifo.i16P0A, i16 %height"   --->   Operation 8 'read' 'height_read' <Predicate = true> <Delay = 3.65> <CoreInst = "FIFO_SRL">   --->   Core 81 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 3.91> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 16> <Depth = 2> <FIFO>
+ST_1 : Operation 9 [1/1] (3.65ns)   --->   "%write_ln0 = write void @_ssdm_op_Write.ap_fifo.i16P0A, i16 %height_c11, i16 %height_read"   --->   Operation 9 'write' 'write_ln0' <Predicate = true> <Delay = 3.65> <CoreInst = "FIFO_SRL">   --->   Core 81 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 3.91> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 16> <Depth = 2> <FIFO>
+ST_1 : Operation 10 [1/1] (0.00ns)   --->   "%LineBuffer = alloca i64 1" [../gaussian_vns_5x5.cpp:91]   --->   Operation 10 'alloca' 'LineBuffer' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 11 [1/1] (0.00ns)   --->   "%LineBuffer_1 = alloca i64 1" [../gaussian_vns_5x5.cpp:91]   --->   Operation 11 'alloca' 'LineBuffer_1' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 12 [1/1] (0.00ns)   --->   "%LineBuffer_2 = alloca i64 1" [../gaussian_vns_5x5.cpp:91]   --->   Operation 12 'alloca' 'LineBuffer_2' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 13 [1/1] (0.00ns)   --->   "%LineBuffer_3 = alloca i64 1" [../gaussian_vns_5x5.cpp:91]   --->   Operation 13 'alloca' 'LineBuffer_3' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 14 [1/1] (0.00ns)   --->   "%zext_ln100 = zext i16 %width_read" [../gaussian_vns_5x5.cpp:100]   --->   Operation 14 'zext' 'zext_ln100' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 15 [1/1] (0.00ns)   --->   "%zext_ln101 = zext i16 %height_read" [../gaussian_vns_5x5.cpp:101]   --->   Operation 15 'zext' 'zext_ln101' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 16 [4/4] (2.15ns) (root node of the DSP)   --->   "%num_pixels = mul i32 %zext_ln101, i32 %zext_ln100" [../gaussian_vns_5x5.cpp:101]   --->   Operation 16 'mul' 'num_pixels' <Predicate = true> <Delay = 2.15> <CoreInst = "DSP48">   --->   Core 119 'DSP48' <Latency = 3> <II = 1> <Delay = 2.15> <IPBlock> <Opcode : 'mul' 'add' 'sub' 'select'> <InPorts = 0> <OutPorts = 1> <Sync> <CReg>
+
+State 2 <SV = 1> <Delay = 2.15>
+ST_2 : Operation 17 [3/4] (2.15ns) (root node of the DSP)   --->   "%num_pixels = mul i32 %zext_ln101, i32 %zext_ln100" [../gaussian_vns_5x5.cpp:101]   --->   Operation 17 'mul' 'num_pixels' <Predicate = true> <Delay = 2.15> <CoreInst = "DSP48">   --->   Core 119 'DSP48' <Latency = 3> <II = 1> <Delay = 2.15> <IPBlock> <Opcode : 'mul' 'add' 'sub' 'select'> <InPorts = 0> <OutPorts = 1> <Sync> <CReg>
+ST_2 : Operation 18 [1/1] (0.00ns)   --->   "%empty = wait i32 @_ssdm_op_Wait"   --->   Operation 18 'wait' 'empty' <Predicate = true> <Delay = 0.00>
+
+State 3 <SV = 2> <Delay = 2.15>
+ST_3 : Operation 19 [2/4] (2.15ns) (root node of the DSP)   --->   "%num_pixels = mul i32 %zext_ln101, i32 %zext_ln100" [../gaussian_vns_5x5.cpp:101]   --->   Operation 19 'mul' 'num_pixels' <Predicate = true> <Delay = 2.15> <CoreInst = "DSP48">   --->   Core 119 'DSP48' <Latency = 3> <II = 1> <Delay = 2.15> <IPBlock> <Opcode : 'mul' 'add' 'sub' 'select'> <InPorts = 0> <OutPorts = 1> <Sync> <CReg>
+
+State 4 <SV = 3> <Delay = 4.72>
+ST_4 : Operation 20 [1/1] (0.00ns)   --->   "%zext_ln100_1 = zext i16 %width_read" [../gaussian_vns_5x5.cpp:100]   --->   Operation 20 'zext' 'zext_ln100_1' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 21 [1/1] (0.00ns)   --->   "%shl_ln = bitconcatenate i17 @_ssdm_op_BitConcatenate.i17.i16.i1, i16 %width_read, i1 0" [../gaussian_vns_5x5.cpp:100]   --->   Operation 21 'bitconcatenate' 'shl_ln' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 22 [1/1] (0.00ns)   --->   "%zext_ln100_2 = zext i17 %shl_ln" [../gaussian_vns_5x5.cpp:100]   --->   Operation 22 'zext' 'zext_ln100_2' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 23 [1/1] (2.16ns)   --->   "%ramp_up = add i18 %zext_ln100_2, i18 2" [../gaussian_vns_5x5.cpp:100]   --->   Operation 23 'add' 'ramp_up' <Predicate = true> <Delay = 2.16> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 2.16> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_4 : Operation 24 [1/1] (0.00ns)   --->   "%zext_ln100_3 = zext i18 %ramp_up" [../gaussian_vns_5x5.cpp:100]   --->   Operation 24 'zext' 'zext_ln100_3' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 25 [1/4] (0.00ns) (root node of the DSP)   --->   "%num_pixels = mul i32 %zext_ln101, i32 %zext_ln100" [../gaussian_vns_5x5.cpp:101]   --->   Operation 25 'mul' 'num_pixels' <Predicate = true> <Delay = 0.00> <CoreInst = "DSP48">   --->   Core 119 'DSP48' <Latency = 3> <II = 1> <Delay = 2.15> <IPBlock> <Opcode : 'mul' 'add' 'sub' 'select'> <InPorts = 0> <OutPorts = 1> <Sync> <CReg>
+ST_4 : Operation 26 [1/1] (2.56ns)   --->   "%num_iterations = add i32 %num_pixels, i32 %zext_ln100_3" [../gaussian_vns_5x5.cpp:102]   --->   Operation 26 'add' 'num_iterations' <Predicate = true> <Delay = 2.56> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 2.56> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_4 : Operation 27 [1/1] (2.13ns)   --->   "%sub = add i17 %zext_ln100_1, i17 131071" [../gaussian_vns_5x5.cpp:100]   --->   Operation 27 'add' 'sub' <Predicate = true> <Delay = 2.13> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 2.13> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_4 : Operation 28 [2/2] (0.00ns)   --->   "%call_ln102 = call void @Window2D_Pipeline_update_window, i32 %num_iterations, i8 %LineBuffer, i8 %LineBuffer_1, i8 %LineBuffer_2, i8 %LineBuffer_3, i17 %sub, i18 %ramp_up, i32 %num_pixels, i8 %pixel_stream3, i200 %window_stream" [../gaussian_vns_5x5.cpp:102]   --->   Operation 28 'call' 'call_ln102' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 5 <SV = 4> <Delay = 0.00>
+ST_5 : Operation 29 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i16 %width, void @ap_fifo_str, i32 0, i32 0, void @p_str, i32 0, i32 0, void @p_str, void @p_str, void @p_str, i32 2, i32 2, i32 16, i32 16, void @p_str, void @ScalarProp_str, i32 4294967295, i32 0"   --->   Operation 29 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 30 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i16 %width_c13, void @ap_fifo_str, i32 0, i32 0, void @p_str, i32 0, i32 0, void @p_str, void @p_str, void @p_str, i32 2, i32 2, i32 16, i32 16, void @p_str, void @ScalarProp_str, i32 4294967295, i32 0"   --->   Operation 30 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 31 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i16 %height, void @ap_fifo_str, i32 0, i32 0, void @p_str, i32 0, i32 0, void @p_str, void @p_str, void @p_str, i32 2, i32 2, i32 16, i32 16, void @p_str, void @ScalarProp_str, i32 4294967295, i32 0"   --->   Operation 31 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 32 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i16 %height_c11, void @ap_fifo_str, i32 0, i32 0, void @p_str, i32 0, i32 0, void @p_str, void @p_str, void @p_str, i32 2, i32 2, i32 16, i32 16, void @p_str, void @ScalarProp_str, i32 4294967295, i32 0"   --->   Operation 32 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 33 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i200 %window_stream, void @empty_5, i32 0, i32 0, void @empty_7, i32 0, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 33 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 34 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i8 %pixel_stream3, void @empty_5, i32 0, i32 0, void @empty_7, i32 0, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 34 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 35 [1/2] (0.00ns)   --->   "%call_ln102 = call void @Window2D_Pipeline_update_window, i32 %num_iterations, i8 %LineBuffer, i8 %LineBuffer_1, i8 %LineBuffer_2, i8 %LineBuffer_3, i17 %sub, i18 %ramp_up, i32 %num_pixels, i8 %pixel_stream3, i200 %window_stream" [../gaussian_vns_5x5.cpp:102]   --->   Operation 35 'call' 'call_ln102' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_5 : Operation 36 [1/1] (0.00ns)   --->   "%ret_ln140 = ret" [../gaussian_vns_5x5.cpp:140]   --->   Operation 36 'ret' 'ret_ln140' <Predicate = true> <Delay = 0.00>
+
+
+============================================================
++ Verbose Summary: Timing violations
+============================================================
+Target clock period: 10ns, clock uncertainty: 2.7ns.
+
+ <State 1>: 7.3ns
+The critical path consists of the following:
+	fifo read operation ('width_read') on port 'width' [8]  (3.65 ns)
+	fifo write operation ('write_ln0') on port 'width_c13' [10]  (3.65 ns)
+
+ <State 2>: 2.15ns
+The critical path consists of the following:
+	'mul' operation of DSP[28] ('num_pixels', ../gaussian_vns_5x5.cpp:101) [28]  (2.15 ns)
+
+ <State 3>: 2.15ns
+The critical path consists of the following:
+	'mul' operation of DSP[28] ('num_pixels', ../gaussian_vns_5x5.cpp:101) [28]  (2.15 ns)
+
+ <State 4>: 4.73ns
+The critical path consists of the following:
+	'add' operation ('ramp_up', ../gaussian_vns_5x5.cpp:100) [25]  (2.16 ns)
+	'add' operation ('num_iterations', ../gaussian_vns_5x5.cpp:102) [29]  (2.57 ns)
+
+ <State 5>: 0ns
+The critical path consists of the following:
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+N/A
+* FSMD analyzer results:
+  - Output states:
+ - Input state : 
+  - Chain level:
+	State 1
+	State 2
+	State 3
+	State 4
+	State 5
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+N/A

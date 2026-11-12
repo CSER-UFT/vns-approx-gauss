@@ -1,0 +1,168 @@
+
+
+================================================================
+== Vitis HLS Report for 'WriteToMem'
+================================================================
+* Date:           Mon Nov  2 15:40:11 2026
+
+* Version:        2022.2 (Build 3670227 on Oct 13 2022)
+* Project:        hls_proj_5x5
+* Solution:       vns5Mediana230_T90 (Vivado IP Flow Target)
+* Product family: spartan7
+* Target device:  xc7s50-csga324-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  5.800 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+-----------+----------+-----+--------+---------+
+    |  Latency (cycles) |  Latency (absolute)  |   Interval   | Pipeline|
+    |   min   |   max   |    min    |    max   | min |   max  |   Type  |
+    +---------+---------+-----------+----------+-----+--------+---------+
+    |        6|   523783|  60.000 ns|  5.238 ms|    6|  523783|       no|
+    +---------+---------+-----------+----------+-----+--------+---------+
+
+    + Detail: 
+        * Instance: 
+        +-------------------------------------------+---------------------------------+---------+---------+-----------+----------+-----+--------+---------+
+        |                                           |                                 |  Latency (cycles) |  Latency (absolute)  |   Interval   | Pipeline|
+        |                  Instance                 |              Module             |   min   |   max   |    min    |    max   | min |   max  |   Type  |
+        +-------------------------------------------+---------------------------------+---------+---------+-----------+----------+-----+--------+---------+
+        |grp_WriteToMem_Pipeline_write_image_fu_60  |WriteToMem_Pipeline_write_image  |        2|   523779|  20.000 ns|  5.238 ms|    2|  523779|       no|
+        +-------------------------------------------+---------------------------------+---------+---------+-----------+----------+-----+--------+---------+
+
+        * Loop: 
+        N/A
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+-----+-------+-------+-----+
+|       Name      | BRAM_18K| DSP |   FF  |  LUT  | URAM|
++-----------------+---------+-----+-------+-------+-----+
+|DSP              |        -|    1|      -|      -|    -|
+|Expression       |        -|    -|      0|     20|    -|
+|FIFO             |        -|    -|      -|      -|    -|
+|Instance         |        -|    -|    163|    228|    -|
+|Memory           |        -|    -|      -|      -|    -|
+|Multiplexer      |        -|    -|      -|     69|    -|
+|Register         |        -|    -|     45|      -|    -|
++-----------------+---------+-----+-------+-------+-----+
+|Total            |        0|    1|    208|    317|    0|
++-----------------+---------+-----+-------+-------+-----+
+|Available        |      150|  120|  65200|  32600|    0|
++-----------------+---------+-----+-------+-------+-----+
+|Utilization (%)  |        0|   ~0|     ~0|     ~0|    0|
++-----------------+---------+-----+-------+-------+-----+
+
++ Detail: 
+    * Instance: 
+    +-------------------------------------------+---------------------------------+---------+----+-----+-----+-----+
+    |                  Instance                 |              Module             | BRAM_18K| DSP|  FF | LUT | URAM|
+    +-------------------------------------------+---------------------------------+---------+----+-----+-----+-----+
+    |grp_WriteToMem_Pipeline_write_image_fu_60  |WriteToMem_Pipeline_write_image  |        0|   0|  163|  228|    0|
+    +-------------------------------------------+---------------------------------+---------+----+-----+-----+-----+
+    |Total                                      |                                 |        0|   0|  163|  228|    0|
+    +-------------------------------------------+---------------------------------+---------+----+-----+-----+-----+
+
+    * DSP: 
+    +------------------------------+--------------------------+-----------+
+    |           Instance           |          Module          | Expression|
+    +------------------------------+--------------------------+-----------+
+    |mul_mul_16ns_10ns_19_4_1_U51  |mul_mul_16ns_10ns_19_4_1  |    i0 * i1|
+    +------------------------------+--------------------------+-----------+
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +-----------------+----------+----+---+----+------------+------------+
+    |  Variable Name  | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +-----------------+----------+----+---+----+------------+------------+
+    |sub_fu_104_p2    |         +|   0|  0|  18|          11|           2|
+    |ap_block_state1  |        or|   0|  0|   2|           1|           1|
+    +-----------------+----------+----+---+----+------------+------------+
+    |Total            |          |   0|  0|  20|          12|           3|
+    +-----------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +---------------------+----+-----------+-----+-----------+
+    |         Name        | LUT| Input Size| Bits| Total Bits|
+    +---------------------+----+-----------+-----+-----------+
+    |ap_NS_fsm            |  33|          6|    1|          6|
+    |ap_done              |   9|          2|    1|          2|
+    |height_blk_n         |   9|          2|    1|          2|
+    |output_stream4_read  |   9|          2|    1|          2|
+    |width_blk_n          |   9|          2|    1|          2|
+    +---------------------+----+-----------+-----+-----------+
+    |Total                |  69|         14|    5|         14|
+    +---------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +--------------------------------------------------------+----+----+-----+-----------+
+    |                          Name                          | FF | LUT| Bits| Const Bits|
+    +--------------------------------------------------------+----+----+-----+-----------+
+    |ap_CS_fsm                                               |   5|   0|    5|          0|
+    |ap_done_reg                                             |   1|   0|    1|          0|
+    |empty_reg_133                                           |  10|   0|   10|          0|
+    |grp_WriteToMem_Pipeline_write_image_fu_60_ap_start_reg  |   1|   0|    1|          0|
+    |mul_ln73_reg_138                                        |  19|   0|   19|          0|
+    |stride_assign_reg_118                                   |   4|   0|   10|          6|
+    |sub_reg_143                                             |   5|   0|   11|          6|
+    +--------------------------------------------------------+----+----+-----+-----------+
+    |Total                                                   |  45|   0|   57|         12|
+    +--------------------------------------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++-------------------------------+-----+-----+------------+----------------+--------------+
+|           RTL Ports           | Dir | Bits|  Protocol  |  Source Object |    C Type    |
++-------------------------------+-----+-----+------------+----------------+--------------+
+|ap_clk                         |   in|    1|  ap_ctrl_hs|      WriteToMem|  return value|
+|ap_rst                         |   in|    1|  ap_ctrl_hs|      WriteToMem|  return value|
+|ap_start                       |   in|    1|  ap_ctrl_hs|      WriteToMem|  return value|
+|ap_done                        |  out|    1|  ap_ctrl_hs|      WriteToMem|  return value|
+|ap_continue                    |   in|    1|  ap_ctrl_hs|      WriteToMem|  return value|
+|ap_idle                        |  out|    1|  ap_ctrl_hs|      WriteToMem|  return value|
+|ap_ready                       |  out|    1|  ap_ctrl_hs|      WriteToMem|  return value|
+|width_dout                     |   in|   16|     ap_fifo|           width|       pointer|
+|width_num_data_valid           |   in|    2|     ap_fifo|           width|       pointer|
+|width_fifo_cap                 |   in|    2|     ap_fifo|           width|       pointer|
+|width_empty_n                  |   in|    1|     ap_fifo|           width|       pointer|
+|width_read                     |  out|    1|     ap_fifo|           width|       pointer|
+|height_dout                    |   in|   16|     ap_fifo|          height|       pointer|
+|height_num_data_valid          |   in|    2|     ap_fifo|          height|       pointer|
+|height_fifo_cap                |   in|    2|     ap_fifo|          height|       pointer|
+|height_empty_n                 |   in|    1|     ap_fifo|          height|       pointer|
+|height_read                    |  out|    1|     ap_fifo|          height|       pointer|
+|output_stream4_dout            |   in|    8|     ap_fifo|  output_stream4|       pointer|
+|output_stream4_num_data_valid  |   in|    2|     ap_fifo|  output_stream4|       pointer|
+|output_stream4_fifo_cap        |   in|    2|     ap_fifo|  output_stream4|       pointer|
+|output_stream4_empty_n         |   in|    1|     ap_fifo|  output_stream4|       pointer|
+|output_stream4_read            |  out|    1|     ap_fifo|  output_stream4|       pointer|
+|dst_address0                   |  out|   18|   ap_memory|             dst|         array|
+|dst_ce0                        |  out|    1|   ap_memory|             dst|         array|
+|dst_we0                        |  out|    1|   ap_memory|             dst|         array|
+|dst_d0                         |  out|    8|   ap_memory|             dst|         array|
++-------------------------------+-----+-----+------------+----------------+--------------+
+

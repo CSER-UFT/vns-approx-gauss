@@ -1,0 +1,13 @@
+#-----------------------------------------------------------
+# Vivado v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Mon Nov  2 12:03:32 2026
+# Process ID: 190510
+# Current directory: /home/daniel.costa/hls_proj/build/hls_proj_3x3/vns3GeoMean230_T80/impl/ip
+# Command line: vivado -notrace -mode batch -source run_ippack.tcl
+# Log file: /home/daniel.costa/hls_proj/build/hls_proj_3x3/vns3GeoMean230_T80/impl/ip/vivado.log
+# Journal file: /home/daniel.costa/hls_proj/build/hls_proj_3x3/vns3GeoMean230_T80/impl/ip/vivado.jou
+# Running On: sarue, OS: Linux, CPU Frequency: 1257.959 MHz, CPU Physical cores: 4, Host memory: 33609 MB
+#-----------------------------------------------------------
+source run_ippack.tcl -notrace

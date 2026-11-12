@@ -1,0 +1,259 @@
+
+
+================================================================
+== Vitis HLS Report for 'Window2D_Pipeline_update_window'
+================================================================
+* Date:           Mon Nov  2 13:56:31 2026
+
+* Version:        2022.2 (Build 3670227 on Oct 13 2022)
+* Project:        hls_proj_5x5
+* Solution:       vns5GeoMean230_T75 (Vivado IP Flow Target)
+* Product family: spartan7
+* Target device:  xc7s50-csga324-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  6.904 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+-----------+----------+-----+--------+---------+
+    |  Latency (cycles) |  Latency (absolute)  |   Interval   | Pipeline|
+    |   min   |   max   |    min    |    max   | min |   max  |   Type  |
+    +---------+---------+-----------+----------+-----+--------+---------+
+    |        4|   263174|  40.000 ns|  2.632 ms|    4|  263174|       no|
+    +---------+---------+-----------+----------+-----+--------+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +-----------------+---------+---------+----------+-----------+-----------+------------+----------+
+        |                 |  Latency (cycles) | Iteration|  Initiation Interval  |    Trip    |          |
+        |    Loop Name    |   min   |   max   |  Latency |  achieved |   target  |    Count   | Pipelined|
+        +-----------------+---------+---------+----------+-----------+-----------+------------+----------+
+        |- update_window  |        2|   263172|         3|          1|          1|  0 ~ 263170|       yes|
+        +-----------------+---------+---------+----------+-----------+-----------+------------+----------+
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 0
+ResetActiveHigh: 1
+IsCombinational: 0
+IsDatapathOnly: 0
+HasWiredReturn: 1
+HasMFsm: 2
+HasVarLatency: 1
+IsPipeline: 0
+IsRtlPipelined: 0
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
++ Individual pipeline summary: 
+  * Pipeline-0: initiation interval (II) = 1, depth = 4
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states : 4
+* Pipeline : 1
+  Pipeline-0 : II = 1, D = 4, States = { 1 2 3 4 }
+* Dataflow Pipeline: 0
+
+* FSM state transitions: 
+1 --> 2 
+2 --> 3 
+3 --> 4 
+4 --> 
+
+* FSM state operations: 
+
+State 1 <SV = 0> <Delay = 1.58>
+ST_1 : Operation 6 [1/1] (0.00ns)   --->   "%n = alloca i32 1"   --->   Operation 6 'alloca' 'n' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 7 [1/1] (0.00ns)   --->   "%col_ptr = alloca i32 1"   --->   Operation 7 'alloca' 'col_ptr' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 8 [1/1] (0.00ns)   --->   "%Window_pix = alloca i32 1"   --->   Operation 8 'alloca' 'Window_pix' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 9 [1/1] (0.00ns)   --->   "%Window_sroa_64_0 = alloca i32 1"   --->   Operation 9 'alloca' 'Window_sroa_64_0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 10 [1/1] (0.00ns)   --->   "%Window_pix_4 = alloca i32 1"   --->   Operation 10 'alloca' 'Window_pix_4' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 11 [1/1] (0.00ns)   --->   "%Window_sroa_30_0 = alloca i32 1"   --->   Operation 11 'alloca' 'Window_sroa_30_0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 12 [1/1] (0.00ns)   --->   "%Window_sroa_58_0 = alloca i32 1"   --->   Operation 12 'alloca' 'Window_sroa_58_0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 13 [1/1] (0.00ns)   --->   "%Window_sroa_44_0 = alloca i32 1"   --->   Operation 13 'alloca' 'Window_sroa_44_0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 14 [1/1] (0.00ns)   --->   "%new_pixel_1 = alloca i32 1"   --->   Operation 14 'alloca' 'new_pixel_1' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 15 [1/1] (0.00ns)   --->   "%Window_pix_1 = alloca i32 1"   --->   Operation 15 'alloca' 'Window_pix_1' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 16 [1/1] (0.00ns)   --->   "%Window_pix_2 = alloca i32 1"   --->   Operation 16 'alloca' 'Window_pix_2' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 17 [1/1] (0.00ns)   --->   "%Window_pix_3 = alloca i32 1"   --->   Operation 17 'alloca' 'Window_pix_3' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 18 [1/1] (0.00ns)   --->   "%Window_pix_5 = alloca i32 1"   --->   Operation 18 'alloca' 'Window_pix_5' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 19 [1/1] (0.00ns)   --->   "%Window_pix_7 = alloca i32 1"   --->   Operation 19 'alloca' 'Window_pix_7' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 20 [1/1] (0.00ns)   --->   "%Window_sroa_25_0 = alloca i32 1"   --->   Operation 20 'alloca' 'Window_sroa_25_0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 21 [1/1] (0.00ns)   --->   "%new_pixel_2 = alloca i32 1"   --->   Operation 21 'alloca' 'new_pixel_2' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 22 [1/1] (0.00ns)   --->   "%Window_sroa_33_0 = alloca i32 1"   --->   Operation 22 'alloca' 'Window_sroa_33_0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 23 [1/1] (0.00ns)   --->   "%Window_sroa_36_0 = alloca i32 1"   --->   Operation 23 'alloca' 'Window_sroa_36_0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 24 [1/1] (0.00ns)   --->   "%Window_sroa_39_0 = alloca i32 1"   --->   Operation 24 'alloca' 'Window_sroa_39_0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 25 [1/1] (0.00ns)   --->   "%Window_sroa_47_0 = alloca i32 1"   --->   Operation 25 'alloca' 'Window_sroa_47_0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 26 [1/1] (0.00ns)   --->   "%Window_sroa_50_0 = alloca i32 1"   --->   Operation 26 'alloca' 'Window_sroa_50_0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 27 [1/1] (0.00ns)   --->   "%Window_sroa_53_0 = alloca i32 1"   --->   Operation 27 'alloca' 'Window_sroa_53_0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 28 [1/1] (0.00ns)   --->   "%num_pixels_read = read i32 @_ssdm_op_Read.ap_auto.i32, i32 %num_pixels"   --->   Operation 28 'read' 'num_pixels_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 29 [1/1] (0.00ns)   --->   "%zext_ln100_3_read = read i18 @_ssdm_op_Read.ap_auto.i18, i18 %zext_ln100_3"   --->   Operation 29 'read' 'zext_ln100_3_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 30 [1/1] (0.00ns)   --->   "%sext_ln106_read = read i17 @_ssdm_op_Read.ap_auto.i17, i17 %sext_ln106"   --->   Operation 30 'read' 'sext_ln106_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 31 [1/1] (0.00ns)   --->   "%num_iterations_read = read i32 @_ssdm_op_Read.ap_auto.i32, i32 %num_iterations"   --->   Operation 31 'read' 'num_iterations_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 32 [1/1] (0.00ns)   --->   "%zext_ln100_3_cast = zext i18 %zext_ln100_3_read"   --->   Operation 32 'zext' 'zext_ln100_3_cast' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 33 [1/1] (0.00ns)   --->   "%sext_ln106_cast = sext i17 %sext_ln106_read"   --->   Operation 33 'sext' 'sext_ln106_cast' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 34 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i8 %pixel_stream3, void @empty_5, i32 0, i32 0, void @empty_7, i32 0, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 34 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 35 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i200 %window_stream, void @empty_5, i32 0, i32 0, void @empty_7, i32 0, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 35 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 36 [1/1] (1.58ns)   --->   "%store_ln0 = store i32 0, i32 %col_ptr"   --->   Operation 36 'store' 'store_ln0' <Predicate = true> <Delay = 1.58>
+ST_1 : Operation 37 [1/1] (1.58ns)   --->   "%store_ln0 = store i32 0, i32 %n"   --->   Operation 37 'store' 'store_ln0' <Predicate = true> <Delay = 1.58>
+ST_1 : Operation 38 [1/1] (0.00ns)   --->   "%br_ln0 = br void %for.body"   --->   Operation 38 'br' 'br_ln0' <Predicate = true> <Delay = 0.00>
+
+State 2 <SV = 1> <Delay = 5.53>
+ST_2 : Operation 39 [1/1] (0.00ns)   --->   "%n_2 = load i32 %n" [../gaussian_vns_5x5.cpp:106]   --->   Operation 39 'load' 'n_2' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 40 [1/1] (2.55ns)   --->   "%icmp_ln106 = icmp_eq  i32 %n_2, i32 %num_iterations_read" [../gaussian_vns_5x5.cpp:106]   --->   Operation 40 'icmp' 'icmp_ln106' <Predicate = true> <Delay = 2.55> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 2.55> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 41 [1/1] (2.56ns)   --->   "%n_3 = add i32 %n_2, i32 1" [../gaussian_vns_5x5.cpp:106]   --->   Operation 41 'add' 'n_3' <Predicate = true> <Delay = 2.56> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 2.56> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 42 [1/1] (0.00ns)   --->   "%br_ln106 = br i1 %icmp_ln106, void %for.body.split, void %for.end68.exitStub" [../gaussian_vns_5x5.cpp:106]   --->   Operation 42 'br' 'br_ln106' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 43 [1/1] (0.00ns)   --->   "%specpipeline_ln109 = specpipeline void @_ssdm_op_SpecPipeline, i32 1, i32 0, i32 0, i32 0, void @empty_7" [../gaussian_vns_5x5.cpp:109]   --->   Operation 43 'specpipeline' 'specpipeline_ln109' <Predicate = (!icmp_ln106)> <Delay = 0.00>
+ST_2 : Operation 44 [1/1] (0.00ns)   --->   "%speclooptripcount_ln108 = speclooptripcount void @_ssdm_op_SpecLoopTripCount, i64 0, i64 263170, i64 131585" [../gaussian_vns_5x5.cpp:108]   --->   Operation 44 'speclooptripcount' 'speclooptripcount_ln108' <Predicate = (!icmp_ln106)> <Delay = 0.00>
+ST_2 : Operation 45 [1/1] (0.00ns)   --->   "%specloopname_ln97 = specloopname void @_ssdm_op_SpecLoopName, void @empty_2" [../gaussian_vns_5x5.cpp:97]   --->   Operation 45 'specloopname' 'specloopname_ln97' <Predicate = (!icmp_ln106)> <Delay = 0.00>
+ST_2 : Operation 46 [1/1] (2.55ns)   --->   "%icmp_ln112 = icmp_ult  i32 %n_2, i32 %num_pixels_read" [../gaussian_vns_5x5.cpp:112]   --->   Operation 46 'icmp' 'icmp_ln112' <Predicate = (!icmp_ln106)> <Delay = 2.55> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 2.55> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 47 [1/1] (1.58ns)   --->   "%br_ln112 = br i1 %icmp_ln112, void %for.inc, void %cond.true" [../gaussian_vns_5x5.cpp:112]   --->   Operation 47 'br' 'br_ln112' <Predicate = (!icmp_ln106)> <Delay = 1.58>
+ST_2 : Operation 48 [1/1] (0.00ns)   --->   "%col_ptr_load = load i32 %col_ptr" [../gaussian_vns_5x5.cpp:132]   --->   Operation 48 'load' 'col_ptr_load' <Predicate = (!icmp_ln106)> <Delay = 0.00>
+ST_2 : Operation 49 [1/1] (0.00ns)   --->   "%idxprom28 = zext i32 %col_ptr_load" [../gaussian_vns_5x5.cpp:132]   --->   Operation 49 'zext' 'idxprom28' <Predicate = (!icmp_ln106)> <Delay = 0.00>
+ST_2 : Operation 50 [1/1] (0.00ns)   --->   "%LineBuffer_addr = getelementptr i8 %LineBuffer, i64 0, i64 %idxprom28" [../gaussian_vns_5x5.cpp:119]   --->   Operation 50 'getelementptr' 'LineBuffer_addr' <Predicate = (!icmp_ln106)> <Delay = 0.00>
+ST_2 : Operation 51 [1/1] (0.00ns)   --->   "%LineBuffer_1_addr = getelementptr i8 %LineBuffer_1, i64 0, i64 %idxprom28" [../gaussian_vns_5x5.cpp:119]   --->   Operation 51 'getelementptr' 'LineBuffer_1_addr' <Predicate = (!icmp_ln106)> <Delay = 0.00>
+ST_2 : Operation 52 [2/2] (3.25ns)   --->   "%LineBuffer_1_load = load i9 %LineBuffer_1_addr" [../gaussian_vns_5x5.cpp:119]   --->   Operation 52 'load' 'LineBuffer_1_load' <Predicate = (!icmp_ln106)> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 8> <Depth = 512> <RAM>
+ST_2 : Operation 53 [1/1] (0.00ns)   --->   "%LineBuffer_2_addr = getelementptr i8 %LineBuffer_2, i64 0, i64 %idxprom28" [../gaussian_vns_5x5.cpp:119]   --->   Operation 53 'getelementptr' 'LineBuffer_2_addr' <Predicate = (!icmp_ln106)> <Delay = 0.00>
+ST_2 : Operation 54 [2/2] (3.25ns)   --->   "%LineBuffer_2_load = load i9 %LineBuffer_2_addr" [../gaussian_vns_5x5.cpp:119]   --->   Operation 54 'load' 'LineBuffer_2_load' <Predicate = (!icmp_ln106)> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 8> <Depth = 512> <RAM>
+ST_2 : Operation 55 [1/1] (0.00ns)   --->   "%LineBuffer_3_addr = getelementptr i8 %LineBuffer_3, i64 0, i64 %idxprom28" [../gaussian_vns_5x5.cpp:119]   --->   Operation 55 'getelementptr' 'LineBuffer_3_addr' <Predicate = (!icmp_ln106)> <Delay = 0.00>
+ST_2 : Operation 56 [2/2] (3.25ns)   --->   "%LineBuffer_3_load = load i9 %LineBuffer_3_addr" [../gaussian_vns_5x5.cpp:119]   --->   Operation 56 'load' 'LineBuffer_3_load' <Predicate = (!icmp_ln106)> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 8> <Depth = 512> <RAM>
+ST_2 : Operation 57 [1/1] (2.55ns)   --->   "%icmp_ln129 = icmp_eq  i32 %col_ptr_load, i32 %sext_ln106_cast" [../gaussian_vns_5x5.cpp:129]   --->   Operation 57 'icmp' 'icmp_ln129' <Predicate = (!icmp_ln106)> <Delay = 2.55> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 2.55> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 58 [1/1] (2.56ns)   --->   "%col_ptr_1 = add i32 %col_ptr_load, i32 1" [../gaussian_vns_5x5.cpp:132]   --->   Operation 58 'add' 'col_ptr_1' <Predicate = (!icmp_ln106)> <Delay = 2.56> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 2.56> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 59 [1/1] (1.38ns)   --->   "%col_ptr_2 = select i1 %icmp_ln129, i32 0, i32 %col_ptr_1" [../gaussian_vns_5x5.cpp:129]   --->   Operation 59 'select' 'col_ptr_2' <Predicate = (!icmp_ln106)> <Delay = 1.38> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 1.38> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_2 : Operation 60 [1/1] (2.55ns)   --->   "%icmp_ln136 = icmp_ult  i32 %n_2, i32 %zext_ln100_3_cast" [../gaussian_vns_5x5.cpp:136]   --->   Operation 60 'icmp' 'icmp_ln136' <Predicate = (!icmp_ln106)> <Delay = 2.55> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 2.55> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 61 [1/1] (0.00ns)   --->   "%br_ln136 = br i1 %icmp_ln136, void %if.then64, void %for.inc66" [../gaussian_vns_5x5.cpp:136]   --->   Operation 61 'br' 'br_ln136' <Predicate = (!icmp_ln106)> <Delay = 0.00>
+ST_2 : Operation 62 [1/1] (1.58ns)   --->   "%store_ln106 = store i32 %col_ptr_2, i32 %col_ptr" [../gaussian_vns_5x5.cpp:106]   --->   Operation 62 'store' 'store_ln106' <Predicate = (!icmp_ln106)> <Delay = 1.58>
+ST_2 : Operation 63 [1/1] (1.58ns)   --->   "%store_ln106 = store i32 %n_3, i32 %n" [../gaussian_vns_5x5.cpp:106]   --->   Operation 63 'store' 'store_ln106' <Predicate = (!icmp_ln106)> <Delay = 1.58>
+
+State 3 <SV = 2> <Delay = 6.50>
+ST_3 : Operation 64 [1/1] (3.65ns)   --->   "%pixel_stream3_read = read i8 @_ssdm_op_Read.ap_fifo.volatile.i8P0A, i8 %pixel_stream3" [../gaussian_vns_5x5.cpp:112]   --->   Operation 64 'read' 'pixel_stream3_read' <Predicate = (!icmp_ln106 & icmp_ln112)> <Delay = 3.65> <CoreInst = "FIFO_SRL">   --->   Core 81 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 3.91> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 8> <Depth = 2> <FIFO>
+ST_3 : Operation 65 [1/1] (1.58ns)   --->   "%br_ln112 = br void %for.inc" [../gaussian_vns_5x5.cpp:112]   --->   Operation 65 'br' 'br_ln112' <Predicate = (!icmp_ln106 & icmp_ln112)> <Delay = 1.58>
+ST_3 : Operation 66 [2/2] (3.25ns)   --->   "%Window_pix_12 = load i9 %LineBuffer_addr" [../gaussian_vns_5x5.cpp:119]   --->   Operation 66 'load' 'Window_pix_12' <Predicate = (!icmp_ln106)> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 8> <Depth = 512> <RAM>
+ST_3 : Operation 67 [1/2] (3.25ns)   --->   "%LineBuffer_1_load = load i9 %LineBuffer_1_addr" [../gaussian_vns_5x5.cpp:119]   --->   Operation 67 'load' 'LineBuffer_1_load' <Predicate = (!icmp_ln106)> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 8> <Depth = 512> <RAM>
+ST_3 : Operation 68 [1/2] (3.25ns)   --->   "%LineBuffer_2_load = load i9 %LineBuffer_2_addr" [../gaussian_vns_5x5.cpp:119]   --->   Operation 68 'load' 'LineBuffer_2_load' <Predicate = (!icmp_ln106)> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 8> <Depth = 512> <RAM>
+ST_3 : Operation 69 [1/2] (3.25ns)   --->   "%LineBuffer_3_load = load i9 %LineBuffer_3_addr" [../gaussian_vns_5x5.cpp:119]   --->   Operation 69 'load' 'LineBuffer_3_load' <Predicate = (!icmp_ln106)> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 8> <Depth = 512> <RAM>
+ST_3 : Operation 70 [1/1] (3.25ns)   --->   "%store_ln124 = store i8 %LineBuffer_1_load, i9 %LineBuffer_addr" [../gaussian_vns_5x5.cpp:124]   --->   Operation 70 'store' 'store_ln124' <Predicate = (!icmp_ln106)> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 8> <Depth = 512> <RAM>
+ST_3 : Operation 71 [1/1] (3.25ns)   --->   "%store_ln124 = store i8 %LineBuffer_2_load, i9 %LineBuffer_1_addr" [../gaussian_vns_5x5.cpp:124]   --->   Operation 71 'store' 'store_ln124' <Predicate = (!icmp_ln106)> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 8> <Depth = 512> <RAM>
+ST_3 : Operation 72 [1/1] (3.25ns)   --->   "%store_ln124 = store i8 %LineBuffer_3_load, i9 %LineBuffer_2_addr" [../gaussian_vns_5x5.cpp:124]   --->   Operation 72 'store' 'store_ln124' <Predicate = (!icmp_ln106)> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 8> <Depth = 512> <RAM>
+
+State 4 <SV = 3> <Delay = 6.90>
+ST_4 : Operation 73 [1/1] (0.00ns)   --->   "%new_pixel_1_load = load i8 %new_pixel_1" [../gaussian_vns_5x5.cpp:137]   --->   Operation 73 'load' 'new_pixel_1_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 74 [1/1] (0.00ns)   --->   "%Window_pix_8 = load i8 %Window_pix_1" [../gaussian_vns_5x5.cpp:137]   --->   Operation 74 'load' 'Window_pix_8' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 75 [1/1] (0.00ns)   --->   "%Window_pix_9 = load i8 %Window_pix_2" [../gaussian_vns_5x5.cpp:137]   --->   Operation 75 'load' 'Window_pix_9' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 76 [1/1] (0.00ns)   --->   "%Window_pix_10 = load i8 %Window_pix_3" [../gaussian_vns_5x5.cpp:137]   --->   Operation 76 'load' 'Window_pix_10' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 77 [1/1] (0.00ns)   --->   "%Window_pix_11 = load i8 %Window_pix_5" [../gaussian_vns_5x5.cpp:137]   --->   Operation 77 'load' 'Window_pix_11' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 78 [1/1] (0.00ns)   --->   "%Window_pix_13 = load i8 %Window_pix_7" [../gaussian_vns_5x5.cpp:137]   --->   Operation 78 'load' 'Window_pix_13' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 79 [1/1] (0.00ns)   --->   "%Window_sroa_25_0_load = load i8 %Window_sroa_25_0" [../gaussian_vns_5x5.cpp:137]   --->   Operation 79 'load' 'Window_sroa_25_0_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 80 [1/1] (0.00ns)   --->   "%new_pixel_2_load = load i8 %new_pixel_2" [../gaussian_vns_5x5.cpp:137]   --->   Operation 80 'load' 'new_pixel_2_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 81 [1/1] (0.00ns)   --->   "%Window_sroa_33_0_load = load i8 %Window_sroa_33_0" [../gaussian_vns_5x5.cpp:137]   --->   Operation 81 'load' 'Window_sroa_33_0_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 82 [1/1] (0.00ns)   --->   "%Window_sroa_36_0_load = load i8 %Window_sroa_36_0" [../gaussian_vns_5x5.cpp:137]   --->   Operation 82 'load' 'Window_sroa_36_0_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 83 [1/1] (0.00ns)   --->   "%Window_sroa_39_0_load = load i8 %Window_sroa_39_0" [../gaussian_vns_5x5.cpp:137]   --->   Operation 83 'load' 'Window_sroa_39_0_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 84 [1/1] (0.00ns)   --->   "%Window_sroa_47_0_load = load i8 %Window_sroa_47_0" [../gaussian_vns_5x5.cpp:137]   --->   Operation 84 'load' 'Window_sroa_47_0_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 85 [1/1] (0.00ns)   --->   "%Window_sroa_50_0_load = load i8 %Window_sroa_50_0" [../gaussian_vns_5x5.cpp:137]   --->   Operation 85 'load' 'Window_sroa_50_0_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 86 [1/1] (0.00ns)   --->   "%Window_sroa_53_0_load = load i8 %Window_sroa_53_0" [../gaussian_vns_5x5.cpp:137]   --->   Operation 86 'load' 'Window_sroa_53_0_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 87 [1/1] (0.00ns)   --->   "%new_pixel = phi i8 %pixel_stream3_read, void %cond.true, i8 0, void %for.body.split" [../gaussian_vns_5x5.cpp:112]   --->   Operation 87 'phi' 'new_pixel' <Predicate = (!icmp_ln106)> <Delay = 0.00>
+ST_4 : Operation 88 [1/2] (3.25ns)   --->   "%Window_pix_12 = load i9 %LineBuffer_addr" [../gaussian_vns_5x5.cpp:119]   --->   Operation 88 'load' 'Window_pix_12' <Predicate = (!icmp_ln106)> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 8> <Depth = 512> <RAM>
+ST_4 : Operation 89 [1/1] (3.25ns)   --->   "%store_ln126 = store i8 %new_pixel, i9 %LineBuffer_3_addr" [../gaussian_vns_5x5.cpp:126]   --->   Operation 89 'store' 'store_ln126' <Predicate = (!icmp_ln106)> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 8> <Depth = 512> <RAM>
+ST_4 : Operation 90 [1/1] (0.00ns)   --->   "%Window_pix_load = load i8 %Window_pix" [../gaussian_vns_5x5.cpp:137]   --->   Operation 90 'load' 'Window_pix_load' <Predicate = (!icmp_ln106 & !icmp_ln136)> <Delay = 0.00>
+ST_4 : Operation 91 [1/1] (0.00ns)   --->   "%Window_sroa_64_0_load_1 = load i8 %Window_sroa_64_0" [../gaussian_vns_5x5.cpp:137]   --->   Operation 91 'load' 'Window_sroa_64_0_load_1' <Predicate = (!icmp_ln106 & !icmp_ln136)> <Delay = 0.00>
+ST_4 : Operation 92 [1/1] (0.00ns)   --->   "%Window_pix_4_load = load i8 %Window_pix_4" [../gaussian_vns_5x5.cpp:137]   --->   Operation 92 'load' 'Window_pix_4_load' <Predicate = (!icmp_ln106 & !icmp_ln136)> <Delay = 0.00>
+ST_4 : Operation 93 [1/1] (0.00ns)   --->   "%Window_sroa_30_0_load = load i8 %Window_sroa_30_0" [../gaussian_vns_5x5.cpp:137]   --->   Operation 93 'load' 'Window_sroa_30_0_load' <Predicate = (!icmp_ln106 & !icmp_ln136)> <Delay = 0.00>
+ST_4 : Operation 94 [1/1] (0.00ns)   --->   "%Window_sroa_58_0_load = load i8 %Window_sroa_58_0" [../gaussian_vns_5x5.cpp:137]   --->   Operation 94 'load' 'Window_sroa_58_0_load' <Predicate = (!icmp_ln106 & !icmp_ln136)> <Delay = 0.00>
+ST_4 : Operation 95 [1/1] (0.00ns)   --->   "%Window_sroa_44_0_load = load i8 %Window_sroa_44_0" [../gaussian_vns_5x5.cpp:137]   --->   Operation 95 'load' 'Window_sroa_44_0_load' <Predicate = (!icmp_ln106 & !icmp_ln136)> <Delay = 0.00>
+ST_4 : Operation 96 [1/1] (0.00ns)   --->   "%p_0 = bitconcatenate i200 @_ssdm_op_BitConcatenate.i200.i8.i8.i8.i8.i8.i8.i8.i8.i8.i8.i8.i8.i8.i8.i8.i8.i8.i8.i8.i8.i8.i8.i8.i8.i8, i8 %new_pixel, i8 %new_pixel_1_load, i8 %Window_sroa_64_0_load_1, i8 %new_pixel_2_load, i8 %Window_sroa_58_0_load, i8 %LineBuffer_3_load, i8 %Window_sroa_53_0_load, i8 %Window_sroa_50_0_load, i8 %Window_sroa_47_0_load, i8 %Window_sroa_44_0_load, i8 %LineBuffer_2_load, i8 %Window_sroa_39_0_load, i8 %Window_sroa_36_0_load, i8 %Window_sroa_33_0_load, i8 %Window_sroa_30_0_load, i8 %LineBuffer_1_load, i8 %Window_sroa_25_0_load, i8 %Window_pix_13, i8 %Window_pix_11, i8 %Window_pix_4_load, i8 %Window_pix_12, i8 %Window_pix_10, i8 %Window_pix_9, i8 %Window_pix_8, i8 %Window_pix_load" [../gaussian_vns_5x5.cpp:137]   --->   Operation 96 'bitconcatenate' 'p_0' <Predicate = (!icmp_ln106 & !icmp_ln136)> <Delay = 0.00>
+ST_4 : Operation 97 [1/1] (3.65ns)   --->   "%write_ln137 = write void @_ssdm_op_Write.ap_fifo.volatile.i200P0A, i200 %window_stream, i200 %p_0" [../gaussian_vns_5x5.cpp:137]   --->   Operation 97 'write' 'write_ln137' <Predicate = (!icmp_ln106 & !icmp_ln136)> <Delay = 3.65> <CoreInst = "FIFO_SRL">   --->   Core 81 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 3.91> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 200> <Depth = 2> <FIFO>
+ST_4 : Operation 98 [1/1] (0.00ns)   --->   "%br_ln138 = br void %for.inc66" [../gaussian_vns_5x5.cpp:138]   --->   Operation 98 'br' 'br_ln138' <Predicate = (!icmp_ln106 & !icmp_ln136)> <Delay = 0.00>
+ST_4 : Operation 99 [1/1] (0.00ns)   --->   "%Window_sroa_64_0_load = load i8 %Window_sroa_64_0" [../gaussian_vns_5x5.cpp:106]   --->   Operation 99 'load' 'Window_sroa_64_0_load' <Predicate = (!icmp_ln106)> <Delay = 0.00>
+ST_4 : Operation 100 [1/1] (0.00ns)   --->   "%store_ln106 = store i8 %LineBuffer_3_load, i8 %Window_sroa_53_0" [../gaussian_vns_5x5.cpp:106]   --->   Operation 100 'store' 'store_ln106' <Predicate = (!icmp_ln106)> <Delay = 0.00>
+ST_4 : Operation 101 [1/1] (0.00ns)   --->   "%store_ln106 = store i8 %Window_sroa_53_0_load, i8 %Window_sroa_50_0" [../gaussian_vns_5x5.cpp:106]   --->   Operation 101 'store' 'store_ln106' <Predicate = (!icmp_ln106)> <Delay = 0.00>
+ST_4 : Operation 102 [1/1] (0.00ns)   --->   "%store_ln106 = store i8 %Window_sroa_50_0_load, i8 %Window_sroa_47_0" [../gaussian_vns_5x5.cpp:106]   --->   Operation 102 'store' 'store_ln106' <Predicate = (!icmp_ln106)> <Delay = 0.00>
+ST_4 : Operation 103 [1/1] (0.00ns)   --->   "%store_ln106 = store i8 %LineBuffer_2_load, i8 %Window_sroa_39_0" [../gaussian_vns_5x5.cpp:106]   --->   Operation 103 'store' 'store_ln106' <Predicate = (!icmp_ln106)> <Delay = 0.00>
+ST_4 : Operation 104 [1/1] (0.00ns)   --->   "%store_ln106 = store i8 %Window_sroa_39_0_load, i8 %Window_sroa_36_0" [../gaussian_vns_5x5.cpp:106]   --->   Operation 104 'store' 'store_ln106' <Predicate = (!icmp_ln106)> <Delay = 0.00>
+ST_4 : Operation 105 [1/1] (0.00ns)   --->   "%store_ln106 = store i8 %Window_sroa_36_0_load, i8 %Window_sroa_33_0" [../gaussian_vns_5x5.cpp:106]   --->   Operation 105 'store' 'store_ln106' <Predicate = (!icmp_ln106)> <Delay = 0.00>
+ST_4 : Operation 106 [1/1] (0.00ns)   --->   "%store_ln106 = store i8 %Window_sroa_64_0_load, i8 %new_pixel_2" [../gaussian_vns_5x5.cpp:106]   --->   Operation 106 'store' 'store_ln106' <Predicate = (!icmp_ln106)> <Delay = 0.00>
+ST_4 : Operation 107 [1/1] (0.00ns)   --->   "%store_ln106 = store i8 %LineBuffer_1_load, i8 %Window_sroa_25_0" [../gaussian_vns_5x5.cpp:106]   --->   Operation 107 'store' 'store_ln106' <Predicate = (!icmp_ln106)> <Delay = 0.00>
+ST_4 : Operation 108 [1/1] (0.00ns)   --->   "%store_ln106 = store i8 %Window_sroa_25_0_load, i8 %Window_pix_7" [../gaussian_vns_5x5.cpp:106]   --->   Operation 108 'store' 'store_ln106' <Predicate = (!icmp_ln106)> <Delay = 0.00>
+ST_4 : Operation 109 [1/1] (0.00ns)   --->   "%store_ln106 = store i8 %Window_pix_13, i8 %Window_pix_5" [../gaussian_vns_5x5.cpp:106]   --->   Operation 109 'store' 'store_ln106' <Predicate = (!icmp_ln106)> <Delay = 0.00>
+ST_4 : Operation 110 [1/1] (0.00ns)   --->   "%store_ln106 = store i8 %Window_pix_12, i8 %Window_pix_3" [../gaussian_vns_5x5.cpp:106]   --->   Operation 110 'store' 'store_ln106' <Predicate = (!icmp_ln106)> <Delay = 0.00>
+ST_4 : Operation 111 [1/1] (0.00ns)   --->   "%store_ln106 = store i8 %Window_pix_10, i8 %Window_pix_2" [../gaussian_vns_5x5.cpp:106]   --->   Operation 111 'store' 'store_ln106' <Predicate = (!icmp_ln106)> <Delay = 0.00>
+ST_4 : Operation 112 [1/1] (0.00ns)   --->   "%store_ln106 = store i8 %Window_pix_9, i8 %Window_pix_1" [../gaussian_vns_5x5.cpp:106]   --->   Operation 112 'store' 'store_ln106' <Predicate = (!icmp_ln106)> <Delay = 0.00>
+ST_4 : Operation 113 [1/1] (0.00ns)   --->   "%store_ln106 = store i8 %new_pixel, i8 %new_pixel_1" [../gaussian_vns_5x5.cpp:106]   --->   Operation 113 'store' 'store_ln106' <Predicate = (!icmp_ln106)> <Delay = 0.00>
+ST_4 : Operation 114 [1/1] (0.00ns)   --->   "%store_ln106 = store i8 %Window_sroa_47_0_load, i8 %Window_sroa_44_0" [../gaussian_vns_5x5.cpp:106]   --->   Operation 114 'store' 'store_ln106' <Predicate = (!icmp_ln106)> <Delay = 0.00>
+ST_4 : Operation 115 [1/1] (0.00ns)   --->   "%store_ln106 = store i8 %new_pixel_2_load, i8 %Window_sroa_58_0" [../gaussian_vns_5x5.cpp:106]   --->   Operation 115 'store' 'store_ln106' <Predicate = (!icmp_ln106)> <Delay = 0.00>
+ST_4 : Operation 116 [1/1] (0.00ns)   --->   "%store_ln106 = store i8 %Window_sroa_33_0_load, i8 %Window_sroa_30_0" [../gaussian_vns_5x5.cpp:106]   --->   Operation 116 'store' 'store_ln106' <Predicate = (!icmp_ln106)> <Delay = 0.00>
+ST_4 : Operation 117 [1/1] (0.00ns)   --->   "%store_ln106 = store i8 %Window_pix_11, i8 %Window_pix_4" [../gaussian_vns_5x5.cpp:106]   --->   Operation 117 'store' 'store_ln106' <Predicate = (!icmp_ln106)> <Delay = 0.00>
+ST_4 : Operation 118 [1/1] (0.00ns)   --->   "%store_ln106 = store i8 %new_pixel_1_load, i8 %Window_sroa_64_0" [../gaussian_vns_5x5.cpp:106]   --->   Operation 118 'store' 'store_ln106' <Predicate = (!icmp_ln106)> <Delay = 0.00>
+ST_4 : Operation 119 [1/1] (0.00ns)   --->   "%store_ln106 = store i8 %Window_pix_8, i8 %Window_pix" [../gaussian_vns_5x5.cpp:106]   --->   Operation 119 'store' 'store_ln106' <Predicate = (!icmp_ln106)> <Delay = 0.00>
+ST_4 : Operation 120 [1/1] (0.00ns)   --->   "%br_ln106 = br void %for.body" [../gaussian_vns_5x5.cpp:106]   --->   Operation 120 'br' 'br_ln106' <Predicate = (!icmp_ln106)> <Delay = 0.00>
+ST_4 : Operation 121 [1/1] (0.00ns)   --->   "%ret_ln0 = ret"   --->   Operation 121 'ret' 'ret_ln0' <Predicate = (icmp_ln106)> <Delay = 0.00>
+
+
+============================================================
++ Verbose Summary: Timing violations
+============================================================
+Target clock period: 10ns, clock uncertainty: 2.7ns.
+
+ <State 1>: 1.58ns
+The critical path consists of the following:
+	'alloca' operation ('col_ptr') [12]  (0 ns)
+	'store' operation ('store_ln0') of constant 0 on local variable 'col_ptr' [41]  (1.58 ns)
+
+ <State 2>: 5.53ns
+The critical path consists of the following:
+	'load' operation ('col_ptr_load', ../gaussian_vns_5x5.cpp:132) on local variable 'col_ptr' [74]  (0 ns)
+	'add' operation ('col_ptr', ../gaussian_vns_5x5.cpp:132) [89]  (2.57 ns)
+	'select' operation ('col_ptr', ../gaussian_vns_5x5.cpp:129) [90]  (1.38 ns)
+	'store' operation ('store_ln106', ../gaussian_vns_5x5.cpp:106) of variable 'col_ptr', ../gaussian_vns_5x5.cpp:129 on local variable 'col_ptr' [125]  (1.58 ns)
+
+ <State 3>: 6.51ns
+The critical path consists of the following:
+	'load' operation ('LineBuffer_1_load', ../gaussian_vns_5x5.cpp:119) on array 'LineBuffer_1' [79]  (3.25 ns)
+	'store' operation ('store_ln124', ../gaussian_vns_5x5.cpp:124) of variable 'LineBuffer_1_load', ../gaussian_vns_5x5.cpp:119 on array 'LineBuffer' [84]  (3.25 ns)
+
+ <State 4>: 6.9ns
+The critical path consists of the following:
+	'load' operation ('Window.pix', ../gaussian_vns_5x5.cpp:119) on array 'LineBuffer' [77]  (3.25 ns)
+	fifo write operation ('write_ln137', ../gaussian_vns_5x5.cpp:137) on port 'window_stream' (../gaussian_vns_5x5.cpp:137) [101]  (3.65 ns)
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+N/A
+* FSMD analyzer results:
+  - Output states:
+ - Input state : 
+  - Chain level:
+	State 1
+	State 2
+	State 3
+	State 4
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+N/A

@@ -1,0 +1,163 @@
+
+
+================================================================
+== Vitis HLS Report for 'gaussian'
+================================================================
+* Date:           Mon Nov  2 14:12:30 2026
+
+* Version:        2022.2 (Build 3670227 on Oct 13 2022)
+* Project:        hls_proj_5x5
+* Solution:       vns5GeoMean350_T75 (Vivado IP Flow Target)
+* Product family: spartan7
+* Target device:  xc7s50-csga324-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  7.300 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-----+-----+----------+
+    |  Latency (cycles) |  Latency (absolute) |  Interval | Pipeline |
+    |   min   |   max   |    min   |    max   | min | max |   Type   |
+    +---------+---------+----------+----------+-----+-----+----------+
+    |        ?|        ?|         ?|         ?|    ?|    ?|  dataflow|
+    +---------+---------+----------+----------+-----+-----+----------+
+
+    + Detail: 
+        * Instance: 
+        +----------------+-------------+---------+------------+-----------+------------+-----+------------+---------+
+        |                |             |   Latency (cycles)   |   Latency (absolute)   |     Interval     | Pipeline|
+        |    Instance    |    Module   |   min   |     max    |    min    |     max    | min |     max    |   Type  |
+        +----------------+-------------+---------+------------+-----------+------------+-----+------------+---------+
+        |ReadFromMem_U0  |ReadFromMem  |        ?|           ?|          ?|           ?|    ?|           ?|       no|
+        |Window2D_U0     |Window2D     |        8|      263178|  80.000 ns|    2.632 ms|    8|      263178|       no|
+        |Filter2D_U0     |Filter2D     |        6|  4294836235|  60.000 ns|  42.948 sec|    6|  4294836235|       no|
+        |WriteToMem_U0   |WriteToMem   |        6|      523783|  60.000 ns|    5.238 ms|    6|      523783|       no|
+        +----------------+-------------+---------+------------+-----------+------------+-----+------------+---------+
+
+        * Loop: 
+        N/A
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+-----+-------+-------+-----+
+|       Name      | BRAM_18K| DSP |   FF  |  LUT  | URAM|
++-----------------+---------+-----+-------+-------+-----+
+|DSP              |        -|    -|      -|      -|    -|
+|Expression       |        -|    -|      0|      2|    -|
+|FIFO             |        -|    -|    900|    612|    -|
+|Instance         |        4|    4|   1356|   1987|    0|
+|Memory           |        -|    -|      -|      -|    -|
+|Multiplexer      |        -|    -|      -|      -|    -|
+|Register         |        -|    -|      -|      -|    -|
++-----------------+---------+-----+-------+-------+-----+
+|Total            |        4|    4|   2256|   2601|    0|
++-----------------+---------+-----+-------+-------+-----+
+|Available        |      150|  120|  65200|  32600|    0|
++-----------------+---------+-----+-------+-------+-----+
+|Utilization (%)  |        2|    3|      3|      7|    0|
++-----------------+---------+-----+-------+-------+-----+
+
++ Detail: 
+    * Instance: 
+    +----------------+-------------+---------+----+-----+-----+-----+
+    |    Instance    |    Module   | BRAM_18K| DSP|  FF | LUT | URAM|
+    +----------------+-------------+---------+----+-----+-----+-----+
+    |Filter2D_U0     |Filter2D     |        0|   1|  470|  863|    0|
+    |ReadFromMem_U0  |ReadFromMem  |        0|   1|  177|  327|    0|
+    |Window2D_U0     |Window2D     |        4|   1|  501|  480|    0|
+    |WriteToMem_U0   |WriteToMem   |        0|   1|  208|  317|    0|
+    +----------------+-------------+---------+----+-----+-----+-----+
+    |Total           |             |        4|   4| 1356| 1987|    0|
+    +----------------+-------------+---------+----+-----+-----+-----+
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    +-----------------+---------+-----+----+-----+------+-----+---------+
+    |       Name      | BRAM_18K|  FF | LUT| URAM| Depth| Bits| Size:D*B|
+    +-----------------+---------+-----+----+-----+------+-----+---------+
+    |height_c11_U     |        0|  100|   0|    -|     2|   16|       32|
+    |height_c12_U     |        0|  100|   0|    -|     2|   16|       32|
+    |height_c_U       |        0|  100|   0|    -|     2|   16|       32|
+    |output_stream_U  |        0|  100|   0|    -|     2|    8|       16|
+    |pixel_stream_U   |        0|  100|   0|    -|     2|    8|       16|
+    |width_c13_U      |        0|  100|   0|    -|     2|   16|       32|
+    |width_c14_U      |        0|  100|   0|    -|     2|   16|       32|
+    |width_c_U        |        0|  100|   0|    -|     2|   16|       32|
+    |window_stream_U  |        0|  100|   0|    -|     2|  200|      400|
+    +-----------------+---------+-----+----+-----+------+-----+---------+
+    |Total            |        0|  900|   0|    0|    18|  312|      624|
+    +-----------------+---------+-----+----+-----+------+-----+---------+
+
+    * Expression: 
+    +--------------+----------+----+---+----+------------+------------+
+    | Variable Name| Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +--------------+----------+----+---+----+------------+------------+
+    |ap_idle       |       and|   0|  0|   2|           1|           1|
+    +--------------+----------+----+---+----+------------+------------+
+    |Total         |          |   0|  0|   2|           1|           1|
+    +--------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    N/A
+
+    * Register: 
+    N/A
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++--------------+-----+-----+------------+--------------+--------------+
+|   RTL Ports  | Dir | Bits|  Protocol  | Source Object|    C Type    |
++--------------+-----+-----+------------+--------------+--------------+
+|src_address0  |  out|   18|   ap_memory|           src|         array|
+|src_ce0       |  out|    1|   ap_memory|           src|         array|
+|src_d0        |  out|    8|   ap_memory|           src|         array|
+|src_q0        |   in|    8|   ap_memory|           src|         array|
+|src_we0       |  out|    1|   ap_memory|           src|         array|
+|src_address1  |  out|   18|   ap_memory|           src|         array|
+|src_ce1       |  out|    1|   ap_memory|           src|         array|
+|src_d1        |  out|    8|   ap_memory|           src|         array|
+|src_q1        |   in|    8|   ap_memory|           src|         array|
+|src_we1       |  out|    1|   ap_memory|           src|         array|
+|dst_address0  |  out|   18|   ap_memory|           dst|         array|
+|dst_ce0       |  out|    1|   ap_memory|           dst|         array|
+|dst_d0        |  out|    8|   ap_memory|           dst|         array|
+|dst_q0        |   in|    8|   ap_memory|           dst|         array|
+|dst_we0       |  out|    1|   ap_memory|           dst|         array|
+|dst_address1  |  out|   18|   ap_memory|           dst|         array|
+|dst_ce1       |  out|    1|   ap_memory|           dst|         array|
+|dst_d1        |  out|    8|   ap_memory|           dst|         array|
+|dst_q1        |   in|    8|   ap_memory|           dst|         array|
+|dst_we1       |  out|    1|   ap_memory|           dst|         array|
+|height        |   in|   16|     ap_none|        height|        scalar|
+|width         |   in|   16|     ap_none|         width|        scalar|
+|ap_clk        |   in|    1|  ap_ctrl_hs|      gaussian|  return value|
+|ap_rst        |   in|    1|  ap_ctrl_hs|      gaussian|  return value|
+|ap_start      |   in|    1|  ap_ctrl_hs|      gaussian|  return value|
+|ap_done       |  out|    1|  ap_ctrl_hs|      gaussian|  return value|
+|ap_ready      |  out|    1|  ap_ctrl_hs|      gaussian|  return value|
+|ap_idle       |  out|    1|  ap_ctrl_hs|      gaussian|  return value|
++--------------+-----+-----+------------+--------------+--------------+
+

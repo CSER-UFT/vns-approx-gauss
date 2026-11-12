@@ -1,0 +1,173 @@
+
+
+================================================================
+== Vitis HLS Report for 'ReadFromMem'
+================================================================
+* Date:           Mon Nov  2 12:05:17 2026
+
+* Version:        2022.2 (Build 3670227 on Oct 13 2022)
+* Project:        hls_proj_3x3
+* Solution:       vns3GeoMean230_T85 (Vivado IP Flow Target)
+* Product family: spartan7
+* Target device:  xc7s50-csga324-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  6.904 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-----+-----+---------+
+    |  Latency (cycles) |  Latency (absolute) |  Interval | Pipeline|
+    |   min   |   max   |    min   |    max   | min | max |   Type  |
+    +---------+---------+----------+----------+-----+-----+---------+
+    |        ?|        ?|         ?|         ?|    ?|    ?|       no|
+    +---------+---------+----------+----------+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        +-------------------------------------------+---------------------------------+---------+---------+----------+----------+-----+-----+---------+
+        |                                           |                                 |  Latency (cycles) |  Latency (absolute) |  Interval | Pipeline|
+        |                  Instance                 |              Module             |   min   |   max   |    min   |    max   | min | max |   Type  |
+        +-------------------------------------------+---------------------------------+---------+---------+----------+----------+-----+-----+---------+
+        |grp_ReadFromMem_Pipeline_read_image_fu_82  |ReadFromMem_Pipeline_read_image  |        ?|        ?|         ?|         ?|    ?|    ?|       no|
+        +-------------------------------------------+---------------------------------+---------+---------+----------+----------+-----+-----+---------+
+
+        * Loop: 
+        N/A
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+-----+-------+-------+-----+
+|       Name      | BRAM_18K| DSP |   FF  |  LUT  | URAM|
++-----------------+---------+-----+-------+-------+-----+
+|DSP              |        -|    1|      -|      -|    -|
+|Expression       |        -|    -|      0|     26|    -|
+|FIFO             |        -|    -|      -|      -|    -|
+|Instance         |        -|    -|    116|    223|    -|
+|Memory           |        -|    -|      -|      -|    -|
+|Multiplexer      |        -|    -|      -|     78|    -|
+|Register         |        -|    -|     61|      -|    -|
++-----------------+---------+-----+-------+-------+-----+
+|Total            |        0|    1|    177|    327|    0|
++-----------------+---------+-----+-------+-------+-----+
+|Available        |      150|  120|  65200|  32600|    0|
++-----------------+---------+-----+-------+-------+-----+
+|Utilization (%)  |        0|   ~0|     ~0|      1|    0|
++-----------------+---------+-----+-------+-------+-----+
+
++ Detail: 
+    * Instance: 
+    +-------------------------------------------+---------------------------------+---------+----+-----+-----+-----+
+    |                  Instance                 |              Module             | BRAM_18K| DSP|  FF | LUT | URAM|
+    +-------------------------------------------+---------------------------------+---------+----+-----+-----+-----+
+    |grp_ReadFromMem_Pipeline_read_image_fu_82  |ReadFromMem_Pipeline_read_image  |        0|   0|  116|  223|    0|
+    +-------------------------------------------+---------------------------------+---------+----+-----+-----+-----+
+    |Total                                      |                                 |        0|   0|  116|  223|    0|
+    +-------------------------------------------+---------------------------------+---------+----+-----+-----+-----+
+
+    * DSP: 
+    +-----------------------------+--------------------------+-----------+
+    |           Instance          |          Module          | Expression|
+    +-----------------------------+--------------------------+-----------+
+    |mul_mul_16ns_16ns_32_4_1_U6  |mul_mul_16ns_16ns_32_4_1  |    i0 * i1|
+    +-----------------------------+--------------------------+-----------+
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +-----------------+----------+----+---+----+------------+------------+
+    |  Variable Name  | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +-----------------+----------+----+---+----+------------+------------+
+    |sub_fu_122_p2    |         +|   0|  0|  24|          17|           2|
+    |ap_block_state1  |        or|   0|  0|   2|           1|           1|
+    +-----------------+----------+----+---+----+------------+------------+
+    |Total            |          |   0|  0|  26|          18|           3|
+    +-----------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +---------------------+----+-----------+-----+-----------+
+    |         Name        | LUT| Input Size| Bits| Total Bits|
+    +---------------------+----+-----------+-----+-----------+
+    |ap_NS_fsm            |  33|          6|    1|          6|
+    |ap_done              |   9|          2|    1|          2|
+    |height_c12_blk_n     |   9|          2|    1|          2|
+    |pixel_stream3_write  |   9|          2|    1|          2|
+    |real_start           |   9|          2|    1|          2|
+    |width_c14_blk_n      |   9|          2|    1|          2|
+    +---------------------+----+-----------+-----+-----------+
+    |Total                |  78|         16|    6|         16|
+    +---------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +--------------------------------------------------------+----+----+-----+-----------+
+    |                          Name                          | FF | LUT| Bits| Const Bits|
+    +--------------------------------------------------------+----+----+-----+-----------+
+    |ap_CS_fsm                                               |   5|   0|    5|          0|
+    |ap_done_reg                                             |   1|   0|    1|          0|
+    |grp_ReadFromMem_Pipeline_read_image_fu_82_ap_start_reg  |   1|   0|    1|          0|
+    |mul_ln54_reg_161                                        |  32|   0|   32|          0|
+    |start_once_reg                                          |   1|   0|    1|          0|
+    |stride_assign_reg_141                                   |  10|   0|   16|          6|
+    |sub_reg_156                                             |  11|   0|   17|          6|
+    +--------------------------------------------------------+----+----+-----+-----------+
+    |Total                                                   |  61|   0|   73|         12|
+    +--------------------------------------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++------------------------------+-----+-----+------------+---------------+--------------+
+|           RTL Ports          | Dir | Bits|  Protocol  | Source Object |    C Type    |
++------------------------------+-----+-----+------------+---------------+--------------+
+|ap_clk                        |   in|    1|  ap_ctrl_hs|    ReadFromMem|  return value|
+|ap_rst                        |   in|    1|  ap_ctrl_hs|    ReadFromMem|  return value|
+|ap_start                      |   in|    1|  ap_ctrl_hs|    ReadFromMem|  return value|
+|start_full_n                  |   in|    1|  ap_ctrl_hs|    ReadFromMem|  return value|
+|ap_done                       |  out|    1|  ap_ctrl_hs|    ReadFromMem|  return value|
+|ap_continue                   |   in|    1|  ap_ctrl_hs|    ReadFromMem|  return value|
+|ap_idle                       |  out|    1|  ap_ctrl_hs|    ReadFromMem|  return value|
+|ap_ready                      |  out|    1|  ap_ctrl_hs|    ReadFromMem|  return value|
+|start_out                     |  out|    1|  ap_ctrl_hs|    ReadFromMem|  return value|
+|start_write                   |  out|    1|  ap_ctrl_hs|    ReadFromMem|  return value|
+|width                         |   in|   16|     ap_none|          width|        scalar|
+|height                        |   in|   16|     ap_none|         height|        scalar|
+|src_address0                  |  out|   18|   ap_memory|            src|         array|
+|src_ce0                       |  out|    1|   ap_memory|            src|         array|
+|src_q0                        |   in|    8|   ap_memory|            src|         array|
+|pixel_stream3_din             |  out|    8|     ap_fifo|  pixel_stream3|       pointer|
+|pixel_stream3_num_data_valid  |   in|    2|     ap_fifo|  pixel_stream3|       pointer|
+|pixel_stream3_fifo_cap        |   in|    2|     ap_fifo|  pixel_stream3|       pointer|
+|pixel_stream3_full_n          |   in|    1|     ap_fifo|  pixel_stream3|       pointer|
+|pixel_stream3_write           |  out|    1|     ap_fifo|  pixel_stream3|       pointer|
+|height_c12_din                |  out|   16|     ap_fifo|     height_c12|       pointer|
+|height_c12_num_data_valid     |   in|    2|     ap_fifo|     height_c12|       pointer|
+|height_c12_fifo_cap           |   in|    2|     ap_fifo|     height_c12|       pointer|
+|height_c12_full_n             |   in|    1|     ap_fifo|     height_c12|       pointer|
+|height_c12_write              |  out|    1|     ap_fifo|     height_c12|       pointer|
+|width_c14_din                 |  out|   16|     ap_fifo|      width_c14|       pointer|
+|width_c14_num_data_valid      |   in|    2|     ap_fifo|      width_c14|       pointer|
+|width_c14_fifo_cap            |   in|    2|     ap_fifo|      width_c14|       pointer|
+|width_c14_full_n              |   in|    1|     ap_fifo|      width_c14|       pointer|
+|width_c14_write               |  out|    1|     ap_fifo|      width_c14|       pointer|
++------------------------------+-----+-----+------------+---------------+--------------+
+

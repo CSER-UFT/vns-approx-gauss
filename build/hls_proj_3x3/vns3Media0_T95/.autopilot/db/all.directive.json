@@ -1,0 +1,35 @@
+{"sourceFile": [{
+      "name": "",
+      "directive": [
+        {
+          "functionName": "gaussian",
+          "label": "",
+          "functionLabel": "",
+          "id": "1",
+          "sourceFile": "\/home\/daniel.costa\/hls_proj\/run_hls.tcl",
+          "sourceLine": "112",
+          "pragma": {
+            "name": "TOP",
+            "option": [{
+                "name": "name",
+                "value": "gaussian"
+              }]
+          }
+        },
+        {
+          "functionName": "gaussian",
+          "label": "",
+          "functionLabel": "",
+          "id": "2",
+          "sourceFile": "\/home\/daniel.costa\/hls_proj\/run_hls.tcl",
+          "sourceLine": "112",
+          "pragma": {
+            "name": "TOP",
+            "option": [{
+                "name": "name",
+                "value": "gaussian"
+              }]
+          }
+        }
+      ]
+    }]}

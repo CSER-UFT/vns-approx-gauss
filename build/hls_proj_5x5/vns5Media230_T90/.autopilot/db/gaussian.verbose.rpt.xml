@@ -1,0 +1,146 @@
+<profile>
+
+<section name = "Vitis HLS Report for 'gaussian'" level="0">
+<item name = "Date">Mon Nov  2 14:52:20 2026
+</item>
+<item name = "Version">2022.2 (Build 3670227 on Oct 13 2022)</item>
+<item name = "Project">hls_proj_5x5</item>
+<item name = "Solution">vns5Media230_T90 (Vivado IP Flow Target)</item>
+<item name = "Product family">spartan7</item>
+<item name = "Target device">xc7s50-csga324-1</item>
+</section>
+
+<section name = "Performance Estimates" level="0">
+<item name = "Timing">
+<section name = "" level="1">
+<item name = "Summary"><table name="" hasTotal="0">
+<keys size="4">Clock, Target, Estimated, Uncertainty</keys>
+<column name="ap_clk">10.00 ns, 7.300 ns, 2.70 ns</column>
+</table>
+</item>
+</section>
+</item>
+<item name = "Latency">
+<section name = "" level="1">
+<item name = "Summary"><table name="" hasTotal="0">
+<keys size="8">, min, max, min, max, min, max, Type</keys>
+<column name="">?, ?, ?, ?, ?, ?, dataflow</column>
+</table>
+</item>
+<item name = "Detail">
+<section name = "" level="1">
+<item name = "Instance"><table name="" hasTotal="0">
+<keys size="9">Instance, Module, min, max, min, max, min, max, Type</keys>
+<column name="ReadFromMem_U0">ReadFromMem, ?, ?, ?, ?, ?, ?, no</column>
+<column name="Window2D_U0">Window2D, 8, 263178, 80.000 ns, 2.632 ms, 8, 263178, no</column>
+<column name="Filter2D_U0">Filter2D, 6, 4294836235, 60.000 ns, 42.948 sec, 6, 4294836235, no</column>
+<column name="WriteToMem_U0">WriteToMem, 6, 523783, 60.000 ns, 5.238 ms, 6, 523783, no</column>
+</table>
+</item>
+<item name = "Loop"><table name="" hasTotal="0">
+<keys size="8">Loop Name, min, max, Latency, achieved, target, Count, Pipelined</keys>
+</table>
+</item>
+</section>
+</item>
+</section>
+</item>
+</section>
+
+<section name = "Utilization Estimates" level="0">
+<item name = "Summary"><table name="" hasTotal="1">
+<keys size="6">Name, BRAM_18K, DSP, FF, LUT, URAM</keys>
+<column name="DSP">-, -, -, -, -</column>
+<column name="Expression">-, -, 0, 2, -</column>
+<column name="FIFO">-, -, 900, 612, -</column>
+<column name="Instance">4, 4, 1356, 1987, 0</column>
+<column name="Memory">-, -, -, -, -</column>
+<column name="Multiplexer">-, -, -, -, -</column>
+<column name="Register">-, -, -, -, -</column>
+<specialColumn name="Available">150, 120, 65200, 32600, 0</specialColumn>
+<specialColumn name="Utilization (%)">2, 3, 3, 7, 0</specialColumn>
+</table>
+</item>
+<item name = "Detail">
+<section name = "" level="1">
+<item name = "Instance"><table name="" hasTotal="1">
+<keys size="7">Instance, Module, BRAM_18K, DSP, FF, LUT, URAM</keys>
+<column name="Filter2D_U0">Filter2D, 0, 1, 470, 863, 0</column>
+<column name="ReadFromMem_U0">ReadFromMem, 0, 1, 177, 327, 0</column>
+<column name="Window2D_U0">Window2D, 4, 1, 501, 480, 0</column>
+<column name="WriteToMem_U0">WriteToMem, 0, 1, 208, 317, 0</column>
+</table>
+</item>
+<item name = "DSP"><table name="" hasTotal="0">
+<keys size="3">Instance, Module, Expression</keys>
+</table>
+</item>
+<item name = "Memory"><table name="" hasTotal="1">
+<keys size="10">Memory, Module, BRAM_18K, FF, LUT, URAM, Words, Bits, Banks, W*Bits*Banks</keys>
+</table>
+</item>
+<item name = "FIFO"><table name="" hasTotal="1">
+<keys size="8">Name, BRAM_18K, FF, LUT, URAM, Depth, Bits, Size:D*B</keys>
+<column name="height_c11_U">0, 100, 0, -, 2, 16, 32</column>
+<column name="height_c12_U">0, 100, 0, -, 2, 16, 32</column>
+<column name="height_c_U">0, 100, 0, -, 2, 16, 32</column>
+<column name="output_stream_U">0, 100, 0, -, 2, 8, 16</column>
+<column name="pixel_stream_U">0, 100, 0, -, 2, 8, 16</column>
+<column name="width_c13_U">0, 100, 0, -, 2, 16, 32</column>
+<column name="width_c14_U">0, 100, 0, -, 2, 16, 32</column>
+<column name="width_c_U">0, 100, 0, -, 2, 16, 32</column>
+<column name="window_stream_U">0, 100, 0, -, 2, 200, 400</column>
+</table>
+</item>
+<item name = "Expression"><table name="" hasTotal="1">
+<keys size="7">Variable Name, Operation, DSP, FF, LUT, Bitwidth P0, Bitwidth P1</keys>
+<column name="ap_idle">and, 0, 0, 2, 1, 1</column>
+</table>
+</item>
+<item name = "Multiplexer"><table name="" hasTotal="1">
+<keys size="5">Name, LUT, Input Size, Bits, Total Bits</keys>
+</table>
+</item>
+<item name = "Register"><table name="" hasTotal="1">
+<keys size="5">Name, FF, LUT, Bits, Const Bits</keys>
+</table>
+</item>
+</section>
+</item>
+</section>
+
+<section name = "Interface" level="0">
+<item name = "Summary"><table name="" hasTotal="0">
+<keys size="6">RTL Ports, Dir, Bits, Protocol, Source Object, C Type</keys>
+<column name="src_address0">out, 18, ap_memory, src, array</column>
+<column name="src_ce0">out, 1, ap_memory, src, array</column>
+<column name="src_d0">out, 8, ap_memory, src, array</column>
+<column name="src_q0">in, 8, ap_memory, src, array</column>
+<column name="src_we0">out, 1, ap_memory, src, array</column>
+<column name="src_address1">out, 18, ap_memory, src, array</column>
+<column name="src_ce1">out, 1, ap_memory, src, array</column>
+<column name="src_d1">out, 8, ap_memory, src, array</column>
+<column name="src_q1">in, 8, ap_memory, src, array</column>
+<column name="src_we1">out, 1, ap_memory, src, array</column>
+<column name="dst_address0">out, 18, ap_memory, dst, array</column>
+<column name="dst_ce0">out, 1, ap_memory, dst, array</column>
+<column name="dst_d0">out, 8, ap_memory, dst, array</column>
+<column name="dst_q0">in, 8, ap_memory, dst, array</column>
+<column name="dst_we0">out, 1, ap_memory, dst, array</column>
+<column name="dst_address1">out, 18, ap_memory, dst, array</column>
+<column name="dst_ce1">out, 1, ap_memory, dst, array</column>
+<column name="dst_d1">out, 8, ap_memory, dst, array</column>
+<column name="dst_q1">in, 8, ap_memory, dst, array</column>
+<column name="dst_we1">out, 1, ap_memory, dst, array</column>
+<column name="height">in, 16, ap_none, height, scalar</column>
+<column name="width">in, 16, ap_none, width, scalar</column>
+<column name="ap_clk">in, 1, ap_ctrl_hs, gaussian, return value</column>
+<column name="ap_rst">in, 1, ap_ctrl_hs, gaussian, return value</column>
+<column name="ap_start">in, 1, ap_ctrl_hs, gaussian, return value</column>
+<column name="ap_done">out, 1, ap_ctrl_hs, gaussian, return value</column>
+<column name="ap_ready">out, 1, ap_ctrl_hs, gaussian, return value</column>
+<column name="ap_idle">out, 1, ap_ctrl_hs, gaussian, return value</column>
+</table>
+</item>
+</section>
+</profile>
